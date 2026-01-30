@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jap-Yeo Duo - Violin & Piano</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #ffffff;
+            --accent-color: #d4af37; /* Gold */
+            --accent-color-silver: #c0c0c0; /* Silver */
+            --text-color: #333333;
+            --light-gray: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent-color-silver);
+            text-decoration: none;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--secondary-color) !important;
+            font-weight: 700;
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--secondary-color) !important;
+            margin: 0 0.8rem;
+            font-weight: 400;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover:after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .navbar-nav .nav-link.active {
+            color: var(--accent-color) !important;
+        }
+        
+        /* Language Selector */
+        .language-selector {
+            position: relative;
+        }
+        
+        .language-dropdown {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--secondary-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .language-dropdown:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .language-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            padding: 5px 0;
+            min-width: 120px;
+            display: none;
+            z-index: 1001;
+        }
+        
+        .language-menu.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 8px 15px;
+            color: var(--secondary-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .language-option:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .language-option.active {
+            background-color: rgba(212, 175, 55, 0.2);
+            color: var(--accent-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://picsum.photos/seed/japyeo-duo/1920/1080.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+        
+        .btn-custom {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            font-weight: 600;
+            border: none;
+            border-radius: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-custom:hover {
+            background-color: var(--accent-color-silver);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline-custom {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--accent-color);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--light-gray);
+        }
+        
+        /* Project Section */
+        .project-card {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 3rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .project-card h3 {
+            color: var(--accent-color);
+        }
+        
+        /* Biography Section */
+        .artist-card {
+            background-color: var(--secondary-color);
+            border: 1px solid #e0e0e0;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .artist-card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .artist-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Tabs */
+        .nav-tabs {
+            border-bottom: 1px solid var(--accent-color);
+            margin-bottom: 2rem;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--primary-color);
+            border: none;
+            border-bottom: 2px solid transparent;
+            padding: 0.8rem 1.5rem;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            border-bottom: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--accent-color);
+            background-color: transparent;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        /* Media Section */
+        .media-container {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 3rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+        
+        .media-container h3 {
+            color: var(--accent-color);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light-gray);
+        }
+        
+        .contact-info {
+            background-color: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-info i {
+            color: var(--accent-color);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+            
+            .navbar-nav .nav-link {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Jap-Yeo Duo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home" data-lang="nav_home">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about" data-lang="nav_about">Tentang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#beethoven" data-lang="nav_beethoven">Proyek Beethoven</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#repertoire" data-lang="nav_repertoire">Repertoar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#media" data-lang="nav_media">Media</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact" data-lang="nav_contact">Kontak</a>
+                    </li>
+                    <li class="nav-item language-selector">
+                        <div class="language-dropdown">
+                            <i class="fas fa-globe"></i>
+                            <span id="current-lang">ID</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="language-menu">
+                            <div class="language-option active" data-lang="id">
+                                <span>🇮🇩</span> Indonesia
+                            </div>
+                            <div class="language-option" data-lang="en">
+                                <span>🇬🇧</span> English
+                            </div>
+                            <div class="language-option" data-lang="zh">
+                                <span>🇨🇳</span> 中文
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="fade-in" data-lang="hero_title">Jap-Yeo Duo</h1>
+            <h2 class="fade-in" data-lang="hero_subtitle">Jap Tji Kien, Violin & Dr. Kuei Pin Yeo, Piano</h2>
+            <div class="fade-in">
+                <a href="#beethoven" class="btn-custom" data-lang="hero_btn_explore">Jelajahi Proyek Beethoven</a>
+                <a href="#repertoire" class="btn-outline-custom" data-lang="hero_btn_repertoire">Lihat Repertoar</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title fade-in" data-lang="about_title">Dialog Musikal yang Mendalam</h2>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="lead fade-in" data-lang="about_description">Jap–Yeo Duo menghadirkan kemitraan antara violinis Jap Tji Kien dan pianis Dr. Kuei Pin Yeo, yang didedikasikan untuk musik kamar dengan kedalaman, kejernihan, dan keterlibatan intelektual. Repertoar mereka berfokus pada sastra inti violin-piano, dengan penekanan khusus pada Beethoven dan tradisi Klasik-Romantis.</p>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="artist-card fade-in">
+                        <img src="remon" alt="Jap Tji Kien" class="artist-img">
+                        <h3 data-lang="jap_name">Jap Tji Kien (Violin)</h3>
+                        <p data-lang="jap_bio">Violinis & Dirigen terkemuka di Indonesia, penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara. Memulai karirnya sebagai solis dan musisi kamar, kemudian menjadi concertmaster Orkestra Simfoni Jakarta.</p>
+                        <a href="#" class="btn-custom" data-bs-toggle="modal" data-bs-target="#japModal" data-lang="jap_read_more">Baca Biografi Lengkap</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="artist-card fade-in">
+                        <img src="remon" alt="Dr. Kuei Pin Yeo" class="artist-img">
+                        <h3 data-lang="yeo_name">Dr. Kuei Pin Yeo (Piano)</h3>
+                        <p data-lang="yeo_bio">Pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Dikenal sebagai musisi dengan karier internasional yang panjang, tampil sebagai resitalis, solis dengan orkestra, serta musisi kamar di Amerika Serikat dan Asia.</p>
+                        <a href="#" class="btn-custom" data-bs-toggle="modal" data-bs-target="#yeoModal" data-lang="yeo_read_more">Baca Biografi Lengkap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beethoven Project Section -->
+    <section id="beethoven">
+        <div class="container">
+            <h2 class="section-title fade-in" data-lang="beethoven_title">Beethoven Bicentennial Memorial Concert Series 2027–2028</h2>
+            <p class="lead text-center fade-in" data-lang="beethoven_subtitle">Memperingati 200 Tahun Wafatnya Ludwig van Beethoven</p>
+            
+            <div class="project-card fade-in">
+                <p data-lang="beethoven_description">Sebuah proyek pertunjukan internasional yang mengeksplorasi karya lengkap Beethoven untuk violin dan piano. Dirancang sebagai siklus yang fleksibel dan modular untuk berbagai macam penyelenggara.</p>
+                <a href="#" class="btn-custom mt-3" data-bs-toggle="modal" data-bs-target="#beethovenModal" data-lang="beethoven_learn_more">Pelajari Lebih Lanjut</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Repertoire Section -->
+    <section id="repertoire" class="repertoire">
+        <div class="container">
+            <h2 class="section-title fade-in" data-lang="repertoire_title">Repertoar Kami</h2>
+            
+            <div class="row">
+                <div class="col-md-4 fade-in">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title" data-lang="repertoire_classical">Era Klasik</h3>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-music me-2"></i>W. A. Mozart</li>
+                                <li><i class="fas fa-music me-2"></i>J. Haydn</li>
+                                <li><i class="fas fa-music me-2"></i>L. van Beethoven</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title" data-lang="repertoire_romantic">Era Romantis</h3>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-music me-2"></i>F. Schubert</li>
+                                <li><i class="fas fa-music me-2"></i>R. Schumann</li>
+                                <li><i class="fas fa-music me-2"></i>J. Brahms</li>
+                                <li><i class="fas fa-music me-2"></i>C. Franck</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title" data-lang="repertoire_modern">Era Modern</h3>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-music me-2"></i>D. Shostakovich</li>
+                                <li><i class="fas fa-music me-2"></i>S. Prokofiev</li>
+                                <li><i class="fas fa-music me-2"></i>dan lainnya</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Section -->
+    <section id="media" class="media">
+        <div class="container">
+            <h2 class="section-title fade-in" data-lang="media_title">Dengar & Saksikan</h2>
+            
+            <ul class="nav nav-tabs" id="mediaTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="video-tab" data-bs-toggle="tab" data-bs-target="#video" type="button" role="tab" data-lang="media_video">Video</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="audio-tab" data-bs-toggle="tab" data-bs-target="#audio" type="button" role="tab" data-lang="media_audio">Audio</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="photo-tab" data-bs-toggle="tab" data-bs-target="#photo" type="button" role="tab" data-lang="media_photo">Foto</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="mediaTabsContent">
+                <div class="tab-pane fade show active" id="video" role="tabpanel">
+                    <div class="media-container fade-in">
+                        <h3 data-lang="media_video_title">Penampilan Terbaru</h3>
+                        <div class="ratio ratio-16x9 mt-3">
+                            <iframe src="remon" title="YouTube video" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="audio" role="tabpanel">
+                    <div class="media-container fade-in">
+                        <h3 data-lang="media_audio_title">Rekaman Pilihan</h3>
+                        <div class="mt-3">
+                            <audio controls class="w-100">
+                                <source src="#" type="audio/mpeg">
+                                Browser Anda tidak mendukung elemen audio.
+                            </audio>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="photo" role="tabpanel">
+                    <div class="row mt-4">
+                        <div class="col-md-4 mb-4 fade-in">
+                            <img src="remon" alt="Jap-Yeo Duo" class="img-fluid">
+                        </div>
+                        <div class="col-md-4 mb-4 fade-in">
+                            <img src="remon" alt="Jap-Yeo Duo" class="img-fluid">
+                        </div>
+                        <div class="col-md-4 mb-4 fade-in">
+                            <img src="remon" alt="Jap-Yeo Duo" class="img-fluid">
+                        </div>
+                        <div class="col-md-4 mb-4 fade-in">
+                            <img src="remon" alt="Jap-Yeo Duo" class="img-fluid">
+                        </div>
+                        <div class="col-md-4 mb-4 fade-in">
+                            <img src="remon" alt="Jap-Yeo Duo" class="img-fluid">
+                        </div>
+                        <div class="col-md-4 mb-4 fade-in">
+                            <img src="remon" alt="Jap-Yeo Duo" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title fade-in" data-lang="contact_title">Hubungi Kami</h2>
+            <p class="lead text-center fade-in" data-lang="contact_subtitle">Untuk pemesanan konser dan pertanyaan lainnya, silakan menghubungi manajemen kami:</p>
+            
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-8">
+                    <div class="contact-info fade-in">
+                        <h3 data-lang="contact_management">Informasi Manajemen</h3>
+                        <p class="mt-4"><i class="fas fa-building"></i> <span data-lang="contact_managed">Dikelola oleh:</span> YMJ STAGE (Performance & Artist Management Division)</p>
+                        <p><i class="fas fa-envelope"></i> <span data-lang="contact_email">Email:</span> info@ymjstage.com</p>
+                        <p><i class="fas fa-phone"></i> <span data-lang="contact_phone">Telepon:</span> +62 811-9892-413</p>
+                        <p><i class="fas fa-globe"></i> <span data-lang="contact_website">Website:</span> www.ymjstage.com</p>
+                        
+                        <div class="mt-4">
+                            <h4 data-lang="contact_form_title">Formulir Kontak</h4>
+                            <form class="mt-3">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Nama Lengkap" data-lang-placeholder="contact_form_name">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Email" data-lang-placeholder="contact_form_email">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Subjek" data-lang-placeholder="contact_form_subject">
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" rows="5" placeholder="Pesan Anda" data-lang-placeholder="contact_form_message"></textarea>
+                                </div>
+                                <button type="submit" class="btn-custom" data-lang="contact_form_send">Kirim Pesan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p data-lang="footer_copyright">Hak Cipta © 2026 Jap-Yeo Duo. Semua hak dilindungi.</p>
+            <p data-lang="footer_managed">Dikelola oleh YMJ STAGE</p>
+            <div class="mt-3">
+                <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Jap Tji Kien Modal -->
+    <div class="modal fade" id="japModal" tabindex="-1" aria-labelledby="japModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="japModalLabel" data-lang="jap_modal_title">Biografi: Jap Tji Kien</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="remon" alt="Jap Tji Kien" class="img-fluid mb-4">
+                    <p data-lang="jap_modal_bio_1">Jap Tji Kien adalah salah satu violinis dan dirigen paling dihormati di Indonesia, lahir di Bandung, dan dikenal sebagai penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara. Ia mulai belajar biola pada usia empat tahun dan melakukan debut panggung pada usia sepuluh tahun, menandai awal perjalanan panjangnya sebagai musisi profesional.</p>
+                    <p data-lang="jap_modal_bio_2">Sebagai violinis, Jap Tji Kien telah tampil luas sebagai solis dan musisi kamar, dengan kehadiran yang kuat di berbagai konser, siaran radio, dan televisi, serta memperoleh pengakuan luas baik di dalam maupun luar negeri. Pada tahun 1971, ia diterima sebagai anggota termuda Orkestra Simfoni Jakarta, dan antara tahun 1973 hingga 1985 menjabat sebagai concertmaster, peran penting yang membentuk identitas musikal dan kepemimpinannya.</p>
+                    <p data-lang="jap_modal_bio_3">Pada tahun 1985, ia menerima beasiswa dan fellowship penuh dari Asian Cultural Council (sebelumnya John D. Rockefeller 3rd Fund) serta Aspen School of Music, Colorado, untuk belajar di bawah bimbingan guru biola legendaris Dorothy DeLay. Pengalaman ini memberikan pengaruh mendalam terhadap pendekatan artistik dan musikalitasnya.</p>
+                    <p data-lang="jap_modal_bio_4">Sejak 1976, Jap Tji Kien juga aktif sebagai dirigen. Ia telah memimpin berbagai orkestra dan paduan suara besar, termasuk konser kenegaraan dengan partisipasi ribuan musisi. Saat ini, ia terus berkarya sebagai violinis, dirigen, dan pendidik, serta menjabat sebagai Resident Conductor Orkes Simfoni Nasional Indonesia (OSNI).</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-lang="modal_close">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dr. Kuei Pin Yeo Modal -->
+    <div class="modal fade" id="yeoModal" tabindex="-1" aria-labelledby="yeoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="yeoModalLabel" data-lang="yeo_modal_title">Biografi: Dr. Kuei Pin Yeo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="Remon" alt="Dr. Kuei Pin Yeo" class="img-fluid mb-4">
+                    <p data-lang="yeo_modal_bio_1">Dr. Kuei Pin Yeo adalah pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Ia dikenal sebagai musisi dengan karier internasional yang panjang, tampil sebagai resitalis, solis dengan orkestra, serta musisi kamar di Amerika Serikat dan Asia.</p>
+                    <p data-lang="yeo_modal_bio_2">Debut resitalnya di Carnegie Recital Hall, New York, menandai awal pengakuan internasionalnya. Pada kesempatan tersebut, The New York Times memuji permainannya sebagai pianis dengan teknik yang matang dan musikalitas yang peka, serta interpretasi yang elegan, jernih, dan langsung secara musikal. Kritik lain menyebutnya sebagai "seorang pianis yang luar biasa", dengan kepekaan dan kedalaman artistik yang tinggi.</p>
+                    <p data-lang="yeo_modal_bio_3">Sebagai performer, Dr. Yeo memiliki repertoar luas yang mencakup karya-karya klasik, romantik, hingga abad ke-20, dengan perhatian khusus pada tradisi Jerman–Austria, musik kamar, dan karya-karya berskala besar termasuk concerto. Pendekatan interpretatifnya menekankan kejelasan struktur, integritas gaya, dan kedalaman ekspresi musikal.</p>
+                    <p data-lang="yeo_modal_bio_4">Lahir di Jakarta, Dr. Yeo menempuh pendidikan musiknya di Manhattan School of Music, New York, dengan beasiswa penuh. Ia juga merupakan penerima John D. Rockefeller 3rd Fund / Asian Cultural Council fellowship untuk studi lanjutan di Amerika Serikat.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-lang="modal_close">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Beethoven Project Modal -->
+    <div class="modal fade" id="beethovenModal" tabindex="-1" aria-labelledby="beethovenModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="beethovenModalLabel" data-lang="beethoven_modal_title">Beethoven Bicentennial Memorial Concert Series</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="remon" alt="Beethoven Project" class="img-fluid mb-4">
+                    
+                    <ul class="nav nav-tabs" id="beethovenTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" data-lang="beethoven_tab_overview">Ikhtisar Proyek</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="vision-tab" data-bs-toggle="tab" data-bs-target="#vision" type="button" role="tab" data-lang="beethoven_tab_vision">Visi Artistik</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="repertoire-tab" data-bs-toggle="tab" data-bs-target="#repertoire-tab-content" type="button" role="tab" data-lang="beethoven_tab_repertoire">Repertoar & Format</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="booking-tab" data-bs-toggle="tab" data-bs-target="#booking" type="button" role="tab" data-lang="beethoven_tab_booking">Periode Tur & Pemesanan</button>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content" id="beethovenTabsContent">
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                            <h3 class="mt-4" data-lang="beethoven_overview_title">Ikhtisar Proyek</h3>
+                            <p data-lang="beethoven_overview_1">Beethoven Bicentennial Memorial Concert Series (2027–2028) adalah proyek pertunjukan internasional untuk memperingati 200 tahun kematian Beethoven. Dikonseptualisasikan dan dipresentasikan oleh Jap–Yeo Duo di bawah naungan YMJ Performance & Artist Management Division, proyek ini menawarkan eksplorasi mendalam atas karya lengkap Beethoven untuk violin dan piano melalui program konser yang dipilih dengan cermat.</p>
+                            <p data-lang="beethoven_overview_2">Alih-alih menjadi satu acara peringatan, proyek ini dirancang sebagai siklus yang fleksibel dan modular, memungkinkan penyelenggara untuk mengadakan: satu resital, seri tematik singkat, atau siklus konser lengkap.</p>
+                        </div>
+                        <div class="tab-pane fade" id="vision" role="tabpanel">
+                            <h3 class="mt-4" data-lang="beethoven_vision_title">Visi Artistik</h3>
+                            <p data-lang="beethoven_vision_1">Karya violin-piano Beethoven mewakili momen penting dalam sejarah musik — mendefinisikan ulang hubungan antar instrumen, memperluas kedalaman ekspresif, dan mengubah musik kamar menjadi ruang dialog yang mendalam.</p>
+                            <p data-lang="beethoven_vision_2">Proyek ini mendekati Beethoven bukan sebagai monumen, tetapi sebagai percakapan yang hidup: antara violin dan piano, antara para pemain, dan antara musik dengan audiens saat ini.</p>
+                            <p data-lang="beethoven_vision_3">Interpretasi kami menekankan: kejernihan struktural, kesadaran historis, dan kejujuran emosional.</p>
+                        </div>
+                        <div class="tab-pane fade" id="repertoire-tab-content" role="tabpanel">
+                            <h3 class="mt-4" data-lang="beethoven_repertoire_title">Repertoar & Format</h3>
+                            <h4 data-lang="beethoven_repertoire_core">Repertoar Inti:</h4>
+                            <ul>
+                                <li data-lang="beethoven_repertoire_core_1">Sonata Lengkap untuk Violin dan Piano</li>
+                                <li data-lang="beethoven_repertoire_core_2">Karya Terpilih yang Mengkontekstualisasikan Perkembangan Beethoven</li>
+                                <li data-lang="beethoven_repertoire_core_3">Kolaborasi Konser (Opsional, tergantung format)</li>
+                            </ul>
+                            
+                            <h4 data-lang="beethoven_repertoire_options">Opsi Format untuk Penyelenggara:</h4>
+                            <ul>
+                                <li data-lang="beethoven_repertoire_options_1"><strong>Resital Tunggal:</strong> Program kurasi yang menyoroti sonata kunci.</li>
+                                <li data-lang="beethoven_repertoire_options_2"><strong>Seri Singkat (2-3 konser):</strong> Melacak evolusi gaya Beethoven.</li>
+                                <li data-lang="beethoven_repertoire_options_3"><strong>Siklus Lengkap:</strong> Siklus sonata violin-piano penuh yang dipresentasikan dalam beberapa malam.</li>
+                                <li data-lang="beethoven_repertoire_options_4"><strong>Format Diperluas (Opsional):</strong> Resital-kuliah, Masterclass, Residensi di konservatori, Diskusi pra-konser.</li>
+                            </ul>
+                            
+                            <p data-lang="beethoven_repertoire_adaptability"><strong>Adaptabilitas:</strong> Semua format dapat disesuaikan untuk festival, balai konser, konservatori, dan institusi budaya.</p>
+                        </div>
+                        <div class="tab-pane fade" id="booking" role="tabpanel">
+                            <h3 class="mt-4" data-lang="beethoven_booking_title">Periode Tur & Pemesanan</h3>
+                            <h4 data-lang="beethoven_booking_period">Periode Tur: 2027–2028</h4>
+                            <p data-lang="beethoven_booking_description">Proyek ini sengaja diperpanjang melebihi tahun kalender 2027, mencerminkan siklus peringatan daripada satu tanggal anniversary. Kami kini membuka pemesanan untuk periode tur ini.</p>
+                            
+                            <p data-lang="beethoven_booking_cta"><strong>Ajakan Bertindak:</strong> "Untuk informasi ketersediaan, teknis, dan biaya, silakan hubungi manajemen kami:"</p>
+                            
+                            <h4 data-lang="beethoven_booking_contact">Kontak YMJ STAGE:</h4>
+                            <p data-lang="beethoven_booking_contact_info">Nama: [Nama Kontak]<br>
+                            Jabatan: [Jabatan]<br>
+                            Email: info@ymjstage.com<br>
+                            Telepon: +62 811-9892-413</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-lang="modal_close">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Translation data
+        const translations = {
+            id: {
+                nav_home: "Beranda",
+                nav_about: "Tentang",
+                nav_beethoven: "Proyek Beethoven",
+                nav_repertoire: "Repertoar",
+                nav_media: "Media",
+                nav_contact: "Kontak",
+                hero_title: "Jap-Yeo Duo",
+                hero_subtitle: "Jap Tji Kien, Violin & Dr. Kuei Pin Yeo, Piano",
+                hero_btn_explore: "Jelajahi Proyek Beethoven",
+                hero_btn_repertoire: "Lihat Repertoar",
+                about_title: "Dialog Musikal yang Mendalam",
+                about_description: "Jap–Yeo Duo menghadirkan kemitraan antara violinis Jap Tji Kien dan pianis Dr. Kuei Pin Yeo, yang didedikasikan untuk musik kamar dengan kedalaman, kejernihan, dan keterlibatan intelektual. Repertoar mereka berfokus pada sastra inti violin-piano, dengan penekanan khusus pada Beethoven dan tradisi Klasik-Romantis.",
+                jap_name: "Jap Tji Kien (Violin)",
+                jap_bio: "Violinis & Dirigen terkemuka di Indonesia, penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara. Memulai karirnya sebagai solis dan musisi kamar, kemudian menjadi concertmaster Orkestra Simfoni Jakarta.",
+                jap_read_more: "Baca Biografi Lengkap",
+                yeo_name: "Dr. Kuei Pin Yeo (Piano)",
+                yeo_bio: "Pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Dikenal sebagai musisi dengan karier internasional yang panjang, tampil sebagai resitalis, solis dengan orkestra, serta musisi kamar di Amerika Serikat dan Asia.",
+                yeo_read_more: "Baca Biografi Lengkap",
+                beethoven_title: "Beethoven Bicentennial Memorial Concert Series 2027–2028",
+                beethoven_subtitle: "Memperingati 200 Tahun Wafatnya Ludwig van Beethoven",
+                beethoven_description: "Sebuah proyek pertunjukan internasional yang mengeksplorasi karya lengkap Beethoven untuk violin dan piano. Dirancang sebagai siklus yang fleksibel dan modular untuk berbagai macam penyelenggara.",
+                beethoven_learn_more: "Pelajari Lebih Lanjut",
+                repertoire_title: "Repertoar Kami",
+                repertoire_classical: "Era Klasik",
+                repertoire_romantic: "Era Romantis",
+                repertoire_modern: "Era Modern",
+                media_title: "Dengar & Saksikan",
+                media_video: "Video",
+                media_audio: "Audio",
+                media_photo: "Foto",
+                media_video_title: "Penampilan Terbaru",
+                media_audio_title: "Rekaman Pilihan",
+                contact_title: "Hubungi Kami",
+                contact_subtitle: "Untuk pemesanan konser dan pertanyaan lainnya, silakan menghubungi manajemen kami:",
+                contact_management: "Informasi Manajemen",
+                contact_managed: "Dikelola oleh:",
+                contact_email: "Email:",
+                contact_phone: "Telepon:",
+                contact_website: "Website:",
+                contact_form_title: "Formulir Kontak",
+                contact_form_name: "Nama Lengkap",
+                contact_form_email: "Email",
+                contact_form_subject: "Subjek",
+                contact_form_message: "Pesan Anda",
+                contact_form_send: "Kirim Pesan",
+                footer_copyright: "Hak Cipta © 2026 Jap-Yeo Duo. Semua hak dilindungi.",
+                footer_managed: "Dikelola oleh YMJ STAGE",
+                jap_modal_title: "Biografi: Jap Tji Kien",
+                jap_modal_bio_1: "Jap Tji Kien adalah salah satu violinis dan dirigen paling dihormati di Indonesia, lahir di Bandung, dan dikenal sebagai penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara. Ia mulai belajar biola pada usia empat tahun dan melakukan debut panggung pada usia sepuluh tahun, menandai awal perjalanan panjangnya sebagai musisi profesional.",
+                jap_modal_bio_2: "Sebagai violinis, Jap Tji Kien telah tampil luas sebagai solis dan musisi kamar, dengan kehadiran yang kuat di berbagai konser, siaran radio, dan televisi, serta memperoleh pengakuan luas baik di dalam maupun luar negeri. Pada tahun 1971, ia diterima sebagai anggota termuda Orkestra Simfoni Jakarta, dan antara tahun 1973 hingga 1985 menjabat sebagai concertmaster, peran penting yang membentuk identitas musikal dan kepemimpinannya.",
+                jap_modal_bio_3: "Pada tahun 1985, ia menerima beasiswa dan fellowship penuh dari Asian Cultural Council (sebelumnya John D. Rockefeller 3rd Fund) serta Aspen School of Music, Colorado, untuk belajar di bawah bimbingan guru biola legendaris Dorothy DeLay. Pengalaman ini memberikan pengaruh mendalam terhadap pendekatan artistik dan musikalitasnya.",
+                jap_modal_bio_4: "Sejak 1976, Jap Tji Kien juga aktif sebagai dirigen. Ia telah memimpin berbagai orkestra dan paduan suara besar, termasuk konser kenegaraan dengan partisipasi ribuan musisi. Saat ini, ia terus berkarya sebagai violinis, dirigen, dan pendidik, serta menjabat sebagai Resident Conductor Orkes Simfoni Nasional Indonesia (OSNI).",
+                yeo_modal_title: "Biografi: Dr. Kuei Pin Yeo",
+                yeo_modal_bio_1: "Dr. Kuei Pin Yeo adalah pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Ia dikenal sebagai musisi dengan karier internasional yang panjang, tampil sebagai resitalis, solis dengan orkestra, serta musisi kamar di Amerika Serikat dan Asia.",
+                yeo_modal_bio_2: "Debut resitalnya di Carnegie Recital Hall, New York, menandai awal pengakuan internasionalnya. Pada kesempatan tersebut, The New York Times memuji permainannya sebagai pianis dengan teknik yang matang dan musikalitas yang peka, serta interpretasi yang elegan, jernih, dan langsung secara musikal. Kritik lain menyebutnya sebagai \"seorang pianis yang luar biasa\", dengan kepekaan dan kedalaman artistik yang tinggi.",
+                yeo_modal_bio_3: "Sebagai performer, Dr. Yeo memiliki repertoar luas yang mencakup karya-karya klasik, romantik, hingga abad ke-20, dengan perhatian khusus pada tradisi Jerman–Austria, musik kamar, dan karya-karya berskala besar termasuk concerto. Pendekatan interpretatifnya menekankan kejelasan struktur, integritas gaya, dan kedalaman ekspresi musikal.",
+                yeo_modal_bio_4: "Lahir di Jakarta, Dr. Yeo menempuh pendidikan musiknya di Manhattan School of Music, New York, dengan beasiswa penuh. Ia juga merupakan penerima John D. Rockefeller 3rd Fund / Asian Cultural Council fellowship untuk studi lanjutan di Amerika Serikat.",
+                beethoven_modal_title: "Beethoven Bicentennial Memorial Concert Series",
+                beethoven_tab_overview: "Ikhtisar Proyek",
+                beethoven_tab_vision: "Visi Artistik",
+                beethoven_tab_repertoire: "Repertoar & Format",
+                beethoven_tab_booking: "Periode Tur & Pemesanan",
+                beethoven_overview_title: "Ikhtisar Proyek",
+                beethoven_overview_1: "Beethoven Bicentennial Memorial Concert Series (2027–2028) adalah proyek pertunjukan internasional untuk memperingati 200 tahun kematian Beethoven. Dikonseptualisasikan dan dipresentasikan oleh Jap–Yeo Duo di bawah naungan YMJ Performance & Artist Management Division, proyek ini menawarkan eksplorasi mendalam atas karya lengkap Beethoven untuk violin dan piano melalui program konser yang dipilih dengan cermat.",
+                beethoven_overview_2: "Alih-alih menjadi satu acara peringatan, proyek ini dirancang sebagai siklus yang fleksibel dan modular, memungkinkan penyelenggara untuk mengadakan: satu resital, seri tematik singkat, atau siklus konser lengkap.",
+                beethoven_vision_title: "Visi Artistik",
+                beethoven_vision_1: "Karya violin-piano Beethoven mewakili momen penting dalam sejarah musik — mendefinisikan ulang hubungan antar instrumen, memperluas kedalaman ekspresif, dan mengubah musik kamar menjadi ruang dialog yang mendalam.",
+                beethoven_vision_2: "Proyek ini mendekati Beethoven bukan sebagai monumen, tetapi sebagai percakapan yang hidup: antara violin dan piano, antara para pemain, dan antara musik dengan audiens saat ini.",
+                beethoven_vision_3: "Interpretasi kami menekankan: kejernihan struktural, kesadaran historis, dan kejujuran emosional.",
+                beethoven_repertoire_title: "Repertoar & Format",
+                beethoven_repertoire_core: "Repertoar Inti:",
+                beethoven_repertoire_core_1: "Sonata Lengkap untuk Violin dan Piano",
+                beethoven_repertoire_core_2: "Karya Terpilih yang Mengkontekstualisasikan Perkembangan Beethoven",
+                beethoven_repertoire_core_3: "Kolaborasi Konser (Opsional, tergantung format)",
+                beethoven_repertoire_options: "Opsi Format untuk Penyelenggara:",
+                beethoven_repertoire_options_1: "Resital Tunggal: Program kurasi yang menyoroti sonata kunci.",
+                beethoven_repertoire_options_2: "Seri Singkat (2-3 konser): Melacak evolusi gaya Beethoven.",
+                beethoven_repertoire_options_3: "Siklus Lengkap: Siklus sonata violin-piano penuh yang dipresentasikan dalam beberapa malam.",
+                beethoven_repertoire_options_4: "Format Diperluas (Opsional): Resital-kuliah, Masterclass, Residensi di konservatori, Diskusi pra-konser.",
+                beethoven_repertoire_adaptability: "Adaptabilitas: Semua format dapat disesuaikan untuk festival, balai konser, konservatori, dan institusi budaya.",
+                beethoven_booking_title: "Periode Tur & Pemesanan",
+                beethoven_booking_period: "Periode Tur: 2027–2028",
+                beethoven_booking_description: "Proyek ini sengaja diperpanjang melebihi tahun kalender 2027, mencerminkan siklus peringatan daripada satu tanggal anniversary. Kami kini membuka pemesanan untuk periode tur ini.",
+                beethoven_booking_cta: "Ajakan Bertindak: \"Untuk informasi ketersediaan, teknis, dan biaya, silakan hubungi manajemen kami:\"",
+                beethoven_booking_contact: "Kontak YMJ STAGE:",
+                beethoven_booking_contact_info: "Nama: [Nama Kontak]<br>Jabatan: [Jabatan]<br>Email: info@ymjstage.com<br>Telepon: +62 811-9892-413",
+                modal_close: "Tutup"
+            },
+            en: {
+                nav_home: "Home",
+                nav_about: "About",
+                nav_beethoven: "Beethoven Project",
+                nav_repertoire: "Repertoire",
+                nav_media: "Media",
+                nav_contact: "Contact",
+                hero_title: "Jap-Yeo Duo",
+                hero_subtitle: "Jap Tji Kien, Violin & Dr. Kuei Pin Yeo, Piano",
+                hero_btn_explore: "Explore Beethoven Project",
+                hero_btn_repertoire: "View Repertoire",
+                about_title: "A Deep Musical Dialogue",
+                about_description: "The Jap–Yeo Duo presents a partnership between violinist Jap Tji Kien and pianist Dr. Kuei Pin Yeo, dedicated to chamber music with depth, clarity, and intellectual engagement. Their repertoire focuses on the core violin-piano literature, with special emphasis on Beethoven and the Classical-Romantic tradition.",
+                jap_name: "Jap Tji Kien (Violin)",
+                jap_bio: "Prominent violinist & conductor in Indonesia, recipient of the Fellowship of the Royal Schools of Music (FRSM), London, the first in Southeast Asia. He began his career as a soloist and chamber musician, later becoming concertmaster of the Jakarta Symphony Orchestra.",
+                jap_read_more: "Read Full Biography",
+                yeo_name: "Dr. Kuei Pin Yeo (Piano)",
+                yeo_bio: "Leading Indonesian pianist and Indonesia's first doctor of music in piano performance. Known as a musician with a long international career, performing as a recitalist, orchestral soloist, and chamber musician in the United States and Asia.",
+                yeo_read_more: "Read Full Biography",
+                beethoven_title: "Beethoven Bicentennial Memorial Concert Series 2027–2028",
+                beethoven_subtitle: "Commemorating the 200th Anniversary of Ludwig van Beethoven's Death",
+                beethoven_description: "An international performance project exploring the complete works of Beethoven for violin and piano. Designed as a flexible and modular cycle for various organizers.",
+                beethoven_learn_more: "Learn More",
+                repertoire_title: "Our Repertoire",
+                repertoire_classical: "Classical Era",
+                repertoire_romantic: "Romantic Era",
+                repertoire_modern: "Modern Era",
+                media_title: "Listen & Watch",
+                media_video: "Video",
+                media_audio: "Audio",
+                media_photo: "Photos",
+                media_video_title: "Recent Performance",
+                media_audio_title: "Selected Recordings",
+                contact_title: "Contact Us",
+                contact_subtitle: "For concert bookings and other inquiries, please contact our management:",
+                contact_management: "Management Information",
+                contact_managed: "Managed by:",
+                contact_email: "Email:",
+                contact_phone: "Phone:",
+                contact_website: "Website:",
+                contact_form_title: "Contact Form",
+                contact_form_name: "Full Name",
+                contact_form_email: "Email",
+                contact_form_subject: "Subject",
+                contact_form_message: "Your Message",
+                contact_form_send: "Send Message",
+                footer_copyright: "Copyright © 2026 Jap-Yeo Duo. All rights reserved.",
+                footer_managed: "Managed by YMJ STAGE",
+                jap_modal_title: "Biography: Jap Tji Kien",
+                jap_modal_bio_1: "Jap Tji Kien is one of Indonesia's most respected violinists and conductors, born in Bandung, and known as the first recipient of the Fellowship of the Royal Schools of Music (FRSM), London, in Southeast Asia. He began studying violin at the age of four and made his stage debut at the age of ten, marking the beginning of his long journey as a professional musician.",
+                jap_modal_bio_2: "As a violinist, Jap Tji Kien has performed extensively as a soloist and chamber musician, with a strong presence in various concerts, radio broadcasts, and television, gaining wide recognition both domestically and internationally. In 1971, he was accepted as the youngest member of the Jakarta Symphony Orchestra, and between 1973 and 1985 served as concertmaster, a crucial role that shaped his musical identity and leadership.",
+                jap_modal_bio_3: "In 1985, he received a full scholarship and fellowship from the Asian Cultural Council (formerly John D. Rockefeller 3rd Fund) and Aspen School of Music, Colorado, to study under the legendary violin teacher Dorothy DeLay. This experience had a profound influence on his artistic approach and musicality.",
+                jap_modal_bio_4: "Since 1976, Jap Tji Kien has also been active as a conductor. He has led various large orchestras and choirs, including state concerts with the participation of thousands of musicians. Currently, he continues to work as a violinist, conductor, and educator, and serves as Resident Conductor of the Indonesian National Symphony Orchestra (OSNI).",
+                yeo_modal_title: "Biography: Dr. Kuei Pin Yeo",
+                yeo_modal_bio_1: "Dr. Kuei Pin Yeo is a leading Indonesian pianist and Indonesia's first doctor of music in piano performance. She is known as a musician with a long international career, performing as a recitalist, orchestral soloist, and chamber musician in the United States and Asia.",
+                yeo_modal_bio_2: "Her recital debut at Carnegie Recital Hall, New York, marked the beginning of her international recognition. On that occasion, The New York Times praised her playing as that of a pianist with mature technique and sensitive musicality, as well as elegant, clear, and musically direct interpretations. Other critics described her as \"an extraordinary pianist\" with high sensitivity and artistic depth.",
+                yeo_modal_bio_3: "As a performer, Dr. Yeo has a broad repertoire covering classical, romantic, to 20th-century works, with special attention to the German-Austrian tradition, chamber music, and large-scale works including concertos. Her interpretive approach emphasizes structural clarity, stylistic integrity, and depth of musical expression.",
+                yeo_modal_bio_4: "Born in Jakarta, Dr. Yeo pursued her music education at Manhattan School of Music, New York, with a full scholarship. She is also a recipient of the John D. Rockefeller 3rd Fund / Asian Cultural Council fellowship for advanced studies in the United States.",
+                beethoven_modal_title: "Beethoven Bicentennial Memorial Concert Series",
+                beethoven_tab_overview: "Project Overview",
+                beethoven_tab_vision: "Artistic Vision",
+                beethoven_tab_repertoire: "Repertoire & Format",
+                beethoven_tab_booking: "Tour Period & Booking",
+                beethoven_overview_title: "Project Overview",
+                beethoven_overview_1: "The Beethoven Bicentennial Memorial Concert Series (2027–2028) is an international performance project to commemorate the 200th anniversary of Beethoven's death. Conceptualized and presented by the Jap–Yeo Duo under the auspices of YMJ Performance & Artist Management Division, this project offers an in-depth exploration of Beethoven's complete works for violin and piano through carefully selected concert programs.",
+                beethoven_overview_2: "Rather than being a single commemorative event, this project is designed as a flexible and modular cycle, allowing organizers to hold: a single recital, a short thematic series, or a complete concert cycle.",
+                beethoven_vision_title: "Artistic Vision",
+                beethoven_vision_1: "Beethoven's violin-piano works represent a pivotal moment in music history—redefining the relationship between instruments, expanding expressive depth, and transforming chamber music into a space for deep dialogue.",
+                beethoven_vision_2: "This project approaches Beethoven not as a monument, but as a living conversation: between violin and piano, between the players, and between the music and today's audience.",
+                beethoven_vision_3: "Our interpretation emphasizes: structural clarity, historical awareness, and emotional honesty.",
+                beethoven_repertoire_title: "Repertoire & Format",
+                beethoven_repertoire_core: "Core Repertoire:",
+                beethoven_repertoire_core_1: "Complete Sonatas for Violin and Piano",
+                beethoven_repertoire_core_2: "Selected Works Contextualizing Beethoven's Development",
+                beethoven_repertoire_core_3: "Concert Collaborations (Optional, format-dependent)",
+                beethoven_repertoire_options: "Format Options for Organizers:",
+                beethoven_repertoire_options_1: "Single Recital: A curated program highlighting key sonatas.",
+                beethoven_repertoire_options_2: "Short Series (2-3 concerts): Tracing the evolution of Beethoven's style.",
+                beethoven_repertoire_options_3: "Complete Cycle: The full violin-piano sonata cycle presented over several evenings.",
+                beethoven_repertoire_options_4: "Extended Format (Optional): Lecture-recitals, Masterclasses, Conservatory residencies, Pre-concert discussions.",
+                beethoven_repertoire_adaptability: "Adaptability: All formats can be tailored for festivals, concert halls, conservatories, and cultural institutions.",
+                beethoven_booking_title: "Tour Period & Booking",
+                beethoven_booking_period: "Tour Period: 2027–2028",
+                beethoven_booking_description: "This project is intentionally extended beyond the calendar year 2027, reflecting a commemorative cycle rather than a single anniversary date. We are now opening bookings for this tour period.",
+                beethoven_booking_cta: "Call to Action: \"For availability, technical, and fee information, please contact our management:\"",
+                beethoven_booking_contact: "Contact YMJ STAGE:",
+                beethoven_booking_contact_info: "Name: [Contact Name]<br>Title: [Position]<br>Email: info@ymjstage.com<br>Phone: +62 811-9892-413",
+                modal_close: "Close"
+            },
+            zh: {
+                nav_home: "首页",
+                nav_about: "关于",
+                nav_beethoven: "贝多芬项目",
+                nav_repertoire: "曲目",
+                nav_media: "媒体",
+                nav_contact: "联系我们",
+                hero_title: "Jap-Yeo 二重奏",
+                hero_subtitle: "Jap Tji Kien, 小提琴 & Dr. Kuei Pin Yeo, 钢琴",
+                hero_btn_explore: "探索贝多芬项目",
+                hero_btn_repertoire: "查看曲目",
+                about_title: "深刻的音乐对话",
+                about_description: "Jap-Yeo 二重奏呈现小提琴家 Jap Tji Kien 和钢琴家 Dr. Kuei Pin Yeo 之间的合作伙伴关系，致力于具有深度、清晰度和智力参与度的室内乐。他们的曲目专注于核心小提琴-钢琴文献，特别强调贝多芬和古典-浪漫主义传统。",
+                jap_name: "Jap Tji Kien (小提琴)",
+                jap_bio: "印度尼西亚著名小提琴家和指挥家，伦敦皇家音乐学院奖学金（FRSM）获得者，东南亚首位。他开始作为独奏家和室内乐音乐家的职业生涯，后来成为雅加达交响乐团的首席小提琴手。",
+                jap_read_more: "阅读完整传记",
+                yeo_name: "Dr. Kuei Pin Yeo (钢琴)",
+                yeo_bio: "印度尼西亚著名钢琴家，印度尼西亚第一位钢琴表演音乐博士。以拥有漫长国际职业生涯的音乐家而闻名，在美国和亚洲作为独奏家、管弦乐队独奏家和室内乐音乐家演出。",
+                yeo_read_more: "阅读完整传记",
+                beethoven_title: "贝多芬二百周年纪念音乐会系列 2027–2028",
+                beethoven_subtitle: "纪念路德维希·范·贝多芬逝世200周年",
+                beethoven_description: "一个国际演出项目，探索贝多芬为小提琴和钢琴创作的完整作品。设计为灵活和模块化的循环，适用于各种组织者。",
+                beethoven_learn_more: "了解更多",
+                repertoire_title: "我们的曲目",
+                repertoire_classical: "古典时期",
+                repertoire_romantic: "浪漫主义时期",
+                repertoire_modern: "现代时期",
+                media_title: "聆听与观看",
+                media_video: "视频",
+                media_audio: "音频",
+                media_photo: "照片",
+                media_video_title: "最近演出",
+                media_audio_title: "精选录音",
+                contact_title: "联系我们",
+                contact_subtitle: "如需音乐会预订和其他咨询，请联系我们的管理团队：",
+                contact_management: "管理信息",
+                contact_managed: "管理方：",
+                contact_email: "邮箱：",
+                contact_phone: "电话：",
+                contact_website: "网站：",
+                contact_form_title: "联系表单",
+                contact_form_name: "全名",
+                contact_form_email: "邮箱",
+                contact_form_subject: "主题",
+                contact_form_message: "您的消息",
+                contact_form_send: "发送消息",
+                footer_copyright: "版权所有 © 2026 Jap-Yeo 二重奏。保留所有权利。",
+                footer_managed: "由 YMJ STAGE 管理",
+                jap_modal_title: "传记：Jap Tji Kien",
+                jap_modal_bio_1: "Jap Tji Kien 是印度尼西亚最受尊敬的小提琴家和指挥家之一，出生于万隆，被称为东南亚第一位伦敦皇家音乐学院奖学金（FRSM）获得者。他四岁开始学习小提琴，十岁首次登台演出，标志着他作为专业音乐家漫长旅程的开始。",
+                jap_modal_bio_2: "作为小提琴家，Jap Tji Kien 广泛作为独奏家和室内乐音乐家演出，在各种音乐会、广播和电视中都有强烈的存在感，在国内外都获得了广泛认可。1971年，他被接受为雅加达交响乐团最年轻的成员，1973年至1985年间担任首席小提琴手，这一关键角色塑造了他的音乐身份和领导力。",
+                jap_modal_bio_3: "1985年，他获得了亚洲文化委员会（前身为约翰·D·洛克菲勒第三基金）和科罗拉多阿斯彭音乐学院的全额奖学金和研究员资格，在传奇小提琴教师多萝西·迪莱的指导下学习。这段经历对他的艺术方法和音乐性产生了深远影响。",
+                jap_modal_bio_4: "自1976年以来，Jap Tji Kien 也积极担任指挥家。他曾领导过各种大型管弦乐队和合唱团，包括有数千名音乐家参与的国家音乐会。目前，他继续作为小提琴家、指挥家和教育家工作，并担任印度尼西亚国家交响乐团（OSNI）的常驻指挥。",
+                yeo_modal_title: "传记：Dr. Kuei Pin Yeo",
+                yeo_modal_bio_1: "Dr. Kuei Pin Yeo 是印度尼西亚著名钢琴家和印度尼西亚第一位钢琴表演音乐博士。她以拥有漫长国际职业生涯的音乐家而闻名，在美国和亚洲作为独奏家、管弦乐队独奏家和室内乐音乐家演出。",
+                yeo_modal_bio_2: "她在纽约卡内基独奏厅的独奏首演标志着她国际认可的开始。在那个场合，《纽约时报》称赞她的演奏是一位技术成熟、音乐敏感性强的钢琴家，以及优雅、清晰、音乐直接的诠释。其他评论家称她为\"一位非凡的钢琴家\"，具有高度的敏感性和艺术深度。",
+                yeo_modal_bio_3: "作为表演者，Dr. Yeo 拥有广泛的曲目，涵盖古典、浪漫主义到20世纪的作品，特别关注德奥传统、室内乐以及包括协奏曲在内的大型作品。她的诠释方法强调结构清晰度、风格完整性和音乐表达的深度。",
+                yeo_modal_bio_4: "出生于雅加达，Dr. Yeo 在纽约曼哈顿音乐学院接受音乐教育，获得全额奖学金。她也是约翰·D·洛克菲勒第三基金/亚洲文化委员会研究员资格的获得者，用于在美国深造。",
+                beethoven_modal_title: "贝多芬二百周年纪念音乐会系列",
+                beethoven_tab_overview: "项目概述",
+                beethoven_tab_vision: "艺术愿景",
+                beethoven_tab_repertoire: "曲目与格式",
+                beethoven_tab_booking: "巡演期与预订",
+                beethoven_overview_title: "项目概述",
+                beethoven_overview_1: "贝多芬二百周年纪念音乐会系列（2027–2028）是一个国际演出项目，以纪念贝多芬逝世200周年。由Jap-Yeo二重奏在YMJ表演与艺术家管理部的支持下构思和呈现，该项目通过精心挑选的音乐会节目，深入探索贝多芬为小提琴和钢琴创作的完整作品。",
+                beethoven_overview_2: "与其作为单一的纪念活动，该项目被设计为一个灵活和模块化的循环，允许组织者举办：单一独奏会、简短的主题系列或完整的音乐会循环。",
+                beethoven_vision_title: "艺术愿景",
+                beethoven_vision_1: "贝多芬的小提琴-钢琴作品代表了音乐史上的一个关键时刻——重新定义乐器之间的关系，扩展表达深度，并将室内乐转变为深度对话的空间。",
+                beethoven_vision_2: "该项目不是将贝多芬视为一座纪念碑，而是视为一场活生生的对话：在小提琴和钢琴之间，在演奏者之间，以及在音乐与当今观众之间。",
+                beethoven_vision_3: "我们的诠释强调：结构清晰度、历史意识和情感诚实。",
+                beethoven_repertoire_title: "曲目与格式",
+                beethoven_repertoire_core: "核心曲目：",
+                beethoven_repertoire_core_1: "完整的小提琴和钢琴奏鸣曲",
+                beethoven_repertoire_core_2: "背景化贝多芬发展的精选作品",
+                beethoven_repertoire_core_3: "音乐会合作（可选，取决于格式）",
+                beethoven_repertoire_options: "组织者的格式选项：",
+                beethoven_repertoire_options_1: "单一独奏会：突出关键奏鸣曲的策划节目。",
+                beethoven_repertoire_options_2: "简短系列（2-3场音乐会）：追踪贝多芬风格的演变。",
+                beethoven_repertoire_options_3: "完整循环：在几个晚上呈现完整的小提琴-钢琴奏鸣曲循环。",
+                beethoven_repertoire_options_4: "扩展格式（可选）：讲座-独奏会、大师班、音乐学院驻留、音乐会前讨论。",
+                beethoven_repertoire_adaptability: "适应性：所有格式都可以为音乐节、音乐厅、音乐学院和文化机构量身定制。",
+                beethoven_booking_title: "巡演期与预订",
+                beethoven_booking_period: "巡演期：2027–2028",
+                beethoven_booking_description: "该项目有意延长到2027日历年之后，反映了纪念循环而非单一周年纪念日期。我们现在开放此巡演期的预订。",
+                beethoven_booking_cta: "行动呼吁：\"如需可用性、技术和费用信息，请联系我们的管理团队：\"",
+                beethoven_booking_contact: "联系 YMJ STAGE：",
+                beethoven_booking_contact_info: "姓名：[联系人姓名]<br>职位：[职位]<br>邮箱：info@ymjstage.com<br>电话：+62 811-9892-413",
+                modal_close: "关闭"
+            }
+        };
+
+        // Language selector functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageDropdown = document.querySelector('.language-dropdown');
+            const languageMenu = document.querySelector('.language-menu');
+            const languageOptions = document.querySelectorAll('.language-option');
+            const currentLangDisplay = document.getElementById('current-lang');
+            
+            // Toggle language menu
+            languageDropdown.addEventListener('click', function() {
+                languageMenu.classList.toggle('show');
+            });
+            
+            // Close language menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!languageDropdown.contains(event.target)) {
+                    languageMenu.classList.remove('show');
+                }
+            });
+            
+            // Handle language selection
+            languageOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedLang = this.getAttribute('data-lang');
+                    
+                    // Update active state
+                    languageOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update current language display
+                    currentLangDisplay.textContent = selectedLang.toUpperCase();
+                    
+                    // Change language
+                    changeLanguage(selectedLang);
+                    
+                    // Close menu
+                    languageMenu.classList.remove('show');
+                });
+            });
+            
+            // Function to change language
+            function changeLanguage(lang) {
+                // Update HTML lang attribute
+                document.documentElement.lang = lang;
+                
+                // Update all elements with data-lang attribute
+                document.querySelectorAll('[data-lang]').forEach(element => {
+                    const key = element.getAttribute('data-lang');
+                    if (translations[lang] && translations[lang][key]) {
+                        element.textContent = translations[lang][key];
+                    }
+                });
+                
+                // Update placeholders
+                document.querySelectorAll('[data-lang-placeholder]').forEach(element => {
+                    const key = element.getAttribute('data-lang-placeholder');
+                    if (translations[lang] && translations[lang][key]) {
+                        element.placeholder = translations[lang][key];
+                    }
+                });
+                
+                // Update page title
+                if (lang === 'en') {
+                    document.title = 'Jap-Yeo Duo - Violin & Piano';
+                } else if (lang === 'zh') {
+                    document.title = 'Jap-Yeo 二重奏 - 小提琴与钢琴';
+                } else {
+                    document.title = 'Jap-Yeo Duo - Violin & Piano';
+                }
+                
+                // Save language preference to localStorage
+                localStorage.setItem('selectedLanguage', lang);
+            }
+            
+            // Load saved language preference
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'id';
+            if (savedLanguage !== 'id') {
+                const option = document.querySelector(`.language-option[data-lang="${savedLanguage}"]`);
+                if (option) {
+                    option.click();
+                }
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Update active nav link on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
