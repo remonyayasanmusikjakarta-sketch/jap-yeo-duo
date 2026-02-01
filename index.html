@@ -339,6 +339,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            z-index: 2;
         }
         
         .image-upload-btn:hover {
@@ -822,6 +823,12 @@
         
         .image-item-delete:hover {
             background-color: #c82333;
+        }
+        
+        /* Notification */
+        .notification {
+            min-width: 300px;
+            z-index: 9999;
         }
         
         /* Responsive */
@@ -1351,6 +1358,10 @@
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </div>
+            <div class="admin-menu-item" onclick="clearImageStorage()">
+                <i class="fas fa-trash-alt"></i>
+                <span>Clear Image Storage</span>
+            </div>
         </div>
         <button class="admin-toggle" id="adminToggle" onclick="toggleAdminMenu()">
             <i class="fas fa-cog"></i>
@@ -1376,7 +1387,7 @@
                 <button type="submit" class="login-btn">Login</button>
             </form>
             <div class="login-footer">
-                <p>Username: rem | Password: on</p>
+                <p>Username: japyeoduo | Password: japyeoduoymj1885</p>
             </div>
         </div>
     </div>
@@ -1392,7 +1403,7 @@
             <div class="image-upload-area" onclick="document.getElementById('imageFileInput').click()">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <h4>Drag & Drop Image Here</h4>
-                <p>or click to browse</p>
+                <p>or click to browse (max 5MB)</p>
                 <input type="file" id="imageFileInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
             </div>
             
@@ -1901,7 +1912,7 @@
 
         function showUploadButtons() {
             // Add upload buttons to all image placeholders
-            const placeholders = document.querySelectorAll('.artist-image-placeholder, .poster-item, .gallery-item');
+            const placeholders = document.querySelectorAll('.artist-image-placeholder, .poster-item, .gallery-item, .image-placeholder');
             placeholders.forEach(placeholder => {
                 // Check if upload button already exists
                 if (!placeholder.querySelector('.image-upload-btn')) {
@@ -1992,20 +2003,62 @@
         function showNotification(message, type) {
             // Create notification element
             const notification = document.createElement('div');
-            notification.className = `alert alert-${type} position-fixed top-0 start-50 translate-middle-x mt-3`;
+            notification.className = `notification alert alert-${type} position-fixed top-0 start-50 translate-middle-x mt-3`;
             notification.style.zIndex = '9999';
-            notification.textContent = message;
+            notification.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>${message}</span>
+                    <button type="button" class="btn-close" onclick="this.parentElement.parentElement.remove()"></button>
+                </div>
+            `;
             
             document.body.appendChild(notification);
             
-            // Remove after 3 seconds
+            // Remove after 5 seconds
             setTimeout(() => {
-                notification.remove();
-            }, 3000);
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
         }
 
         // Image storage (in a real application, this would be on a server)
         let imageStorage = {};
+
+        // Image compression function
+        function compressImage(file, maxWidth = 1920, maxHeight = 1080, quality = 0.8) {
+            return new Promise((resolve, reject) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                
+                img.onload = function() {
+                    // Calculate new dimensions
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    if (width > maxWidth) {
+                        height = (maxWidth / width) * height;
+                        width = maxWidth;
+                    }
+                    
+                    if (height > maxHeight) {
+                        width = (maxHeight / height) * width;
+                        height = maxHeight;
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    
+                    // Draw and compress
+                    ctx.drawImage(img, 0, 0, width, height);
+                    canvas.toBlob(resolve, 'image/jpeg', quality);
+                };
+                
+                img.onerror = reject;
+                img.src = URL.createObjectURL(file);
+            });
+        }
 
         // Image upload functions
         function openImageUpload(imageType) {
@@ -2023,39 +2076,84 @@
             document.getElementById('imageUploadModal').classList.remove('show');
         }
 
-        function handleImageSelect(event) {
+        async function handleImageSelect(event) {
             const file = event.target.files[0];
             if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    // In a real application, you would upload this to a server
-                    // For now, we'll store it in localStorage
-                    const imageData = {
-                        url: e.target.result,
-                        name: file.name,
-                        size: (file.size / 1024).toFixed(2) + ' KB',
-                        type: currentImageType
+                // Tampilkan informasi file
+                const fileSizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+                console.log(`File selected: ${file.name}, Size: ${fileSizeInMB} MB`);
+                
+                // Periksa ukuran file (maksimal 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    showNotification(`Ukuran gambar terlalu besar (${fileSizeInMB} MB). Maksimal 5MB.`, 'error');
+                    return;
+                }
+                
+                try {
+                    // Kompres gambar terlebih dahulu
+                    const compressedBlob = await compressImage(file);
+                    
+                    // Periksa ukuran file setelah kompresi
+                    if (compressedBlob.size > 5 * 1024 * 1024) {
+                        showNotification('Gambar terlalu besar bahkan setelah kompresi. Silakan pilih gambar yang lebih kecil.', 'error');
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            // In a real application, you would upload this to a server
+                            // For now, we'll store it in localStorage
+                            const imageData = {
+                                url: e.target.result,
+                                name: file.name,
+                                size: (compressedBlob.size / 1024).toFixed(2) + ' KB',
+                                type: currentImageType
+                            };
+                            
+                            if (!imageStorage[currentImageType]) {
+                                imageStorage[currentImageType] = [];
+                            }
+                            
+                            // Hapus gambar lama jika ada (hanya simpan satu gambar per tipe)
+                            imageStorage[currentImageType] = [imageData];
+                            
+                            // Save to localStorage dengan penanganan error
+                            try {
+                                localStorage.setItem('imageStorage', JSON.stringify(imageStorage));
+                                
+                                // Update the UI
+                                updateImageDisplay(currentImageType, imageData.url);
+                                updateImageList(currentImageType);
+                                
+                                showNotification('Gambar berhasil diunggah!', 'success');
+                            } catch (storageError) {
+                                console.error('Storage error:', storageError);
+                                showNotification('Gagal menyimpan gambar. Penyimpanan lokal mungkin penuh.', 'error');
+                            }
+                        } catch (error) {
+                            console.error('Error processing image:', error);
+                            showNotification('Terjadi kesalahan saat memproses gambar.', 'error');
+                        }
                     };
                     
-                    if (!imageStorage[currentImageType]) {
-                        imageStorage[currentImageType] = [];
-                    }
-                    imageStorage[currentImageType].push(imageData);
+                    reader.onerror = function() {
+                        showNotification('Gagal membaca file gambar.', 'error');
+                    };
                     
-                    // Save to localStorage
-                    localStorage.setItem('imageStorage', JSON.stringify(imageStorage));
-                    
-                    // Update the UI
-                    updateImageDisplay(currentImageType, imageData.url);
-                    updateImageList(currentImageType);
-                };
-                reader.readAsDataURL(file);
+                    reader.readAsDataURL(compressedBlob);
+                } catch (error) {
+                    console.error('Error compressing image:', error);
+                    showNotification('Terjadi kesalahan saat memproses gambar.', 'error');
+                }
+            } else {
+                showNotification('Harap pilih file gambar yang valid.', 'error');
             }
         }
 
         function saveImage() {
             // In a real application, this would save to a server
-            alert('Gambar berhasil disimpan!');
+            showNotification('Gambar berhasil disimpan!', 'success');
             closeImageUpload();
         }
 
@@ -2144,12 +2242,23 @@
             }
         }
 
+        function clearImageStorage() {
+            if (confirm('Apakah Anda yakin ingin menghapus semua gambar yang tersimpan?')) {
+                localStorage.removeItem('imageStorage');
+                imageStorage = {};
+                showNotification('Semua gambar telah dihapus.', 'info');
+                
+                // Refresh halaman untuk memperbarui tampilan
+                location.reload();
+            }
+        }
+
         function openVideoUpload() {
             if (!isAdminLoggedIn) {
                 showLoginModal();
                 return;
             }
-            alert('Fitur upload video akan segera tersedia');
+            showNotification('Fitur upload video akan segera tersedia', 'info');
         }
 
         function openAudioUpload() {
@@ -2157,7 +2266,7 @@
                 showLoginModal();
                 return;
             }
-            alert('Fitur upload audio akan segera tersedia');
+            showNotification('Fitur upload audio akan segera tersedia', 'info');
         }
 
         // Language selector functionality
@@ -2322,4 +2431,3 @@
     </script>
 </body>
 </html>
-
