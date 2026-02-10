@@ -53,95 +53,82 @@
         ::-webkit-scrollbar {
             width: 10px;
         }
-
         ::-webkit-scrollbar-track {
             background: var(--black);
         }
-
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(var(--gold), var(--gold-dark));
             border-radius: 5px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: var(--gold);
         }
-/* Logo Styles */
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: transform 0.3s ease;
-}
 
-.logo-img {
-    height: 40px;
-    width: auto;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
+        /* ===== LOGO STYLES (Updated & Consolidated) ===== */
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
 
-.logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin: 0;
-    letter-spacing: -0.5px;
-}
+        .logo-img {
+            height: 50px; /* Ukuran default logo di navbar */
+            width: auto;
+            object-fit: contain;
+            margin-right: 12px;
+            transition: transform 0.3s ease;
+        }
 
-/* Hover effects */
-.navbar-brand:hover .logo-container {
-    transform: scale(1.05);
-}
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold); /* Menggunakan warna gold konsisten */
+            margin: 0;
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
 
-.navbar-brand:hover .logo-img {
-    transform: rotate(5deg);
-}
+        /* Hover effects */
+        .navbar-brand:hover .logo-img {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .navbar-brand:hover .logo-text {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .logo-img {
-        height: 35px;
-    }
-    
-    .logo-text {
-        font-size: 1.3rem;
-    }
-}
+        /* Scrolled navbar logo adjustment */
+        .navbar.scrolled .logo-img {
+            height: 40px;
+        }
 
-@media (max-width: 576px) {
-    .logo-container {
-        gap: 8px;
-    }
-    
-    .logo-img {
-        height: 30px;
-    }
-    
-    .logo-text {
-        font-size: 1.1rem;
-    }
-}
+        .navbar.scrolled .logo-text {
+            font-size: 1.3rem;
+        }
 
-/* Scrolled navbar logo adjustment */
-.navbar.scrolled .logo-img {
-    height: 35px;
-}
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .logo-img {
+                height: 40px;
+            }
+            .logo-text {
+                font-size: 1.3rem;
+            }
+        }
 
-.navbar.scrolled .logo-text {
-    font-size: 1.3rem;
-}
+        @media (max-width: 576px) {
+            .logo-img {
+                height: 35px;
+                margin-right: 8px;
+            }
+            .logo-text {
+                font-size: 1.1rem;
+            }
+        }
 
-@media (max-width: 768px) {
-    .navbar.scrolled .logo-img {
-        height: 30px;
-    }
-    
-    .navbar.scrolled .logo-text {
-        font-size: 1.2rem;
-    }
-}
         /* ===== SPLASH SCREEN ===== */
         #splashScreen {
             position: fixed;
@@ -173,11 +160,16 @@
             margin: 0 auto 2rem;
             position: relative;
             animation: pulse 2s infinite;
+            padding: 20px; /* Memberi ruang agar logo tidak terpotong */
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
         }
 
-        .splash-logo i {
-            font-size: 4rem;
-            color: var(--black);
+        /* Logo Image di Splash Screen */
+        .splash-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
         }
 
         .splash-logo::before {
@@ -191,6 +183,7 @@
             border-radius: 50%;
             opacity: 0.5;
             animation: rotate 3s linear infinite;
+            z-index: -1;
         }
 
         .splash-title {
@@ -225,56 +218,14 @@
             z-index: 1000;
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 15px 0;
         }
 
         #navbar.scrolled {
             background: rgba(10, 10, 10, 0.98);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
         }
-
-       /* Tambahkan ke dalam style tag */
-          .navbar-brand {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    margin-right: 2rem;
-    text-decoration: none;
-}
-            
-            .logo-img {
-                height: 40px;
-                width: auto;
-                margin-right: 12px;
-                transition: all 0.3s ease;
-            }
-            
-            .brand-text {
-                background: linear-gradient(135deg, #8B7355, #D4AF37);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-            }
-            
-            /* Responsive logo */
-            @media (max-width: 768px) {
-                .logo-img {
-                    height: 35px;
-                    margin-right: 8px;
-                }
-                
-                .brand-text {
-                    font-size: 1.2rem;
-                }
-            }
-            
-            /* Logo hover effect */
-            .navbar-brand:hover .logo-img {
-                transform: scale(1.05);
-            }
-            
-            .navbar-brand:hover .brand-text {
-                opacity: 0.8;
-            }
 
         .navbar-nav .nav-link {
             color: var(--white) !important;
@@ -382,6 +333,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+            padding-top: 80px; /* Offset for fixed navbar */
         }
 
         .hero-bg-pattern {
@@ -566,232 +518,193 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
         }
+
         /* Beethoven Bicentennial Project Section */
-.beethoven-project-section {
-    padding: 100px 0;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(212, 175, 55, 0.02));
-    position: relative;
-    overflow: hidden;
-}
+        .beethoven-project-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(212, 175, 55, 0.02));
+            position: relative;
+            overflow: hidden;
+        }
 
-.beethoven-project-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.03" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-    background-size: cover;
-}
+        .beethoven-project-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.03" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
 
-.project-header {
-    text-align: center;
-    margin-bottom: 60px;
-    position: relative;
-    z-index: 2;
-}
+        .project-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
 
-.project-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
-    color: white;
-    padding: 8px 24px;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 32px rgba(242, 175, 60, 0.3);
-    animation: pulse 2s infinite;
-}
+        .project-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            color: white;
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(242, 175, 60, 0.3);
+            animation: pulse 2s infinite;
+        }
 
-@keyframes pulse {
-    0% {
-        box-shadow: 0 8px 32px rgb(239, 198, 96);
-    }
-    50% {
-        box-shadow: 0 8px 48px rgb(239, 198, 96);
-    }
-    100% {
-        box-shadow: 0 8px 32px rgb(239, 198, 96);
-    }
-}
+        .project-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-.project-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 20px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+        .project-subtitle {
+            font-size: 1.5rem;
+            color: #a8b2d1;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-.project-subtitle {
-    font-size: 1.5rem;
-    color: #a8b2d1;
-    font-weight: 300;
-    max-width: 600px;
-    margin: 0 auto;
-}
+        .project-description {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
 
-.project-description {
-    text-align: center;
-    margin-bottom: 80px;
-    position: relative;
-    z-index: 2;
-}
+        .project-description p {
+            font-size: 1.2rem;
+            color: #ccd6f6;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-.project-description p {
-    font-size: 1.2rem;
-    color: #ccd6f6;
-    line-height: 1.8;
-    max-width: 800px;
-    margin: 0 auto;
-}
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
 
-.project-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 80px;
-    position: relative;
-    z-index: 2;
-}
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-.stat-item {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 40px 30px;
-    text-align: center;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ead266 0%, #302701 100%);
+        }
 
-.stat-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #ead266 0%, #302701 100%);
-}
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgb(69, 57, 3);
+            border-color: rgba(255, 221, 27, 0.3);
+        }
 
-.stat-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgb(69, 57, 3);
-    border-color: rgba(255, 221, 27, 0.3);
-}
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #e3dda4 0%, #605404 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-.stat-number {
-    font-size: 4rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 10px;
-    background: linear-gradient(135deg, #e3dda4 0%, #605404 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
+        .stat-label {
+            font-size: 1.2rem;
+            color: #a8b2d1;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
 
-.stat-label {
-    font-size: 1.2rem;
-    color: #a8b2d1;
-    font-weight: 500;
-    margin-bottom: 20px;
-}
+        .stat-icon {
+            font-size: 2.5rem;
+            color: #ffffff;
+            opacity: 0.8;
+        }
 
-.stat-icon {
-    font-size: 2.5rem;
-    color: #ffffff;
-    opacity: 0.8;
-}
+        .project-cta {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
 
-.project-cta {
-    text-align: center;
-    position: relative;
-    z-index: 2;
-}
+        .btn-project {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #000000 0%, #121007 100%);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(216, 216, 17, 0.3);
+        }
 
-.btn-project {
-    display: inline-flex;
-    align-items: center;
-    background: linear-gradient(135deg, #000000 0%, #121007 100%);
-    color: white;
-    padding: 16px 40px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(216, 216, 17, 0.3);
-}
+        .btn-project:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(74, 63, 6, 0.4);
+            color: white;
+        }
 
-.btn-project:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(74, 63, 6, 0.4);
-    color: white;
-}
+        .btn-project i {
+            transition: transform 0.3s ease;
+        }
 
-.btn-project i {
-    transition: transform 0.3s ease;
-}
+        .btn-project:hover i {
+            transform: translateX(5px);
+        }
 
-.btn-project:hover i {
-    transform: translateX(5px);
-}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-title { font-size: 2.5rem; }
+            .project-subtitle { font-size: 1.2rem; }
+            .stat-number { font-size: 3rem; }
+            .project-stats { grid-template-columns: 1fr; gap: 30px; }
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .project-title {
-        font-size: 2.5rem;
-    }
-    
-    .project-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .stat-number {
-        font-size: 3rem;
-    }
-    
-    .project-stats {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-}
+        @media (max-width: 576px) {
+            .beethoven-project-section { padding: 60px 0; }
+            .project-title { font-size: 2rem; }
+            .project-subtitle { font-size: 1rem; }
+            .stat-item { padding: 30px 20px; }
+            .stat-number { font-size: 2.5rem; }
+            .stat-label { font-size: 1rem; }
+        }
 
-@media (max-width: 576px) {
-    .beethoven-project-section {
-        padding: 60px 0;
-    }
-    
-    .project-title {
-        font-size: 2rem;
-    }
-    
-    .project-subtitle {
-        font-size: 1rem;
-    }
-    
-    .stat-item {
-        padding: 30px 20px;
-    }
-    
-    .stat-number {
-        font-size: 2.5rem;
-    }
-    
-    .stat-label {
-        font-size: 1rem;
-    }
-}
         /* ===== ABOUT SECTION ===== */
         .about-section {
             padding: 100px 0;
@@ -927,250 +840,174 @@
         /* ===== REPERTOIRE SECTION ===== */
         .repertoire-section {
             padding: 100px 0;
-            background: var(--black);
-            position: relative;
+            background-color: #0d0a03;
+        }
+
+        .repertoire-tabs-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
         }
 
         .repertoire-tabs {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
+            background: rgba(6, 1, 1, 0.05);
+            border-radius: 50px;
+            padding: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .repertoire-tab {
-            padding: 1rem 2rem;
             background: transparent;
-            border: 2px solid var(--gold);
-            color: var(--gold);
+            border: none;
+            color: #8892b0;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1.1rem;
-            font-weight: 500;
+            margin: 0 5px;
         }
 
         .repertoire-tab.active,
         .repertoire-tab:hover {
-            background: var(--gold);
-            color: var(--black);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(135deg, #141308 0%, #000000 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(225, 234, 102, 0.4);
         }
 
-        .repertoire-content {
+        .artist-content {
             display: none;
+        }
+
+        .artist-content.active {
+            display: block;
             animation: fadeIn 0.5s ease;
         }
 
-        .repertoire-content.active {
-            display: block;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .content-subtitle, .card-title {
+            color: #ccd6f6;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
 
         .repertoire-list {
-            max-width: 900px;
-            margin: 0 auto;
+            list-style: none;
+            padding: 0;
         }
 
-        .repertoire-item {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(212, 175, 55, 0.02));
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
+        .repertoire-list li {
+            color: #a8b2d1;
+            font-size: 1.1rem;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .repertoire-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Sub-tabs for Piano Section */
+        .sub-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sub-tab {
+            background: transparent;
+            border: none;
+            color: #8892b0;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-right: 10px;
+        }
+
+        .sub-tab.active,
+        .sub-tab:hover {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .sub-content {
+            display: none;
+        }
+
+        .sub-content.active {
+            display: block;
+        }
+
+        .sonata-periods .period-item {
+            color: #a8b2d1;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        .sonata-periods .period-item strong {
+            color: #ccd6f6;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Sonata Grid for Violin Section */
+        .sonata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .sonata-item {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: #ccd6f6;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
             transition: all 0.3s ease;
         }
 
-        .repertoire-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-            border-color: var(--gold);
+        .sonata-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
         }
 
-        .repertoire-item h4 {
-            color: var(--gold);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-family: 'Playfair Display', serif;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .repertoire-tabs {
+                flex-direction: column;
+                border-radius: 12px;
+                padding: 10px;
+            }
+            .repertoire-tab {
+                margin: 5px 0;
+                width: 100%;
+                text-align: center;
+            }
+            .sonata-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
         }
-
-        .repertoire-item p {
-            color: rgba(255, 255, 255, 0.8);
-            margin: 0;
-            font-size: 1.1rem;
-        }
-        /* Repertoire Section Styles */
-.repertoire-section {
-    padding: 100px 0;
-    background-color: #0d0a03;
-}
-
-.repertoire-tabs-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
-}
-
-.repertoire-tabs {
-    display: flex;
-    background: rgba(6, 1, 1, 0.05);
-    border-radius: 50px;
-    padding: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.repertoire-tab {
-    background: transparent;
-    border: none;
-    color: #8892b0;
-    padding: 12px 28px;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 0 5px;
-}
-
-.repertoire-tab.active,
-.repertoire-tab:hover {
-    background: linear-gradient(135deg, #141308 0%, #000000 100%);
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(225, 234, 102, 0.4);
-}
-
-.artist-content {
-    display: none;
-}
-
-.artist-content.active {
-    display: block;
-    animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.content-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 30px;
-    margin-bottom: 20px;
-    backdrop-filter: blur(5px);
-}
-
-.content-subtitle, .card-title {
-    color: #ccd6f6;
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
-.repertoire-list {
-    list-style: none;
-    padding: 0;
-}
-
-.repertoire-list li {
-    color: #a8b2d1;
-    font-size: 1.1rem;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.repertoire-list li:last-child {
-    border-bottom: none;
-}
-
-/* Sub-tabs for Piano Section */
-.sub-tabs {
-    display: flex;
-    margin-bottom: 30px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.sub-tab {
-    background: transparent;
-    border: none;
-    color: #8892b0;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-bottom: 3px solid transparent;
-    margin-right: 10px;
-}
-
-.sub-tab.active,
-.sub-tab:hover {
-    color: #667eea;
-    border-bottom-color: #667eea;
-}
-
-.sub-content {
-    display: none;
-}
-
-.sub-content.active {
-    display: block;
-}
-
-.sonata-periods .period-item {
-    color: #a8b2d1;
-    font-size: 1.05rem;
-    margin-bottom: 15px;
-}
-
-.sonata-periods .period-item strong {
-    color: #ccd6f6;
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* Sonata Grid for Violin Section */
-.sonata-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
-
-.sonata-item {
-    background: rgba(102, 126, 234, 0.1);
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    color: #ccd6f6;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.sonata-item:hover {
-    background: rgba(102, 126, 234, 0.2);
-    transform: translateY(-3px);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .repertoire-tabs {
-        flex-direction: column;
-        border-radius: 12px;
-        padding: 10px;
-    }
-    .repertoire-tab {
-        margin: 5px 0;
-        width: 100%;
-        text-align: center;
-    }
-    .sonata-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-}
 
         /* ===== MEDIA SECTION ===== */
         .media-section {
@@ -1480,198 +1317,79 @@
 
         /* ===== ANIMATIONS ===== */
         @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         @keyframes shimmer {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes glow {
-            from {
-                text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
-            }
-            to {
-                text-shadow: 0 0 30px rgba(212, 175, 55, 1), 0 0 40px rgba(212, 175, 55, 0.8);
-            }
+            from { text-shadow: 0 0 20px rgba(212, 175, 55, 0.8); }
+            to { text-shadow: 0 0 30px rgba(212, 175, 55, 1), 0 0 40px rgba(212, 175, 55, 0.8); }
         }
 
         @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            from { opacity: 0; transform: scale(0.9) translateY(-20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 992px) {
-            .hero-title {
-                font-size: 4rem;
-            }
-            
-            .section-title {
-                font-size: 3rem;
-            }
-            
-            .artist-name {
-                font-size: 2rem;
-            }
-            
-            .artist-instrument {
-                font-size: 1.2rem;
-            }
+            .hero-title { font-size: 4rem; }
+            .section-title { font-size: 3rem; }
+            .artist-name { font-size: 2rem; }
+            .artist-instrument { font-size: 1.2rem; }
         }
 
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 3rem;
-            }
-            
-            .hero-subtitle {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            
-            .artist-divider {
-                flex-direction: row;
-                transform: rotate(90deg);
-            }
-            
-            .divider-line {
-                width: 60px;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .artist-cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn-hero {
-                width: 250px;
-            }
-            
-            .navbar-nav {
-                text-align: center;
-                padding: 1rem 0;
-            }
-            
-            .navbar-nav .nav-link {
-                margin: 0.5rem 0;
-            }
+            .hero-title { font-size: 3rem; }
+            .hero-subtitle { flex-direction: column; gap: 2rem; }
+            .artist-divider { flex-direction: row; transform: rotate(90deg); }
+            .divider-line { width: 60px; }
+            .section-title { font-size: 2.5rem; }
+            .artist-cards { grid-template-columns: 1fr; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn-hero { width: 250px; }
+            .navbar-nav { text-align: center; padding: 1rem 0; }
+            .navbar-nav .nav-link { margin: 0.5rem 0; }
         }
 
         @media (max-width: 576px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .artist-name {
-                font-size: 1.8rem;
-            }
-            
-            .artist-instrument {
-                font-size: 1rem;
-                letter-spacing: 2px;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .artist-card {
-                padding: 2rem;
-            }
-            
-            .contact-form {
-                padding: 2rem;
-            }
-            
-            .modal-content {
-                width: 95%;
-                margin: 1rem;
-            }
+            .hero-title { font-size: 2.5rem; }
+            .artist-name { font-size: 1.8rem; }
+            .artist-instrument { font-size: 1rem; letter-spacing: 2px; }
+            .section-title { font-size: 2rem; }
+            .artist-card { padding: 2rem; }
+            .contact-form { padding: 2rem; }
+            .modal-content { width: 95%; margin: 1rem; }
         }
 
         /* ===== UTILITY CLASSES ===== */
@@ -1686,21 +1404,10 @@
             transform: translateY(0);
         }
 
-        .text-gold {
-            color: var(--gold) !important;
-        }
-
-        .text-gold-light {
-            color: var(--gold-light) !important;
-        }
-
-        .bg-gold-gradient {
-            background: linear-gradient(45deg, var(--gold), var(--gold-light)) !important;
-        }
-
-        .border-gold {
-            border-color: var(--gold) !important;
-        }
+        .text-gold { color: var(--gold) !important; }
+        .text-gold-light { color: var(--gold-light) !important; }
+        .bg-gold-gradient { background: linear-gradient(45deg, var(--gold), var(--gold-light)) !important; }
+        .border-gold { border-color: var(--gold) !important; }
 
         /* ===== LOADING SPINNER ===== */
         .loading-spinner {
@@ -1723,8 +1430,10 @@
     <!-- Splash Screen -->
     <div id="splashScreen">
         <div class="splash-content">
+            <!-- Logo Area: Menggunakan tag img untuk logo -->
+            <!-- Jika file assets/logo.png tidak ada, gambar placeholder akan muncul -->
             <div class="splash-logo">
-                <i class="fas fa-music"></i>
+                <img src="J&Glogo.jpg" onerror="this.src='https://placehold.co/150x150/d4af37/0a0a0a?text=JY'; this.onerror=null;" alt="Jap-Yeo Duo Logo">
             </div>
             <h1 class="splash-title">Jap-Yeo Duo</h1>
             <p class="splash-subtitle">Violin & Piano Excellence</p>
@@ -1732,25 +1441,19 @@
     </div>
 
     <!-- Navigation -->
-    <!-- Ganti bagian logo di navbar -->
-<!-- Ganti bagian navbar-brand yang ada dengan ini -->
-<a class="navbar-brand" href="#home">
-    <div class="J&Glogo.jpg">
-        <img src="assets/logo.png" alt="Jap-Yeo Duo Logo" class="logo-img">
-        <span class="logo-text">Jap-Yeo Duo</span>
-    </div>
-</a>
-        <!-- ... sisanya tetap sama ... -->
-    </div>
-</nav>
     <nav id="navbar" class="navbar navbar-expand-lg">
         <div class="container">
+            <!-- Navbar Brand: Logo di kiri + Teks -->
             <a class="navbar-brand" href="#home">
-                <i class="fas fa-music"></i> Jap-Yeo Duo
+                <!-- Ganti src dengan path logo Anda yang sebenarnya -->
+                <img src="J&Glogo.jpg" onerror="this.src='https://placehold.co/60x60/d4af37/0a0a0a?text=JY'; this.onerror=null;" alt="Jap-Yeo Duo Logo" class="logo-img">
+                <span class="logo-text">Jap-Yeo Duo</span>
             </a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -1848,7 +1551,7 @@
                 
                 <div class="artist-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="artist-image">
-                        <i class="fas fa-piano"></i>
+                        <i class="fas fa-music"></i> <!-- Changed fa-piano to fa-music as fa-piano might not be free -->
                     </div>
                     <h3>Dr. Kuei Pin Yeo</h3>
                     <p class="artist-role">Pianist</p>
@@ -1865,146 +1568,131 @@
     </section>
 
     <!-- Repertoire Section -->
-<section id="repertoire" class="repertoire-section">
-    <div class="container">
-        <div class="section-header text-center mb-5" data-aos="fade-up">
-            <h2 class="section-title" data-lang="repertoire_title">Repertoire</h2>
-            <p class="section-subtitle" data-lang="repertoire_subtitle">Master Works Performed</p>
-        </div>
+    <section id="repertoire" class="repertoire-section">
+        <div class="container">
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title" data-lang="repertoire_title">Repertoire</h2>
+                <p class="section-subtitle" data-lang="repertoire_subtitle">Master Works Performed</p>
+            </div>
 
-        <!-- Main Artist Tabs -->
-<!-- Repertoire Section -->
-<section id="repertoire" class="repertoire-section">
-    <div class="container">
-        <div class="section-title" data-lang="repertoire_title">Repertoar</div>
-        <p class="section-subtitle" data-lang="repertoire_subtitle">Karya Agung yang Dibawakan</p>
-        
-        <div class="repertoire-tabs">
-            <button class="repertoire-tab active" onclick="showArtistContent('japyeo')" data-lang="repertoire_tab_duo">JAP-YEO Duo</button>
-            <button class="repertoire-tab" onclick="showArtistContent('yeo')" data-lang="repertoire_tab_piano">Dr. Kuei Pin Yeo</button>
-            <button class="repertoire-tab" onclick="showArtistContent('jap')" data-lang="repertoire_tab_violin">Jap Tji Kien</button>
-        </div>
-        
-        <!-- JAP-YEO Duo Content -->
-        <div id="japyeo-content" class="artist-content active">
-            <div class="repertoire-list">
-                <div class="repertoire-item">
-                    <h4>Beethoven</h4>
-                    <ul class="repertoire-details">
-                        <li>Sonata Lengkap untuk Piano dan Biola No. 1 - 10</li>
-                        <li>Triple Concerto for Violin, Cello, and Piano in C Major, Op. 56</li>
-                    </ul>
+            <!-- Main Artist Tabs -->
+            <div class="repertoire-tabs">
+                <button class="repertoire-tab active" onclick="showArtistContent('japyeo')" data-lang="repertoire_tab_duo">JAP-YEO Duo</button>
+                <button class="repertoire-tab" onclick="showArtistContent('yeo')" data-lang="repertoire_tab_piano">Dr. Kuei Pin Yeo</button>
+                <button class="repertoire-tab" onclick="showArtistContent('jap')" data-lang="repertoire_tab_violin">Jap Tji Kien</button>
+            </div>
+            
+            <!-- JAP-YEO Duo Content -->
+            <div id="japyeo-content" class="artist-content active">
+                <div class="content-card">
+                    <h3 class="card-title">JAP-YEO Duo Repertoire</h3>
+                    <div class="repertoire-list">
+                        <div class="repertoire-item">
+                            <h4>Beethoven</h4>
+                            <ul class="repertoire-details">
+                                <li>Sonata Lengkap untuk Piano dan Biola No. 1 - 10</li>
+                                <li>Triple Concerto for Violin, Cello, and Piano in C Major, Op. 56</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dr. Kuei Pin Yeo Content -->
+            <div id="yeo-content" class="artist-content">
+                <div class="content-card">
+                    <h3 class="card-title">Dr. Kuei Pin Yeo - Piano</h3>
+                    <div class="repertoire-list">
+                        <div class="repertoire-item">
+                            <h4>Beethoven</h4>
+                            <ul class="repertoire-details">
+                                <li>Complete Piano Concertos No. 1 - 5</li>
+                                </ul>
+                                <h4>Piano Sonatas</h4>
+                            <ul class="repertoire-details">
+                                <li>Masa Awal</li>
+                                <li>Masa Pertengahan</li>
+                                <li>Masa Akhir</li>
+                            <ul>Contoh Program
+                                <li>Piano Sonata Op. 2 No. 3 in C Major</li>
+                                <li>Piano Sonata Op. 81a ‘Les Adieux’</li>
+                                <li>Piano Sonata Op. 110 in Ab Major"></li>
+                                </ul>
+                            <h4>Konser Tambahan</h4>
+                            <ul class="repertoire-details">
+                                <li>Chopin: Piano Concerto No. 1</li>
+                                <li>Grieg: Piano Concerto in A Minor</li>
+                                <li>Mozart: Piano Concertos</li>
+                                <li>Rachmaninoff: Piano Concerto No. 2</li>
+                                <li>Ravel: Piano Concerto for the Left Hand</li>
+                                <li>Tchaikovsky: Piano Concerto</li>
+                            </ul>
+                                
+                            </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Jap Tji Kien Content -->
+            <div id="jap-content" class="artist-content">
+                <div class="content-card">
+                    <h3 class="card-title">Jap Tji Kien - Violin</h3>
+                    <div class="repertoire-list">
+                        <div class="repertoire-item">
+                            <h4>Beethoven: Sonata Lengkap untuk Piano dan Biola No. 1 - 10</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Dr. Kuei Pin Yeo Content -->
-        <div id="yeo-content" class="artist-content">
-            <div class="repertoire-list">
-                <div class="repertoire-item">
-                    <h4>Beethoven</h4>
-                    <ul class="repertoire-details">
-                        <li>Complete Piano Concertos No. 1 - 5</li>
-                        <li>Piano Sonatas:</li>
-                        <li>Masa Awal</li>
-                        <li>Masa Pertengahan</li>
-                        <li>Masa Akhir</li>
-                    </ul>
-                </div>
-                <div class="repertoire-item">
-                    <h4>Contoh Program:</h4>
-                    <ul class="repertoire-details">
-                        <li>Piano Sonata Op. 2 No. 3 in C Major</li>
-                        <li>Piano Sonata Op. 81a 'Les Adieux'</li>
-                        <li>Piano Sonata Op. 110 in Ab Major</li>
-                    </ul>
-                </div>
-                <div class="repertoire-item">
-                    <h4>Konser Tambahan</h4>
-                    <ul class="repertoire-details">
-                        <li>Chopin: Piano Concerto No. 1</li>
-                        <li>Grieg: Piano Concerto in A Minor</li>
-                        <li>Mozart: Piano Concertos</li>
-                        <li>Rachmaninoff: Piano Concerto No. 2</li>
-                        <li>Ravel: Piano Concerto for the Left Hand</li>
-                        <li>Tchaikovsky: Piano Concerto</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Jap Tji Kien Content -->
-        <div id="jap-content" class="artist-content">
-            <div class="repertoire-list">
-                <div class="repertoire-item">
-                    <h4>Beethoven: Sonata Lengkap untuk Piano dan Biola No. 1 - 10</h4>
-                    <ul class="repertoire-details">
-                        <li>No. 1 Op. 12 No. 1 in D Major</li>
-                        <li>No. 2 Op. 12 No. 2 in A Major</li>
-                        <li>No. 3 Op. 12 No. 3 in E-flat Major</li>
-                        <li>No. 4 Op. 23 in A Minor</li>
-                        <li>No. 5 Op. 24 'Spring' in F Major</li>
-                        <li>No. 6 Op. 30 No. 1 in A Major</li>
-                        <li>No. 7 Op. 30 No. 2 in C Minor</li>
-                        <li>No. 8 Op. 30 No. 3 in G Major</li>
-                        <li>No. 9 Op. 47 'Kreutzer' in A Major</li>
-                        <li>No. 10 Op. 96 in G Major</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Beethoven Bicentennial Project Section -->
-<section id="beethoven-project" class="beethoven-project-section">
-    <div class="container">
-        <div class="project-header" data-aos="fade-up">
-            <div class="project-badge">2027</div>
-            <h2 class="project-title" data-lang="project_title">Beethoven Bicentennial Project 2027</h2>
-            <p class="project-subtitle" data-lang="project_subtitle">Memperingati 200 Tahun Karya Agung Beethoven</p>
-        </div>
-        
-        <div class="project-description" data-aos="fade-up" data-aos-delay="100">
-            <p data-lang="project_description">
-                Dalam rangka Beethoven Bicentennial Project 2027, Jap-Yeo Duo merancang sebuah proyek artistik berskala internasional yang berfokus pada penyajian lengkap Sonate untuk Biola dan Piano karya Beethoven.
-            </p>
-        </div>
-        
-        <div class="project-stats">
-            <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
-                <div class="stat-number">10</div>
-                <div class="stat-label" data-lang="stat_sonatas">Sonate Beethoven</div>
-                <div class="stat-icon">
-                    <i class="fas fa-music"></i>
+    <section id="beethoven-project" class="beethoven-project-section">
+        <div class="container">
+            <div class="project-header" data-aos="fade-up">
+                <div class="project-badge">2027</div>
+                <h2 class="project-title" data-lang="project_title">Beethoven Bicentennial Project 2027</h2>
+                <p class="project-subtitle" data-lang="project_subtitle">Memperingati 200 Tahun Karya Agung Beethoven</p>
+            </div>
+            
+            <div class="project-description" data-aos="fade-up" data-aos-delay="100">
+                <p data-lang="project_description">
+                    Dalam rangka Beethoven Bicentennial Project 2027, Jap-Yeo Duo merancang sebuah proyek artistik berskala internasional yang berfokus pada penyajian lengkap Sonate untuk Biola dan Piano karya Beethoven.
+                </p>
+            </div>
+            
+            <div class="project-stats">
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label" data-lang="stat_sonatas">Sonate Beethoven</div>
+                    <div class="stat-icon"><i class="fas fa-music"></i></div>
+                </div>
+                
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label" data-lang="stat_cities">Kota Konser</div>
+                    <div class="stat-icon"><i class="fas fa-globe"></i></div>
+                </div>
+                
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="stat-number">2027</div>
+                    <div class="stat-label" data-lang="stat_year">Tahun Pelaksanaan</div>
+                    <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
                 </div>
             </div>
             
-            <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
-                <div class="stat-number">20+</div>
-                <div class="stat-label" data-lang="stat_cities">Kota Konser</div>
-                <div class="stat-icon">
-                    <i class="fas fa-globe"></i>
-                </div>
-            </div>
-            
-            <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
-                <div class="stat-number">2027</div>
-                <div class="stat-label" data-lang="stat_year">Tahun Pelaksanaan</div>
-                <div class="stat-icon">
-                    <i class="fas fa-calendar-alt"></i>
-                </div>
+            <div class="project-cta" data-aos="fade-up" data-aos-delay="500">
+                <a href="#contact" class="btn-project">
+                    <span data-lang="btn_learn_project">Pelajari Lebih Lanjut</span>
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
-        
-        <div class="project-cta" data-aos="fade-up" data-aos-delay="500">
-            <a href="#contact" class="btn-project">
-                <span data-lang="btn_learn_project">Pelajari Lebih Lanjut</span>
-                <i class="fas fa-arrow-right ms-2"></i>
-            </a>
-        </div>
-    </div>
-</section>
+    </section>
+
     <!-- Media Section -->
     <section id="media" class="media-section">
         <div class="container">
@@ -2094,9 +1782,7 @@
                         <textarea class="form-control" rows="5" placeholder="Tulis pesan Anda di sini" required></textarea>
                     </div>
                     
-                    <button type="submit" class="btn-submit" data-lang="btn_send">
-                        Kirim Pesan
-                    </button>
+                    <button type="submit" class="btn-submit" data-lang="btn_send">Kirim Pesan</button>
                 </form>
                 
                 <div class="contact-info">
@@ -2118,18 +1804,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="social-links">
-                    <a href="#" class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-twitter"></i>
-                    </a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                 </div>
                 <p class="footer-text">
                     © 2024 Jap-Yeo Duo. All rights reserved. | 
@@ -2182,19 +1860,30 @@
                 yeo_bio: 'Pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Karir internasional yang cemerlang dengan penampilan di berbagai panggung dunia.',
                 btn_full_bio: 'Biografi Lengkap',
                 repertoire_title: 'Repertoar',
-    repertoire_subtitle: 'Karya Agung yang Dibawakan',
-    repertoire_tab_duo: 'JapYeo Duo',
-    repertoire_tab_piano: 'Dr. Kuei Pin Yeo',
-    repertoire_tab_violin: 'Jap Tji Kien',
-    repertoire_duo_sonatas: 'Sonata Lengkap untuk Piano dan Biola No. 1 - 10',
-    repertoire_duo_triple: 'Triple Concerto for Violin, Cello, and Piano in C Major, Op. 56',
-    repertoire_piano_concertos: 'Complete Piano Concertos No. 1 - 5',
-    repertoire_piano_sonatas: 'Piano Sonatas',
-    repertoire_piano_example: 'Contoh Program:',
-    repertoire_piano_additional: 'Konser Tambahan',
-    repertoire_sonata_early: 'Masa Awal:',
-    repertoire_sonata_middle: 'Masa Pertengahan:',
-    repertoire_sonata_late: 'Masa Akhir:',
+                repertoire_subtitle: 'Karya Agung yang Dibawakan',
+                repertoire_tab_duo: 'JapYeo Duo',
+                repertoire_tab_piano: 'Dr. Kuei Pin Yeo',
+                repertoire_tab_violin: 'Jap Tji Kien',
+                project_title: 'Beethoven Bicentennial Project 2027',
+                project_subtitle: 'Memperingati 200 Tahun Karya Agung Beethoven',
+                project_description: 'Dalam rangka Beethoven Bicentennial Project 2027, Jap-Yeo Duo merancang sebuah proyek artistik berskala internasional yang berfokus pada penyajian lengkap Sonate untuk Biola dan Piano karya Beethoven.',
+                stat_sonatas: 'Sonate Beethoven',
+                stat_cities: 'Kota Konser',
+                stat_year: 'Tahun Pelaksanaan',
+                btn_learn_project: 'Pelajari Lebih Lanjut',
+                media_title: 'Media',
+                media_subtitle: 'Dokumentasi Penampilan Kami',
+                tab_videos: 'Video',
+                tab_audio: 'Audio',
+                tab_press: 'Press',
+                contact_title: 'Kontak',
+                contact_subtitle: 'Hubungi Kami untuk Penampilan',
+                form_name: 'Nama Lengkap',
+                form_email: 'Email',
+                form_subject: 'Subjek',
+                form_message: 'Pesan',
+                btn_send: 'Kirim Pesan',
+                footer_managed: 'Dikelola dengan penuh semangat'
             },
             en: {
                 nav_home: 'Home',
@@ -2210,20 +1899,31 @@
                 jap_bio: 'Leading Indonesian violinist and conductor with brilliant international career. First recipient of Fellowship of the Royal Schools of Music (FRSM) in Southeast Asia.',
                 yeo_bio: 'Prominent Indonesian pianist and Indonesia\'s first Doctor of Musical Arts in piano performance. Brilliant international career with performances on various world stages.',
                 btn_full_bio: 'Full Biography',
-                 repertoire_title: 'Repertoire',
-    repertoire_subtitle: 'Master Works Performed',
-    repertoire_tab_duo: 'JapYeo Duo',
-    repertoire_tab_piano: 'Dr. Kuei Pin Yeo',
-    repertoire_tab_violin: 'Jap Tji Kien',
-    repertoire_duo_sonatas: 'Complete Violin and Piano Sonatas No. 1 - 10',
-    repertoire_duo_triple: 'Triple Concerto for Violin, Cello, and Piano in C Major, Op. 56',
-    repertoire_piano_concertos: 'Complete Piano Concertos No. 1 - 5',
-    repertoire_piano_sonatas: 'Piano Sonatas',
-    repertoire_piano_example: 'Example Program:',
-    repertoire_piano_additional: 'Additional Concertos',
-    repertoire_sonata_early: 'Early Period:',
-    repertoire_sonata_middle: 'Middle Period:',
-    repertoire_sonata_late: 'Late Period:',
+                repertoire_title: 'Repertoire',
+                repertoire_subtitle: 'Master Works Performed',
+                repertoire_tab_duo: 'JapYeo Duo',
+                repertoire_tab_piano: 'Dr. Kuei Pin Yeo',
+                repertoire_tab_violin: 'Jap Tji Kien',
+                project_title: 'Beethoven Bicentennial Project 2027',
+                project_subtitle: 'Commemorating 200 Years of Beethoven\'s Masterworks',
+                project_description: 'In honor of the Beethoven Bicentennial Project 2027, Jap-Yeo Duo has designed an international-scale artistic project focusing on the complete presentation of Beethoven\'s Violin and Piano Sonatas.',
+                stat_sonatas: 'Beethoven Sonatas',
+                stat_cities: 'Concert Cities',
+                stat_year: 'Year of Implementation',
+                btn_learn_project: 'Learn More',
+                media_title: 'Media',
+                media_subtitle: 'Documentation of Our Performances',
+                tab_videos: 'Videos',
+                tab_audio: 'Audio',
+                tab_press: 'Press',
+                contact_title: 'Contact',
+                contact_subtitle: 'Contact Us for Performances',
+                form_name: 'Full Name',
+                form_email: 'Email',
+                form_subject: 'Subject',
+                form_message: 'Message',
+                btn_send: 'Send Message',
+                footer_managed: 'Managed with passion'
             },
             zh: {
                 nav_home: '首页',
@@ -2240,19 +1940,30 @@
                 yeo_bio: '印尼杰出钢琴家，印尼第一位钢琴表演音乐博士。辉煌的国际职业生涯，在世界各地舞台演出。',
                 btn_full_bio: '完整传记',
                 repertoire_title: '曲目',
-    repertoire_subtitle: '演奏的杰作',
-    repertoire_tab_duo: 'JapYeo 二重奏',
-    repertoire_tab_piano: '叶博士',
-    repertoire_tab_violin: 'Jap Tji Kien',
-    repertoire_duo_sonatas: '完整的小提琴与钢琴奏鸣曲 第1-10号',
-    repertoire_duo_triple: 'C大调小提琴、大提琴与钢琴三重协奏曲，作品56',
-    repertoire_piano_concertos: '完整钢琴协奏曲 第1-5号',
-    repertoire_piano_sonatas: '钢琴奏鸣曲',
-    repertoire_piano_example: '节目示例:',
-    repertoire_piano_additional: '额外协奏曲',
-    repertoire_sonata_early: '早期:',
-    repertoire_sonata_middle: '中期:',
-    repertoire_sonata_late: '晚期:',
+                repertoire_subtitle: '演奏的杰作',
+                repertoire_tab_duo: 'JapYeo 二重奏',
+                repertoire_tab_piano: '叶博士',
+                repertoire_tab_violin: 'Jap Tji Kien',
+                project_title: '贝多芬二百周年项目 2027',
+                project_subtitle: '纪念贝多芬杰作200周年',
+                project_description: '为了纪念贝多芬二百周年项目2027，Jap-Yeo Duo设计了一个国际规模的艺术项目，专注于贝多芬小提琴和钢琴奏鸣曲的完整呈现。',
+                stat_sonatas: '贝多芬奏鸣曲',
+                stat_cities: '音乐会城市',
+                stat_year: '实施年份',
+                btn_learn_project: '了解更多',
+                media_title: '媒体',
+                media_subtitle: '我们的演出记录',
+                tab_videos: '视频',
+                tab_audio: '音频',
+                tab_press: '新闻',
+                contact_title: '联系',
+                contact_subtitle: '联系我们预约演出',
+                form_name: '全名',
+                form_email: '电子邮件',
+                form_subject: '主题',
+                form_message: '留言',
+                btn_send: '发送信息',
+                footer_managed: '充满激情地管理'
             }
         };
 
@@ -2500,43 +2211,31 @@
             changeLanguage(savedLanguage);
         }
 
-        // Hapus fungsi showRepertoire yang lama jika ada, dan ganti dengan ini:
+        function showArtistContent(artist) {
+            document.querySelectorAll('.artist-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.repertoire-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(artist + '-content').classList.add('active');
+            event.target.classList.add('active');
+        }
 
-function showArtistContent(artist) {
-    // Hide all artist contents
-    document.querySelectorAll('.artist-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    
-    // Remove active class from all main tabs
-    document.querySelectorAll('.repertoire-tab').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    // Show selected content
-    document.getElementById(artist + '-content').classList.add('active');
-    
-    // Add active class to clicked tab
-    event.target.classList.add('active');
-}
-
-function showPianoSubContent(subTab) {
-    // Hide all sub-contents
-    document.querySelectorAll('.sub-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    
-    // Remove active class from all sub-tabs
-    document.querySelectorAll('.sub-tab').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    
-    // Show selected sub-content
-    document.getElementById(subTab + '-subcontent').classList.add('active');
-    
-    // Add active class to clicked sub-tab
-    event.target.classList.add('active');
-}
+        function showPianoSubContent(subTab) {
+            document.querySelectorAll('.sub-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.sub-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(subTab + '-subcontent').classList.add('active');
+            event.target.classList.add('active');
+        }
 
         // Close modals when clicking outside
         window.addEventListener('click', function(event) {
@@ -2548,7 +2247,3 @@ function showPianoSubContent(subTab) {
     </script>
 </body>
 </html>
-
-
-
-
