@@ -66,7 +66,82 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--gold);
         }
+/* Logo Styles */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.3s ease;
+}
 
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+/* Hover effects */
+.navbar-brand:hover .logo-container {
+    transform: scale(1.05);
+}
+
+.navbar-brand:hover .logo-img {
+    transform: rotate(5deg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logo-img {
+        height: 35px;
+    }
+    
+    .logo-text {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo-container {
+        gap: 8px;
+    }
+    
+    .logo-img {
+        height: 30px;
+    }
+    
+    .logo-text {
+        font-size: 1.1rem;
+    }
+}
+
+/* Scrolled navbar logo adjustment */
+.navbar.scrolled .logo-img {
+    height: 35px;
+}
+
+.navbar.scrolled .logo-text {
+    font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+    .navbar.scrolled .logo-img {
+        height: 30px;
+    }
+    
+    .navbar.scrolled .logo-text {
+        font-size: 1.2rem;
+    }
+}
         /* ===== SPLASH SCREEN ===== */
         #splashScreen {
             position: fixed;
@@ -158,15 +233,13 @@
         }
 
        /* Tambahkan ke dalam style tag */
-            .navbar-brand {
-                display: flex;
-                align-items: center;
-                text-decoration: none;
-                color: var(--text-color);
-                font-weight: 600;
-                font-size: 1.5rem;
-                transition: all 0.3s ease;
-            }
+          .navbar-brand {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-right: 2rem;
+    text-decoration: none;
+}
             
             .logo-img {
                 height: 40px;
@@ -1660,12 +1733,13 @@
 
     <!-- Navigation -->
     <!-- Ganti bagian logo di navbar -->
-<nav class="navbar navbar-expand-lg fixed-top" id="navbar">
-    <div class="container">
-        <a class="navbar-brand" href="#home">
-            <img src="J&Glogo.jpg" alt="Jap-Yeo Duo" class="logo-img">
-            <span class="brand-text">Jap-Yeo Duo</span>
-        </a>
+<!-- Ganti bagian navbar-brand yang ada dengan ini -->
+<a class="navbar-brand" href="#home">
+    <div class="logo-container">
+        <img src="assets/logo.png" alt="Jap-Yeo Duo Logo" class="logo-img">
+        <span class="logo-text">Jap-Yeo Duo</span>
+    </div>
+</a>
         <!-- ... sisanya tetap sama ... -->
     </div>
 </nav>
@@ -1799,7 +1873,6 @@
         </div>
 
         <!-- Main Artist Tabs -->
-      <!-- Repertoire Section -->
 <!-- Repertoire Section -->
 <section id="repertoire" class="repertoire-section">
     <div class="container">
@@ -2475,5 +2548,6 @@ function showPianoSubContent(subTab) {
     </script>
 </body>
 </html>
+
 
 
