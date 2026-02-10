@@ -4,29 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jap-Yeo Duo - Biola & Piano</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@400;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <style>
         :root {
-            --primary-color: #d4af37;
-            --secondary-color: #8b4513;
-            --dark-color: #1a1a1a;
-            --light-color: #f8f9fa;
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #f39c12;
             --text-color: #333;
-            --gradient: linear-gradient(135deg, #d4af37 0%, #8b4513 100%);
+            --light-bg: #f8f9fa;
+            --dark-bg: #1a1a1a;
+            --gold: #d4af37;
         }
 
         * {
@@ -36,9 +25,8 @@
         }
 
         body {
-            font-family: 'Libre Baskerville', serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--text-color);
-            background-color: var(--light-color);
             overflow-x: hidden;
         }
 
@@ -49,59 +37,54 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            transition: opacity 1s ease-out, visibility 1s ease-out;
+            transition: opacity 1s ease;
         }
 
         #splashScreen.hidden {
             opacity: 0;
-            visibility: hidden;
+            pointer-events: none;
         }
 
         .splash-content {
             text-align: center;
-            color: var(--primary-color);
+            color: white;
+        }
+
+        .splash-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            background: url('https://picsum.photos/seed/logo/150/150') center/cover;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255,255,255,0.3);
             animation: pulse 2s infinite;
         }
 
-       .splash-logo {
-            width: 200px;
-            height: 200px;
-            background: url(J&Glogo.jpg) center/cover;
-            border-radius: 50%;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            animation: logoPulse 2s ease-in-out infinite;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
         .splash-title {
-            font-family: 'Playfair Display', serif;
             font-size: 3rem;
-            font-weight: 900;
+            font-weight: 300;
             letter-spacing: 3px;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .splash-subtitle {
-            font-family: 'Cormorant Garamond', serif;
             font-size: 1.2rem;
-            opacity: 0.9;
-            letter-spacing: 2px;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
+            color: var(--gold);
+            opacity: 0.8;
         }
 
         /* Navigation */
@@ -109,85 +92,87 @@
             background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
             transition: all 0.3s ease;
-            padding: 1rem 0;
         }
 
         .navbar-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary-color) !important;
-            letter-spacing: 2px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--gold) !important;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .navbar-brand i {
-            font-size: 1.5rem;
+        .navbar-brand img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
         }
 
-        .nav-link {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            color: var(--light-color) !important;
+        .navbar-nav .nav-link {
+            color: white !important;
             margin: 0 15px;
-            transition: all 0.3s ease;
             position: relative;
+            transition: all 0.3s ease;
         }
 
-        .nav-link::after {
+        .navbar-nav .nav-link:hover {
+            color: var(--gold) !important;
+        }
+
+        .navbar-nav .nav-link::after {
             content: '';
             position: absolute;
             bottom: -5px;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: var(--primary-color);
+            background: var(--gold);
             transition: width 0.3s ease;
         }
 
-        .nav-link:hover::after {
-            width: 100%;
+        .navbar-nav .nav-link:hover::after {
+            width: 80%;
         }
 
-        /* Language Selector */
         .language-selector {
             position: relative;
         }
 
         .language-dropdown {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
             padding: 8px 15px;
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
         }
 
         .language-dropdown:hover {
-            background: var(--primary-color);
-            color: var(--dark-color);
+            background: rgba(255,255,255,0.2);
         }
 
         .language-menu {
             position: absolute;
             top: 100%;
             right: 0;
-            background: var(--dark-color);
-            border: 1px solid var(--primary-color);
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: 10px;
             margin-top: 10px;
-            overflow: hidden;
+            min-width: 150px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s ease;
-            z-index: 1000;
         }
 
         .language-menu.show {
@@ -198,153 +183,121 @@
 
         .language-option {
             padding: 10px 20px;
-            color: var(--light-color);
+            color: white;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Cormorant Garamond', serif;
+            border-radius: 5px;
+            margin: 5px;
         }
 
-        .language-option:hover,
+        .language-option:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--gold);
+        }
+
         .language-option.active {
-            background: var(--primary-color);
-            color: var(--dark-color);
-        }
-
-        /* Admin Menu */
-        .admin-menu {
-            position: relative;
-        }
-
-        .admin-toggle {
-            background: transparent;
-            border: none;
-            color: var(--light-color);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 5px 10px;
-            transition: all 0.3s ease;
-        }
-
-        .admin-toggle:hover {
-            color: var(--primary-color);
-        }
-
-        .admin-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: var(--dark-color);
-            border: 1px solid var(--primary-color);
-            border-radius: 10px;
-            margin-top: 10px;
-            min-width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .admin-dropdown.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .admin-item {
-            padding: 10px 20px;
-            color: var(--light-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Cormorant Garamond', serif;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .admin-item:hover {
-            background: var(--primary-color);
-            color: var(--dark-color);
-        }
-
-        .admin-status {
-            padding: 10px 20px;
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--primary-color);
-            font-family: 'Cormorant Garamond', serif;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            display: none;
-        }
-
-        .admin-status.show {
-            display: block;
+            background: var(--gold);
+            color: var(--dark-bg);
         }
 
         /* Hero Section */
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/seed/classical-music/1920/1080');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), 
+                        url('https://picsum.photos/seed/concerthall/1920/1080') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--light-color);
+            color: white;
             position: relative;
+            overflow: hidden;
         }
 
-        .hero-content h1 {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
             font-size: 4rem;
-            font-weight: 900;
+            font-weight: 300;
             margin-bottom: 20px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            letter-spacing: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             animation: fadeInUp 1s ease;
         }
 
-        .hero-content h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 400;
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gold);
             margin-bottom: 30px;
-            color: var(--primary-color);
-            animation: fadeInUp 1s ease 0.2s;
-            animation-fill-mode: both;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.2s both;
         }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 40px;
+        .hero-description {
+            font-size: 1.1rem;
             line-height: 1.8;
-            animation: fadeInUp 1s ease 0.4s;
-            animation-fill-mode: both;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
         }
 
         .btn-hero {
-            background: var(--gradient);
-            color: var(--light-color);
             padding: 15px 40px;
+            font-size: 1.1rem;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin: 0 10px;
-            display: inline-block;
             text-decoration: none;
-            animation: fadeInUp 1s ease 0.6s;
-            animation-fill-mode: both;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-hero:hover {
+        .btn-primary {
+            background: linear-gradient(45deg, var(--gold), #f39c12);
+            color: var(--dark-bg);
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
-            color: var(--light-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--dark-bg);
+            transform: translateY(-3px);
         }
 
         @keyframes fadeInUp {
@@ -360,177 +313,201 @@
 
         /* Section Styles */
         .section {
-            padding: 80px 0;
+            padding: 100px 0;
+            position: relative;
         }
 
         .section-title {
             font-size: 3rem;
             text-align: center;
             margin-bottom: 60px;
-            color: var(--dark-color);
             position: relative;
-            font-weight: 900;
+            color: var(--primary-color);
+            font-weight: 300;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 80px;
             height: 3px;
-            background: var(--gradient);
+            background: var(--gold);
         }
 
         /* About Section */
-        .about-card {
-            background: var(--light-color);
-            border-radius: 15px;
+        .about {
+            background: var(--light-bg);
+        }
+
+        .artist-card {
+            background: white;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             height: 100%;
         }
 
-        .about-card:hover {
+        .artist-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
 
-        .about-image {
-            height: 300px;
+        .artist-image {
+            height: 400px;
             background-size: cover;
             background-position: center;
             position: relative;
+            overflow: hidden;
         }
 
-        .about-overlay {
+        .artist-image::after {
+            content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 20px;
-            color: var(--light-color);
+            height: 100px;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
         }
 
-        .about-content {
+        .artist-info {
             padding: 30px;
         }
 
-        .about-content h3 {
-            font-size: 1.8rem;
-            color: var(--primary-color);
+        .artist-name {
+            font-size: 2rem;
             margin-bottom: 10px;
+            color: var(--primary-color);
         }
 
-        .about-content p {
+        .artist-role {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .artist-bio {
+            color: #666;
             line-height: 1.8;
             margin-bottom: 20px;
-            color: var(--text-color);
         }
 
         .btn-bio {
-            background: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+            border: none;
             padding: 10px 30px;
             border-radius: 25px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .btn-bio:hover {
-            background: var(--primary-color);
-            color: var(--light-color);
+            background: var(--gold);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
         }
 
-        /* Beethoven Section */
+        /* Beethoven Project Section */
         .beethoven {
-            background: linear-gradient(135deg, rgba(26,26,26,0.95), rgba(45,45,45,0.95)), url('https://picsum.photos/seed/beethoven/1920/1080');
-            background-size: cover;
-            background-position: center;
-            color: var(--light-color);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .beethoven::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://picsum.photos/seed/beethoven/1920/1080') center/cover;
+            opacity: 0.1;
         }
 
         .beethoven-content {
-            max-width: 900px;
-            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .beethoven-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
             text-align: center;
-        }
-
-        .beethoven-content h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .beethoven-content p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        .beethoven-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .beethoven-feature {
-            text-align: center;
-            padding: 30px;
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 15px;
             transition: all 0.3s ease;
         }
 
-        .beethoven-feature:hover {
-            background: rgba(212, 175, 55, 0.2);
+        .beethoven-card:hover {
             transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
         }
 
-        .beethoven-feature i {
-            font-size: 3rem;
-            color: var(--primary-color);
+        .beethoven-icon {
+            font-size: 4rem;
+            color: var(--gold);
             margin-bottom: 20px;
         }
 
-        .beethoven-feature h4 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+        .beethoven-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .beethoven-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .beethoven-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 30px;
         }
 
         /* Gallery Section */
+        .gallery {
+            background: var(--light-bg);
+        }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            margin-top: 50px;
         }
 
         .gallery-item {
             position: relative;
-            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             cursor: pointer;
+            height: 300px;
+            transition: all 0.3s ease;
         }
 
         .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: scale(1.03);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
         .gallery-item img {
             width: 100%;
-            height: 300px;
+            height: 100%;
             object-fit: cover;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .gallery-item:hover img {
@@ -539,58 +516,53 @@
 
         .gallery-overlay {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
-            bottom: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            opacity: 0;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: flex-end;
+            color: white;
             padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
         }
 
         .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-overlay h4 {
-            color: var(--primary-color);
-            font-size: 1.3rem;
+            transform: translateY(0);
         }
 
         /* Repertoire Section */
-        .repertoire-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .repertoire {
+            background: white;
         }
 
         .repertoire-tabs {
             display: flex;
             justify-content: center;
+            gap: 20px;
             margin-bottom: 50px;
             flex-wrap: wrap;
-            gap: 10px;
         }
 
         .repertoire-tab {
-            background: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+            padding: 15px 40px;
+            background: var(--light-bg);
+            border: none;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin: 5px;
+            font-size: 1.1rem;
+            color: var(--primary-color);
         }
 
-        .repertoire-tab:hover,
-        .repertoire-tab.active {
+        .repertoire-tab:hover {
             background: var(--primary-color);
-            color: var(--light-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .repertoire-tab.active {
+            background: var(--gold);
+            color: var(--dark-bg);
         }
 
         .repertoire-content {
@@ -607,133 +579,72 @@
             to { opacity: 1; }
         }
 
-        .repertoire-section {
-            margin-bottom: 40px;
-            padding: 30px;
-            background: var(--light-color);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .repertoire-section h3 {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-        }
-
         .repertoire-list {
-            list-style: none;
-            padding: 0;
+            background: var(--light-bg);
+            border-radius: 20px;
+            padding: 40px;
         }
 
-        .repertoire-list li {
-            padding: 12px 0;
+        .repertoire-item {
+            padding: 20px 0;
             border-bottom: 1px solid rgba(0,0,0,0.1);
-            font-size: 1.1rem;
-            line-height: 1.6;
-            transition: all 0.3s ease;
             display: flex;
-            align-items: flex-start;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
         }
 
-        .repertoire-list li:hover {
+        .repertoire-item:hover {
             padding-left: 20px;
-            color: var(--primary-color);
+            background: rgba(212, 175, 55, 0.1);
+            margin: 0 -20px;
+            padding-right: 20px;
         }
 
-        .repertoire-list li:last-child {
+        .repertoire-item:last-child {
             border-bottom: none;
         }
 
-        .repertoire-list li i {
+        .repertoire-composer {
+            font-weight: bold;
             color: var(--primary-color);
-            margin-right: 15px;
-            margin-top: 3px;
-            font-size: 0.9rem;
         }
 
-        .repertoire-subsection {
-            margin-top: 30px;
-            padding-left: 20px;
-        }
-
-        .repertoire-subsection h4 {
-            font-size: 1.4rem;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .program-example {
-            background: rgba(212, 175, 55, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        .program-example h4 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .sonata-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .sonata-item {
-            background: var(--light-color);
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary-color);
-            transition: all 0.3s ease;
-        }
-
-        .sonata-item:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .sonata-number {
-            color: var(--primary-color);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .sonata-title {
-            color: var(--text-color);
-            margin-top: 5px;
+        .repertoire-piece {
+            color: #666;
         }
 
         /* Media Section */
+        .media {
+            background: var(--light-bg);
+        }
+
         .media-tabs {
             display: flex;
             justify-content: center;
-            margin-bottom: 40px;
             gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
         }
 
         .media-tab {
-            background: transparent;
+            padding: 12px 30px;
+            background: white;
             border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
+            color: var(--primary-color);
         }
 
-        .media-tab:hover,
+        .media-tab:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
         .media-tab.active {
             background: var(--primary-color);
-            color: var(--light-color);
+            color: white;
         }
 
         .media-grid {
@@ -743,16 +654,17 @@
         }
 
         .media-item {
-            background: var(--light-color);
+            background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .media-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .media-thumbnail {
@@ -760,6 +672,7 @@
             background-size: cover;
             background-position: center;
             position: relative;
+            overflow: hidden;
         }
 
         .media-play {
@@ -774,15 +687,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--light-color);
             font-size: 1.5rem;
-            cursor: pointer;
+            color: white;
             transition: all 0.3s ease;
         }
 
-        .media-play:hover {
-            background: var(--primary-color);
+        .media-item:hover .media-play {
             transform: translate(-50%, -50%) scale(1.1);
+            background: var(--gold);
         }
 
         .media-info {
@@ -790,71 +702,64 @@
         }
 
         .media-info h4 {
-            font-size: 1.3rem;
-            color: var(--dark-color);
             margin-bottom: 10px;
+            color: var(--primary-color);
         }
 
         .media-info p {
-            color: var(--text-color);
-            line-height: 1.6;
+            color: #666;
+            margin: 0;
         }
 
         /* Contact Section */
         .contact {
-            background: linear-gradient(135deg, rgba(26,26,26,0.95), rgba(45,45,45,0.95));
-            color: var(--light-color);
+            background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+            color: white;
         }
 
         .contact-form {
-            background: rgba(255,255,255,0.1);
-            padding: 40px;
-            border-radius: 15px;
+            background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .contact-form h3 {
+            color: var(--gold);
+            margin-bottom: 30px;
         }
 
         .form-control {
             background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            color: var(--light-color);
-            padding: 12px 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
             border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            padding: 15px;
         }
 
         .form-control:focus {
             background: rgba(255,255,255,0.15);
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
-            color: var(--light-color);
+            border-color: var(--gold);
+            color: white;
+            box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
         }
 
         .form-control::placeholder {
             color: rgba(255,255,255,0.6);
         }
 
-        .form-label {
-            color: var(--primary-color);
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-        }
-
         .btn-submit {
-            background: var(--gradient);
-            color: var(--light-color);
-            padding: 12px 40px;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--gold), #f39c12);
+            color: var(--dark-bg);
             border: none;
-            border-radius: 25px;
+            border-radius: 50px;
             font-size: 1.1rem;
-            font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 20px;
         }
 
         .btn-submit:hover {
@@ -863,12 +768,16 @@
         }
 
         .contact-info {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
             padding: 40px;
+            height: 100%;
         }
 
         .contact-info h3 {
-            font-size: 2rem;
-            color: var(--primary-color);
+            color: var(--gold);
             margin-bottom: 30px;
         }
 
@@ -876,26 +785,27 @@
             display: flex;
             align-items: center;
             margin-bottom: 20px;
-            font-size: 1.1rem;
+            color: white;
             transition: all 0.3s ease;
         }
 
         .contact-item:hover {
             transform: translateX(10px);
+            color: var(--gold);
         }
 
         .contact-item i {
             font-size: 1.5rem;
-            color: var(--primary-color);
             margin-right: 20px;
             width: 30px;
+            color: var(--gold);
         }
 
         /* Footer */
         footer {
-            background: var(--dark-color);
-            color: var(--light-color);
-            padding: 40px 0;
+            background: var(--dark-bg);
+            color: white;
+            padding: 50px 0 30px;
             text-align: center;
         }
 
@@ -903,26 +813,25 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .social-links a {
             width: 50px;
             height: 50px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 2px solid var(--primary-color);
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-color);
+            color: white;
             font-size: 1.3rem;
             transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            background: var(--primary-color);
-            color: var(--light-color);
+            background: var(--gold);
+            color: var(--dark-bg);
             transform: translateY(-5px);
         }
 
@@ -935,27 +844,21 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.8);
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal.show {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-            visibility: visible;
         }
 
         .modal-content {
-            background: var(--light-color);
-            padding: 40px;
-            border-radius: 15px;
+            background: white;
+            border-radius: 20px;
             max-width: 800px;
             width: 90%;
-            max-height: 80vh;
+            max-height: 90vh;
             overflow-y: auto;
             position: relative;
             animation: modalSlideIn 0.3s ease;
@@ -963,12 +866,12 @@
 
         @keyframes modalSlideIn {
             from {
-                transform: translateY(-50px);
                 opacity: 0;
+                transform: translateY(-50px);
             }
             to {
-                transform: translateY(0);
                 opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -976,93 +879,88 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: transparent;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
             border: none;
-            font-size: 1.5rem;
-            color: var(--text-color);
+            border-radius: 50%;
             cursor: pointer;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
+            z-index: 10;
         }
 
         .modal-close:hover {
-            color: var(--primary-color);
+            background: var(--gold);
+            color: var(--dark-bg);
             transform: rotate(90deg);
         }
 
         .modal-title {
+            padding: 30px 30px 20px;
             font-size: 2rem;
             color: var(--primary-color);
-            margin-bottom: 30px;
-            text-align: center;
+            border-bottom: 2px solid var(--light-bg);
         }
 
         .modal-body {
+            padding: 30px;
             line-height: 1.8;
-            color: var(--text-color);
+            color: #666;
         }
 
         .modal-body h4 {
             color: var(--primary-color);
-            margin: 25px 0 15px;
-            font-size: 1.4rem;
-        }
-
-        .modal-body p {
-            margin-bottom: 15px;
-            text-align: justify;
+            margin-bottom: 20px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero-content h1 {
+            .hero-title {
                 font-size: 2.5rem;
             }
-
-            .hero-content h2 {
-                font-size: 1.4rem;
-            }
-
+            
             .section-title {
                 font-size: 2rem;
             }
-
-            .nav-link {
-                margin: 0 10px;
-                font-size: 1rem;
-            }
-
-            .repertoire-tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .repertoire-tab {
-                width: 200px;
+            
+            .navbar-nav {
                 text-align: center;
+                margin-top: 20px;
             }
-
-            .sonata-grid {
+            
+            .gallery-grid {
                 grid-template-columns: 1fr;
             }
-
+            
             .media-grid {
                 grid-template-columns: 1fr;
             }
-
-            .splash-title {
-                font-size: 2rem;
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
             }
-
-            .splash-subtitle {
-                font-size: 1rem;
+            
+            .btn-hero {
+                width: 250px;
             }
         }
 
-        /* Notification */
-        .notification {
-            z-index: 10001 !important;
-            min-width: 300px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Fade In Animation */
@@ -1082,26 +980,22 @@
     <!-- Splash Screen -->
     <div id="splashScreen">
         <div class="splash-content">
-            <div class="splash-logo">
-                <i class="fas fa-music"></i>
-            </div>
+            <div class="splash-logo"></div>
             <h1 class="splash-title">JAP-YEO DUO</h1>
             <p class="splash-subtitle">Violin & Piano Excellence</p>
         </div>
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="#home">
-                <i class="fas fa-music"></i>
+                <img src="https://picsum.photos/seed/brandlogo/40/40" alt="Logo">
                 <span data-lang="nav_brand">Jap-Yeo Duo</span>
             </a>
-            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
             </button>
-            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
@@ -1126,47 +1020,14 @@
                         <a class="nav-link" href="#contact" data-lang="nav_contact">Kontak</a>
                     </li>
                 </ul>
-                
-                <div class="d-flex align-items-center gap-3">
-                    <!-- Language Selector -->
-                    <div class="language-selector">
-                        <div class="language-dropdown">
-                            <i class="fas fa-globe"></i>
-                            <span id="current-lang">ID</span>
-                            <i class="fas fa-chevron-down ms-2"></i>
-                        </div>
-                        <div class="language-menu">
-                            <div class="language-option active" data-lang="id">
-                                <i class="fas fa-flag"></i> Bahasa Indonesia
-                            </div>
-                            <div class="language-option" data-lang="en">
-                                <i class="fas fa-flag"></i> English
-                            </div>
-                            <div class="language-option" data-lang="zh">
-                                <i class="fas fa-flag"></i> 中文
-                            </div>
-                        </div>
+                <div class="language-selector">
+                    <div class="language-dropdown">
+                        <span id="current-lang">ID</span> <i class="fas fa-chevron-down"></i>
                     </div>
-                    
-                    <!-- Admin Menu -->
-                    <div class="admin-menu">
-                        <button class="admin-toggle" id="adminToggle">
-                            <i class="fas fa-cog"></i>
-                        </button>
-                        <div class="admin-dropdown" id="adminMenu">
-                            <div class="admin-status" id="adminStatus">
-                                <i class="fas fa-user"></i>
-                                <span id="adminUsername">Admin</span>
-                            </div>
-                            <div class="admin-item" onclick="showLoginModal()">
-                                <i class="fas fa-sign-in-alt"></i>
-                                <span>Login</span>
-                            </div>
-                            <div class="admin-item" id="logoutItem" style="display: none;" onclick="logout()">
-                                <i class="fas fa-sign-out-alt"></i>
-                                <span>Logout</span>
-                            </div>
-                        </div>
+                    <div class="language-menu">
+                        <div class="language-option active" data-lang="id">Bahasa Indonesia</div>
+                        <div class="language-option" data-lang="en">English</div>
+                        <div class="language-option" data-lang="zh">中文</div>
                     </div>
                 </div>
             </div>
@@ -1176,43 +1037,45 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1 data-lang="hero_title">Jap-Yeo Duo</h1>
-            <h2 data-lang="hero_subtitle">Jap Tji Kien, Biola & Dr. Kuei Pin Yeo, Piano</h2>
-            <p data-lang="hero_description">Jap-Yeo Duo mempertemukan dua musisi Indonesia berkelas internasional: violinis Jap Tji Kien dan pianis Dr. Kuei Pin Yeo. Dengan pengalaman panjang sebagai solis, musisi kamar, dan kolaborator lintas budaya, duo ini dikenal karena kematangan musikal, kejelasan struktur, dan penghormatan mendalam terhadap karya yang mereka bawakan.</p>
-            <a href="#beethoven" class="btn-hero" data-lang="hero_btn_beethoven">Proyek Beethoven 2027</a>
-            <a href="#gallery" class="btn-hero" data-lang="hero_btn_gallery">Lihat Galeri</a>
+            <h1 class="hero-title" data-lang="hero_title">Jap-Yeo Duo</h1>
+            <p class="hero-subtitle" data-lang="hero_subtitle">Jap Tji Kien, Biola & Dr. Kuei Pin Yeo, Piano</p>
+            <p class="hero-description" data-lang="hero_description">
+                Jap-Yeo Duo mempertemukan dua musisi Indonesia berkelas internasional: violinis Jap Tji Kien dan pianis Dr. Kuei Pin Yeo. Dengan pengalaman panjang sebagai solis, musisi kamar, dan kolaborator lintas budaya, duo ini dikenal karena kematangan musikal, kejelasan struktur, dan penghormatan mendalam terhadap karya yang mereka bawakan.
+            </p>
+            <div class="hero-buttons">
+                <a href="#beethoven" class="btn-hero btn-primary" data-lang="hero_btn_beethoven">Proyek Beethoven 2027</a>
+                <a href="#gallery" class="btn-hero btn-outline" data-lang="hero_btn_gallery">Lihat Galeri</a>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="section" id="about">
+    <section class="section about" id="about">
         <div class="container">
             <h2 class="section-title" data-lang="about_title">Tentang Kami</h2>
             <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="about-card fade-in">
-                        <div class="about-image" style="background-image: url('https://picsum.photos/seed/violinist/600/400');">
-                            <div class="about-overlay">
-                                <h3 data-lang="jap_name">Jap Tji Kien</h3>
-                                <p data-lang="jap_role">Violinis & Dirigen</p>
-                            </div>
-                        </div>
-                        <div class="about-content">
-                            <p data-lang="jap_bio">Jap Tji Kien adalah violinis dan dirigen terkemuka Indonesia, lahir di Bandung, dan dikenal sebagai penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara.</p>
+                <div class="col-lg-6 mb-4">
+                    <div class="artist-card" data-aos="fade-right">
+                        <div class="artist-image" style="background-image: url('https://picsum.photos/seed/japviolinist/600/800');"></div>
+                        <div class="artist-info">
+                            <h3 class="artist-name" data-lang="jap_name">Jap Tji Kien</h3>
+                            <p class="artist-role" data-lang="jap_role">Violinis & Dirigen</p>
+                            <p class="artist-bio" data-lang="jap_bio">
+                                Jap Tji Kien adalah violinis dan dirigen terkemuka Indonesia, lahir di Bandung, dan dikenal sebagai penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara.
+                            </p>
                             <button class="btn-bio" onclick="showBioModal('jap')" data-lang="jap_read_more">Baca Selengkapnya</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="about-card fade-in">
-                        <div class="about-image" style="background-image: url('https://picsum.photos/seed/pianist/600/400');">
-                            <div class="about-overlay">
-                                <h3 data-lang="yeo_name">Dr. Kuei Pin Yeo</h3>
-                                <p data-lang="yeo_role">Pianis</p>
-                            </div>
-                        </div>
-                        <div class="about-content">
-                            <p data-lang="yeo_bio">Dr. Kuei Pin Yeo adalah pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Ia dikenal sebagai musisi dengan karier internasional yang panjang.</p>
+                <div class="col-lg-6 mb-4">
+                    <div class="artist-card" data-aos="fade-left">
+                        <div class="artist-image" style="background-image: url('https://picsum.photos/seed/yeopianist/600/800');"></div>
+                        <div class="artist-info">
+                            <h3 class="artist-name" data-lang="yeo_name">Dr. Kuei Pin Yeo</h3>
+                            <p class="artist-role" data-lang="yeo_role">Pianis</p>
+                            <p class="artist-bio" data-lang="yeo_bio">
+                                Dr. Kuei Pin Yeo adalah pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Ia dikenal sebagai musisi dengan karier internasional yang panjang.
+                            </p>
                             <button class="btn-bio" onclick="showBioModal('yeo')" data-lang="yeo_read_more">Baca Selengkapnya</button>
                         </div>
                     </div>
@@ -1221,29 +1084,42 @@
         </div>
     </section>
 
-    <!-- Beethoven Section -->
+    <!-- Beethoven Project Section -->
     <section class="section beethoven" id="beethoven">
         <div class="container">
             <div class="beethoven-content">
-                <h2 data-lang="beethoven_title">Beethoven Bicentennial Project 2027</h2>
-                <h3 data-lang="beethoven_subtitle">Memperingati 200 Tahun Karya Agung Beethoven</h3>
-                <p data-lang="beethoven_description">Dalam rangka Beethoven Bicentennial Project 2027, Jap-Yeo Duo merancang sebuah proyek artistik berskala internasional yang berfokus pada penyajian lengkap Sonate untuk Biola dan Piano karya Beethoven.</p>
-                
-                <div class="beethoven-features">
-                    <div class="beethoven-feature">
-                        <i class="fas fa-music"></i>
-                        <h4>10 Sonata Lengkap</h4>
-                        <p>Penyajian lengkap 10 sonata untuk biola dan piano</p>
-                    </div>
-                    <div class="beethoven-feature">
-                        <i class="fas fa-globe"></i>
-                        <h4>Tur Internasional</h4>
-                        <p>Persembahan di berbagai kota besar dunia</p>
-                    </div>
-                    <div class="beethoven-feature">
-                        <i class="fas fa-microphone"></i>
-                        <h4>Masterclass</h4>
-                        <p>Edukasi dan pembinaan musisi muda</p>
+                <h2 class="section-title text-white" data-lang="beethoven_title">Beethoven Bicentennial Project 2027</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="beethoven-card" data-aos="zoom-in">
+                            <div class="beethoven-icon">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <h3 class="beethoven-title" data-lang="beethoven_subtitle">Memperingati 200 Tahun Karya Agung Beethoven</h3>
+                            <p class="beethoven-description" data-lang="beethoven_description">
+                                Dalam rangka Beethoven Bicentennial Project 2027, Jap-Yeo Duo merancang sebuah proyek artistik berskala internasional yang berfokus pada penyajian lengkap Sonate untuk Biola dan Piano karya Beethoven. Proyek ini akan melibatkan serangkaian konser di berbagai kota besar dunia, rekaman studio, dan program edukasi untuk memperkenalkan warisan musik Beethoven kepada generasi muda.
+                            </p>
+                            <div class="row mt-4">
+                                <div class="col-md-4 text-center mb-3">
+                                    <div class="beethoven-stat">
+                                        <h2 style="color: var(--gold);">10</h2>
+                                        <p>Sonate Beethoven</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    <div class="beethoven-stat">
+                                        <h2 style="color: var(--gold);">20+</h2>
+                                        <p>Kota Konser</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-center mb-3">
+                                    <div class="beethoven-stat">
+                                        <h2 style="color: var(--gold);">2027</h2>
+                                        <p>Tahun Pelaksanaan</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1251,44 +1127,50 @@
     </section>
 
     <!-- Gallery Section -->
-    <section class="section" id="gallery">
+    <section class="section gallery" id="gallery">
         <div class="container">
             <h2 class="section-title" data-lang="gallery_title">Galeri</h2>
             <div class="gallery-grid">
-                <div class="gallery-item fade-in">
-                    <img src="image1.jpg.jpeg" alt="Konser 1">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://picsum.photos/seed/concert1/400/300" alt="Concert 1">
                     <div class="gallery-overlay">
-                        <h4>Konser Jakarta 2023</h4>
+                        <h4>Konser di Jakarta</h4>
+                        <p>Desember 2023</p>
                     </div>
                 </div>
-                <div class="gallery-item fade-in">
-                    <img src="image2.jpg.jpeg" alt="Konser 2">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://picsum.photos/seed/concert2/400/300" alt="Concert 2">
                     <div class="gallery-overlay">
-                        <h4>Beethoven Festival</h4>
+                        <h4>Recital di Carnegie Hall</h4>
+                        <p>November 2023</p>
                     </div>
                 </div>
-                <div class="gallery-item fade-in">
-                    <img src="image3.jpg.jpeg" alt="Konser 3">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://picsum.photos/seed/concert3/400/300" alt="Concert 3">
                     <div class="gallery-overlay">
-                        <h4>Masterclass Vienna</h4>
+                        <h4>Festival Musik Vienna</h4>
+                        <p>Oktober 2023</p>
                     </div>
                 </div>
-                <div class="gallery-item fade-in">
-                    <img src="mage4.jpg.jpeg" alt="Konser 4">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://picsum.photos/seed/concert4/400/300" alt="Concert 4">
                     <div class="gallery-overlay">
-                        <h4>Recital Carnegie Hall</h4>
+                        <h4>Konser Amal</h4>
+                        <p>September 2023</p>
                     </div>
                 </div>
-                <div class="gallery-item fade-in">
-                    <img src="image5.jpg.jpeg" alt="Konser 5">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
+                    <img src="https://picsum.photos/seed/concert5/400/300" alt="Concert 5">
                     <div class="gallery-overlay">
-                        <h4>Kolaborasi Orkestra</h4>
+                        <h4>Masterclass</h4>
+                        <p>Agustus 2023</p>
                     </div>
                 </div>
-                <div class="gallery-item fade-in">
-                    <img src="image6.jpg.jpeg" alt="Konser 6">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
+                    <img src="https://picsum.photos/seed/concert6/400/300" alt="Concert 6">
                     <div class="gallery-overlay">
-                        <h4>Workshop Musik</h4>
+                        <h4>Debut di Berlin</h4>
+                        <p>Juli 2023</p>
                     </div>
                 </div>
             </div>
@@ -1296,207 +1178,98 @@
     </section>
 
     <!-- Repertoire Section -->
-    <section class="section" id="repertoire">
+    <section class="section repertoire" id="repertoire">
         <div class="container">
             <h2 class="section-title" data-lang="repertoire_title">Repertoar</h2>
+            <div class="repertoire-tabs">
+                <button class="repertoire-tab active" onclick="showRepertoire('violin')">Repertoar Biola</button>
+                <button class="repertoire-tab" onclick="showRepertoire('piano')">Repertoar Piano</button>
+                <button class="repertoire-tab" onclick="showRepertoire('duo')">Repertoar Duo</button>
+            </div>
             
-            <div class="repertoire-container">
-                <div class="repertoire-tabs">
-                    <button class="repertoire-tab active" onclick="showRepertoire('duo')">Jap-Yeo Duo</button>
-                    <button class="repertoire-tab" onclick="showRepertoire('yeo')">Dr. Kuei Pin Yeo</button>
-                    <button class="repertoire-tab" onclick="showRepertoire('jap')">Jap Tji Kien</button>
-                </div>
-
-                <!-- Jap-Yeo Duo Repertoire -->
-                <div id="duo-repertoire" class="repertoire-content active">
-                    <div class="repertoire-section">
-                        <h3><i class="fas fa-music"></i> Repertoar Jap-Yeo Duo</h3>
-                        
-                        <div class="repertoire-subsection">
-                            <h4>Beethoven: Sonata Lengkap untuk Piano dan Biola</h4>
-                            <div class="sonata-grid">
-                                <div class="sonata-item">
-                                    <div class="sonata-number">Sonata No. 1</div>
-                                    <div class="sonata-title">Op. 12 No. 1 in D Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">Sonata No. 2</div>
-                                    <div class="sonata-title">Op. 12 No. 2 in A Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">Sonata No. 3</div>
-                                    <div class="sonata-title">Op. 12 No. 3 in E-flat Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">Sonata No. 4</div>
-                                    <div class="sonata-title">Op. 23 in A Minor</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">Sonata No. 5</div>
-                                    <div class="sonata-title">Op. 24 'Spring' in F Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">Sonata No. 6</div>
-                                    <div class="sonata-title">Op. 30 No. 1 in A Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">Sonata No. 7</div>
-                                    <div class="sonata-title">Op. 30 No. 2 in C Minor</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">Sonata No. 8</div>
-                                    <div class="sonata-title">Op. 30 No. 3 in G Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">Sonata No. 9</div>
-                                    <div class="sonata-title">Op. 47 'Kreutzer' in A Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">Sonata No. 10</div>
-                                    <div class="sonata-title">Op. 96 in G Major</div>
-                                </div>
-                            </div>
+            <div id="violin-repertoire" class="repertoire-content active">
+                <div class="repertoire-list">
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">J.S. Bach</span> - <span class="repertoire-piece">Sonata No. 1 in G minor, BWV 1001</span>
                         </div>
-
-                        <div class="repertoire-subsection">
-                            <h4>Repertoar Tambahan</h4>
-                            <ul class="repertoire-list">
-                                <li><i class="fas fa-chevron-right"></i> Beethoven: Triple Concerto for Violin, Cello, and Piano in C Major, Op. 56</li>
-                            </ul>
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">Eugène Ysaÿe</span> - <span class="repertoire-piece">Sonata No. 2 "Obsession"</span>
                         </div>
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">Niccolò Paganini</span> - <span class="repertoire-piece">24 Caprices, Op. 1</span>
+                        </div>
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">Henryk Wieniawski</span> - <span class="repertoire-piece">Polonaise Brillante No. 1, Op. 4</span>
+                        </div>
+                        <i class="fas fa-music"></i>
                     </div>
                 </div>
-
-                <!-- Dr. Kuei Pin Yeo Repertoire -->
-                <div id="yeo-repertoire" class="repertoire-content">
-                    <div class="repertoire-section">
-                        <h3><i class="fas fa-piano"></i> Repertoar Dr. Kuei Pin Yeo</h3>
-                        
-                        <div class="repertoire-subsection">
-                            <h4>Beethoven: Complete Piano Concertos</h4>
-                            <ul class="repertoire-list">
-                                <li><i class="fas fa-chevron-right"></i> Piano Concerto No. 1 in C Major, Op. 15</li>
-                                <li><i class="fas fa-chevron-right"></i> Piano Concerto No. 2 in B-flat Major, Op. 19</li>
-                                <li><i class="fas fa-chevron-right"></i> Piano Concerto No. 3 in C Minor, Op. 37</li>
-                                <li><i class="fas fa-chevron-right"></i> Piano Concerto No. 4 in G Major, Op. 58</li>
-                                <li><i class="fas fa-chevron-right"></i> Piano Concerto No. 5 in E-flat Major, Op. 73 'Emperor'</li>
-                            </ul>
+            </div>
+            
+            <div id="piano-repertoire" class="repertoire-content">
+                <div class="repertoire-list">
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">Frédéric Chopin</span> - <span class="repertoire-piece">Etudes, Op. 10 & Op. 25</span>
                         </div>
-
-                        <div class="repertoire-subsection">
-                            <h4>Beethoven: Piano Sonatas</h4>
-                            
-                            <div class="program-example">
-                                <h4>Contoh Program</h4>
-                                <ul class="repertoire-list">
-                                    <li><i class="fas fa-music"></i> Piano Sonata Op. 2 No. 3 in C Major</li>
-                                    <li><i class="fas fa-music"></i> Piano Sonata Op. 81a 'Les Adieux' in E-flat Major</li>
-                                    <li><i class="fas fa-music"></i> Piano Sonata Op. 110 in A-flat Major</li>
-                                </ul>
-                            </div>
-
-                            <div class="mt-4">
-                                <h5>Masa Awal (Early Period)</h5>
-                                <ul class="repertoire-list">
-                                    <li><i class="fas fa-play-circle"></i> Three Sonatas, Op. 2</li>
-                                    <li><i class="fas fa-play-circle"></i> Two Sonatas, Op. 49</li>
-                                    <li><i class="fas fa-play-circle"></i> Sonata Pathétique, Op. 13</li>
-                                </ul>
-                            </div>
-
-                            <div class="mt-4">
-                                <h5>Masa Pertengahan (Middle Period)</h5>
-                                <ul class="repertoire-list">
-                                    <li><i class="fas fa-play-circle"></i> Sonata 'Moonlight', Op. 27 No. 2</li>
-                                    <li><i class="fas fa-play-circle"></i> Sonata 'Waldstein', Op. 53</li>
-                                    <li><i class="fas fa-play-circle"></i> Sonata 'Appassionata', Op. 57</li>
-                                </ul>
-                            </div>
-
-                            <div class="mt-4">
-                                <h5>Masa Akhir (Late Period)</h5>
-                                <ul class="repertoire-list">
-                                    <li><i class="fas fa-play-circle"></i> Sonata 'Hammerklavier', Op. 106</li>
-                                    <li><i class="fas fa-play-circle"></i> Three Sonatas, Op. 109, 110, 111</li>
-                                </ul>
-                            </div>
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">Franz Liszt</span> - <span class="repertoire-piece">Transcendental Etudes</span>
                         </div>
-
-                        <div class="repertoire-subsection">
-                            <h4>Konser Tambahan (Additional Concertos)</h4>
-                            <ul class="repertoire-list">
-                                <li><i class="fas fa-chevron-right"></i> Chopin: Piano Concerto No. 1 in E Minor, Op. 11</li>
-                                <li><i class="fas fa-chevron-right"></i> Grieg: Piano Concerto in A Minor, Op. 16</li>
-                                <li><i class="fas fa-chevron-right"></i> Mozart: Piano Concertos (K. 466, 488, 595)</li>
-                                <li><i class="fas fa-chevron-right"></i> Rachmaninoff: Piano Concerto No. 2 in C Minor, Op. 18</li>
-                                <li><i class="fas fa-chevron-right"></i> Ravel: Piano Concerto for the Left Hand in D Major</li>
-                                <li><i class="fas fa-chevron-right"></i> Tchaikovsky: Piano Concerto No. 1 in B-flat Minor, Op. 23</li>
-                            </ul>
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">Sergei Rachmaninoff</span> - <span class="repertoire-piece">Piano Concertos Nos. 2 & 3</span>
                         </div>
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">Claude Debussy</span> - <span class="repertoire-piece">Préludes, Book I & II</span>
+                        </div>
+                        <i class="fas fa-music"></i>
                     </div>
                 </div>
-
-                <!-- Jap Tji Kien Repertoire -->
-                <div id="jap-repertoire" class="repertoire-content">
-                    <div class="repertoire-section">
-                        <h3><i class="fas fa-violin"></i> Repertoar Jap Tji Kien</h3>
-                        
-                        <div class="repertoire-subsection">
-                            <h4>Beethoven: Sonata Lengkap untuk Piano dan Biola</h4>
-                            <div class="sonata-grid">
-                                <div class="sonata-item">
-                                    <div class="sonata-number">No. 1</div>
-                                    <div class="sonata-title">Op. 12 No. 1 in D Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">No. 2</div>
-                                    <div class="sonata-title">Op. 12 No. 2 in A Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">No. 3</div>
-                                    <div class="sonata-title">Op. 12 No. 3 in E-flat Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">No. 4</div>
-                                    <div class="sonata-title">Op. 23 in A Minor</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">No. 5</div>
-                                    <div class="sonata-title">Op. 24 'Spring' in F Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">No. 6</div>
-                                    <div class="sonata-title">Op. 30 No. 1 in A Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">No. 7</div>
-                                    <div class="sonata-title">Op. 30 No. 2 in C Minor</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">No. 8</div>
-                                    <div class="sonata-title">Op. 30 No. 3 in G Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">No. 9</div>
-                                    <div class="sonata-title">Op. 47 'Kreutzer' in A Major</div>
-                                </div>
-                                <div class="sonata-item">
-                                    <div class="sonata-number">No. 10</div>
-                                    <div class="sonata-title">Op. 96 in G Major</div>
-                                </div>
-                            </div>
+            </div>
+            
+            <div id="duo-repertoire" class="repertoire-content">
+                <div class="repertoire-list">
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">Ludwig van Beethoven</span> - <span class="repertoire-piece">Sonata for Violin and Piano No. 9 "Kreutzer"</span>
                         </div>
-
-                        <div class="repertoire-subsection">
-                            <h4>Repertoar Tambahan</h4>
-                            <ul class="repertoire-list">
-                                <li><i class="fas fa-chevron-right"></i> Bach: Sonatas and Partitas for Solo Violin</li>
-                                <li><i class="fas fa-chevron-right"></i> Mozart: Violin Concertos No. 3, 4, 5</li>
-                                <li><i class="fas fa-chevron-right"></i> Brahms: Violin Concerto in D Major, Op. 77</li>
-                                <li><i class="fas fa-chevron-right"></i> Tchaikovsky: Violin Concerto in D Major, Op. 35</li>
-                                <li><i class="fas fa-chevron-right"></i> Mendelssohn: Violin Concerto in E Minor, Op. 64</li>
-                            </ul>
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">Johannes Brahms</span> - <span class="repertoire-piece">Sonata for Violin and Piano No. 3 in D minor, Op. 108</span>
                         </div>
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">César Franck</span> - <span class="repertoire-piece">Sonata for Violin and Piano in A Major</span>
+                        </div>
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="repertoire-item">
+                        <div>
+                            <span class="repertoire-composer">Maurice Ravel</span> - <span class="repertoire-piece">Sonata for Violin and Piano</span>
+                        </div>
+                        <i class="fas fa-music"></i>
                     </div>
                 </div>
             </div>
@@ -1504,10 +1277,9 @@
     </section>
 
     <!-- Media Section -->
-    <section class="section" id="media">
+    <section class="section media" id="media">
         <div class="container">
             <h2 class="section-title" data-lang="media_title">Media</h2>
-            
             <div class="media-tabs">
                 <button class="media-tab active" onclick="filterMedia('videos')" data-lang="media_videos">Video</button>
                 <button class="media-tab" onclick="filterMedia('audio')" data-lang="media_audio">Audio</button>
@@ -1569,7 +1341,7 @@
     <!-- Contact Section -->
     <section class="section contact" id="contact">
         <div class="container">
-            <h2 class="section-title" data-lang="contact_title">Kontak</h2>
+            <h2 class="section-title text-white" data-lang="contact_title">Kontak</h2>
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="contact-form">
@@ -1646,29 +1418,6 @@
             <div id="bioModalBody">
                 <!-- Content will be inserted here -->
             </div>
-        </div>
-    </div>
-
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="hideLoginModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            <h3 class="modal-title">Login Admin</h3>
-            <form onsubmit="login(event)">
-                <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" required>
-                </div>
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </button>
-            </form>
         </div>
     </div>
 
@@ -1851,13 +1600,9 @@
             }
         };
 
-        // Admin authentication
-        let isAdminLoggedIn = false;
-
-        // Check if admin is logged in on page load
+        // Initialize splash screen
         document.addEventListener('DOMContentLoaded', function() {
             initializeSplashScreen();
-            checkAdminStatus();
             initializeEventListeners();
             loadSavedLanguage();
         });
@@ -1921,12 +1666,6 @@
                 this.reset();
             });
 
-            // Admin menu
-            document.getElementById('adminToggle').addEventListener('click', function(e) {
-                e.stopPropagation();
-                document.getElementById('adminMenu').classList.toggle('show');
-            });
-
             // Smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
@@ -1955,77 +1694,6 @@
             document.querySelectorAll('.fade-in').forEach(el => {
                 observer.observe(el);
             });
-        }
-
-        function checkAdminStatus() {
-            const adminStatus = localStorage.getItem('isAdminLoggedIn');
-            if (adminStatus === 'true') {
-                isAdminLoggedIn = true;
-                showAdminStatus();
-            }
-        }
-
-        function showAdminStatus() {
-            const adminStatus = document.getElementById('adminStatus');
-            const logoutItem = document.getElementById('logoutItem');
-            if (adminStatus) {
-                adminStatus.classList.add('show');
-                logoutItem.style.display = 'flex';
-            }
-        }
-
-        function hideAdminStatus() {
-            const adminStatus = document.getElementById('adminStatus');
-            const logoutItem = document.getElementById('logoutItem');
-            if (adminStatus) {
-                adminStatus.classList.remove('show');
-                logoutItem.style.display = 'none';
-            }
-        }
-
-        function toggleAdminMenu() {
-            document.getElementById('adminMenu').classList.toggle('show');
-        }
-
-        function showLoginModal() {
-            document.getElementById('loginModal').classList.add('show');
-        }
-
-        function hideLoginModal() {
-            document.getElementById('loginModal').classList.remove('show');
-        }
-
-        function login(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // Check credentials
-            if (username === 'admin' && password === 'admin123') {
-                isAdminLoggedIn = true;
-                localStorage.setItem('isAdminLoggedIn', 'true');
-                localStorage.setItem('adminUsername', username);
-                
-                hideLoginModal();
-                showAdminStatus();
-                document.getElementById('adminUsername').textContent = username;
-                
-                showNotification('Login berhasil! Selamat datang, ' + username, 'success');
-            } else {
-                showNotification('Username atau password salah', 'error');
-            }
-        }
-
-        function logout() {
-            isAdminLoggedIn = false;
-            localStorage.removeItem('isAdminLoggedIn');
-            localStorage.removeItem('adminUsername');
-            
-            hideAdminStatus();
-            document.getElementById('adminMenu').classList.remove('show');
-            
-            showNotification('Anda telah keluar dari sistem', 'info');
         }
 
         function showNotification(message, type) {
@@ -2171,18 +1839,9 @@
 
         // Close modals when clicking outside
         window.addEventListener('click', function(event) {
-            const modals = ['loginModal', 'bioModal'];
-            modals.forEach(modalId => {
-                const modal = document.getElementById(modalId);
-                if (event.target === modal) {
-                    modal.classList.remove('show');
-                }
-            });
-            
-            const adminMenu = document.getElementById('adminMenu');
-            const adminToggle = document.getElementById('adminToggle');
-            if (!adminToggle.contains(event.target) && !adminMenu.contains(event.target)) {
-                adminMenu.classList.remove('show');
+            const modal = document.getElementById('bioModal');
+            if (event.target === modal) {
+                modal.classList.remove('show');
             }
         });
     </script>
