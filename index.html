@@ -157,19 +157,51 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
         }
 
-        .navbar-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--gold) !important;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-brand:hover {
-            transform: scale(1.05);
-            color: var(--gold-light) !important;
-        }
+       /* Tambahkan ke dalam style tag */
+            .navbar-brand {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: var(--text-color);
+                font-weight: 600;
+                font-size: 1.5rem;
+                transition: all 0.3s ease;
+            }
+            
+            .logo-img {
+                height: 40px;
+                width: auto;
+                margin-right: 12px;
+                transition: all 0.3s ease;
+            }
+            
+            .brand-text {
+                background: linear-gradient(135deg, #8B7355, #D4AF37);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            
+            /* Responsive logo */
+            @media (max-width: 768px) {
+                .logo-img {
+                    height: 35px;
+                    margin-right: 8px;
+                }
+                
+                .brand-text {
+                    font-size: 1.2rem;
+                }
+            }
+            
+            /* Logo hover effect */
+            .navbar-brand:hover .logo-img {
+                transform: scale(1.05);
+            }
+            
+            .navbar-brand:hover .brand-text {
+                opacity: 0.8;
+            }
 
         .navbar-nav .nav-link {
             color: var(--white) !important;
@@ -1627,6 +1659,16 @@
     </div>
 
     <!-- Navigation -->
+    <!-- Ganti bagian logo di navbar -->
+<nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="#home">
+            <img src="J&Glogo.jpg" alt="Jap-Yeo Duo" class="logo-img">
+            <span class="brand-text">Jap-Yeo Duo</span>
+        </a>
+        <!-- ... sisanya tetap sama ... -->
+    </div>
+</nav>
     <nav id="navbar" class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="#home">
@@ -2446,3 +2488,4 @@ function showPianoSubContent(subTab) {
     </script>
 </body>
 </html>
+
