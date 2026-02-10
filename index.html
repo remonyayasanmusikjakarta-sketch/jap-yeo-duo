@@ -1799,103 +1799,90 @@
         </div>
 
         <!-- Main Artist Tabs -->
-        <div class="repertoire-tabs-wrapper" data-aos="fade-up" data-aos-delay="100">
-            <div class="repertoire-tabs">
-                <button class="repertoire-tab active" onclick="showArtistContent('duo')" data-lang="repertoire_tab_duo">JapYeo Duo</button>
-                <button class="repertoire-tab" onclick="showArtistContent('piano')" data-lang="repertoire_tab_piano">Dr. Kuei Pin Yeo</button>
-                <button class="repertoire-tab" onclick="showArtistContent('violin')" data-lang="repertoire_tab_violin">Jap Tji Kien</button>
-            </div>
+      <!-- Repertoire Section -->
+<!-- Repertoire Section -->
+<section id="repertoire" class="repertoire-section">
+    <div class="container">
+        <div class="section-title" data-lang="repertoire_title">Repertoar</div>
+        <p class="section-subtitle" data-lang="repertoire_subtitle">Karya Agung yang Dibawakan</p>
+        
+        <div class="repertoire-tabs">
+            <button class="repertoire-tab active" onclick="showArtistContent('japyeo')" data-lang="repertoire_tab_duo">JAP-YEO Duo</button>
+            <button class="repertoire-tab" onclick="showArtistContent('yeo')" data-lang="repertoire_tab_piano">Dr. Kuei Pin Yeo</button>
+            <button class="repertoire-tab" onclick="showArtistContent('jap')" data-lang="repertoire_tab_violin">Jap Tji Kien</button>
         </div>
-
-        <!-- Artist Content -->
-        <div class="repertoire-contents" data-aos="fade-up" data-aos-delay="200">
-            
-            <!-- JapYeo Duo Content -->
-            <div id="duo-content" class="artist-content active">
-                <div class="content-card">
-                    <h4 class="content-subtitle">Beethoven</h4>
-                    <ul class="repertoire-list">
-                        <li data-lang="repertoire_duo_sonatas">Sonata Lengkap untuk Piano dan Biola No. 1 - 10</li>
-                        <li data-lang="repertoire_duo_triple">Triple Concerto for Violin, Cello, and Piano in C Major, Op. 56</li>
+        
+        <!-- JAP-YEO Duo Content -->
+        <div id="japyeo-content" class="artist-content active">
+            <div class="repertoire-list">
+                <div class="repertoire-item">
+                    <h4>Beethoven</h4>
+                    <ul class="repertoire-details">
+                        <li>Sonata Lengkap untuk Piano dan Biola No. 1 - 10</li>
+                        <li>Triple Concerto for Violin, Cello, and Piano in C Major, Op. 56</li>
                     </ul>
                 </div>
             </div>
-
-            <!-- Dr. Kuei Pin Yeo Content -->
-            <div id="piano-content" class="artist-content">
-                <!-- Sub-tabs for Piano -->
-                <div class="sub-tabs">
-                    <button class="sub-tab active" onclick="showPianoSubContent('beethoven')">Beethoven</button>
-                    <button class="sub-tab" onclick="showPianoSubContent('additional')" data-lang="repertoire_piano_additional">Konser Tambahan</button>
+        </div>
+        
+        <!-- Dr. Kuei Pin Yeo Content -->
+        <div id="yeo-content" class="artist-content">
+            <div class="repertoire-list">
+                <div class="repertoire-item">
+                    <h4>Beethoven</h4>
+                    <ul class="repertoire-details">
+                        <li>Complete Piano Concertos No. 1 - 5</li>
+                        <li>Piano Sonatas:</li>
+                        <li>Masa Awal</li>
+                        <li>Masa Pertengahan</li>
+                        <li>Masa Akhir</li>
+                    </ul>
                 </div>
-                
-                <div class="sub-contents">
-                    <!-- Beethoven Sub-content -->
-                    <div id="beethoven-subcontent" class="sub-content active">
-                        <div class="content-card">
-                            <h5 class="card-title" data-lang="repertoire_piano_concertos">Complete Piano Concertos No. 1 - 5</h5>
-                        </div>
-                        <div class="content-card">
-                            <h5 class="card-title" data-lang="repertoire_piano_sonatas">Piano Sonatas</h5>
-                            <div class="sonata-periods">
-                                <div class="period-item">
-                                    <strong data-lang="repertoire_sonata_early">Masa Awal:</strong>
-                                </div>
-                                <div class="period-item">
-                                    <strong data-lang="repertoire_sonata_middle">Masa Pertengahan:</strong>
-                                </div>
-                                <div class="period-item">
-                                    <strong data-lang="repertoire_sonata_late">Masa Akhir:</strong>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content-card">
-                            <h5 class="card-title" data-lang="repertoire_piano_example">Contoh Program:</h5>
-                            <ul class="repertoire-list">
-                                <li>Piano Sonata Op. 2 No. 3 in C Major</li>
-                                <li>Piano Sonata Op. 81a 'Les Adieux'</li>
-                                <li>Piano Sonata Op. 110 in Ab Major</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Additional Concertos Sub-content -->
-                    <div id="additional-subcontent" class="sub-content">
-                        <div class="content-card">
-                            <ul class="repertoire-list">
-                                <li>Chopin: Piano Concerto No. 1</li>
-                                <li>Grieg: Piano Concerto in A Minor</li>
-                                <li>Mozart: Piano Concertos</li>
-                                <li>Rachmaninoff: Piano Concerto No. 2</li>
-                                <li>Ravel: Piano Concerto for the Left Hand</li>
-                                <li>Tchaikovsky: Piano Concerto</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="repertoire-item">
+                    <h4>Contoh Program:</h4>
+                    <ul class="repertoire-details">
+                        <li>Piano Sonata Op. 2 No. 3 in C Major</li>
+                        <li>Piano Sonata Op. 81a 'Les Adieux'</li>
+                        <li>Piano Sonata Op. 110 in Ab Major</li>
+                    </ul>
+                </div>
+                <div class="repertoire-item">
+                    <h4>Konser Tambahan</h4>
+                    <ul class="repertoire-details">
+                        <li>Chopin: Piano Concerto No. 1</li>
+                        <li>Grieg: Piano Concerto in A Minor</li>
+                        <li>Mozart: Piano Concertos</li>
+                        <li>Rachmaninoff: Piano Concerto No. 2</li>
+                        <li>Ravel: Piano Concerto for the Left Hand</li>
+                        <li>Tchaikovsky: Piano Concerto</li>
+                    </ul>
                 </div>
             </div>
-
-            <!-- Jap Tji Kien Content -->
-            <div id="violin-content" class="artist-content">
-                <div class="content-card">
-                    <h4 class="content-subtitle">Beethoven: Sonata Lengkap untuk Piano dan Biola</h4>
-                    <div class="sonata-grid">
-                        <div class="sonata-item">No. 1 Op. 12 No. 1</div>
-                        <div class="sonata-item">No. 2 Op. 12 No. 2</div>
-                        <div class="sonata-item">No. 3 Op. 12 No. 3</div>
-                        <div class="sonata-item">No. 4 Op. 23</div>
-                        <div class="sonata-item">No. 5 Op. 24 'Spring'</div>
-                        <div class="sonata-item">No. 6 Op. 30 No. 1</div>
-                        <div class="sonata-item">No. 7 Op. 30 No. 2</div>
-                        <div class="sonata-item">No. 8 Op. 30 No. 3</div>
-                        <div class="sonata-item">No. 9 Op. 47 'Kreutzer'</div>
-                        <div class="sonata-item">No. 10 Op. 96</div>
-                    </div>
+        </div>
+        
+        <!-- Jap Tji Kien Content -->
+        <div id="jap-content" class="artist-content">
+            <div class="repertoire-list">
+                <div class="repertoire-item">
+                    <h4>Beethoven: Sonata Lengkap untuk Piano dan Biola No. 1 - 10</h4>
+                    <ul class="repertoire-details">
+                        <li>No. 1 Op. 12 No. 1 in D Major</li>
+                        <li>No. 2 Op. 12 No. 2 in A Major</li>
+                        <li>No. 3 Op. 12 No. 3 in E-flat Major</li>
+                        <li>No. 4 Op. 23 in A Minor</li>
+                        <li>No. 5 Op. 24 'Spring' in F Major</li>
+                        <li>No. 6 Op. 30 No. 1 in A Major</li>
+                        <li>No. 7 Op. 30 No. 2 in C Minor</li>
+                        <li>No. 8 Op. 30 No. 3 in G Major</li>
+                        <li>No. 9 Op. 47 'Kreutzer' in A Major</li>
+                        <li>No. 10 Op. 96 in G Major</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
     <!-- Beethoven Bicentennial Project Section -->
 <section id="beethoven-project" class="beethoven-project-section">
     <div class="container">
@@ -2488,4 +2475,5 @@ function showPianoSubContent(subTab) {
     </script>
 </body>
 </html>
+
 
