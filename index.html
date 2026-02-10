@@ -64,7 +64,7 @@
             background: var(--gold);
         }
 
-        /* ===== LOGO STYLES (Updated & Consolidated) ===== */
+        /* ===== LOGO STYLES ===== */
         .navbar-brand {
             display: flex;
             align-items: center;
@@ -74,7 +74,7 @@
         }
 
         .logo-img {
-            height: 50px; /* Ukuran default logo di navbar */
+            height: 50px; 
             width: auto;
             object-fit: contain;
             margin-right: 12px;
@@ -85,7 +85,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--gold); /* Menggunakan warna gold konsisten */
+            color: var(--gold); 
             margin: 0;
             letter-spacing: -0.5px;
             line-height: 1;
@@ -111,22 +111,13 @@
 
         /* Responsive adjustments */
         @media (max-width: 992px) {
-            .logo-img {
-                height: 40px;
-            }
-            .logo-text {
-                font-size: 1.3rem;
-            }
+            .logo-img { height: 40px; }
+            .logo-text { font-size: 1.3rem; }
         }
 
         @media (max-width: 576px) {
-            .logo-img {
-                height: 35px;
-                margin-right: 8px;
-            }
-            .logo-text {
-                font-size: 1.1rem;
-            }
+            .logo-img { height: 35px; margin-right: 8px; }
+            .logo-text { font-size: 1.1rem; }
         }
 
         /* ===== SPLASH SCREEN ===== */
@@ -160,7 +151,7 @@
             margin: 0 auto 2rem;
             position: relative;
             animation: pulse 2s infinite;
-            padding: 20px; /* Memberi ruang agar logo tidak terpotong */
+            padding: 20px; 
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
         }
 
@@ -333,7 +324,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding-top: 80px; /* Offset for fixed navbar */
+            padding-top: 80px; 
         }
 
         .hero-bg-pattern {
@@ -688,23 +679,6 @@
             transform: translateX(5px);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .project-title { font-size: 2.5rem; }
-            .project-subtitle { font-size: 1.2rem; }
-            .stat-number { font-size: 3rem; }
-            .project-stats { grid-template-columns: 1fr; gap: 30px; }
-        }
-
-        @media (max-width: 576px) {
-            .beethoven-project-section { padding: 60px 0; }
-            .project-title { font-size: 2rem; }
-            .project-subtitle { font-size: 1rem; }
-            .stat-item { padding: 30px 20px; }
-            .stat-number { font-size: 2.5rem; }
-            .stat-label { font-size: 1rem; }
-        }
-
         /* ===== ABOUT SECTION ===== */
         .about-section {
             padding: 100px 0;
@@ -794,16 +768,16 @@
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
             overflow: hidden !important; 
             padding: 0;
-            }
+        }
         .artist-photo {
             width: 100% !important;
             height: 100% !important;
-            object-fit: cover !important; /* Ini penting agar foto tidak gepeng, tapi di-crop rapi */
-            border-radius: 50%; /* Membuat foto bulat */
+            object-fit: cover !important; 
+            border-radius: 50%; 
             display: block;
         }
         .artist-card:hover .artist-photo {
-            transform: scale(1.1); /* Foto sedikit membesar saat di-hover */
+            transform: scale(1.1); 
         }
 
         .artist-image i {
@@ -1004,24 +978,7 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .repertoire-tabs {
-                flex-direction: column;
-                border-radius: 12px;
-                padding: 10px;
-            }
-            .repertoire-tab {
-                margin: 5px 0;
-                width: 100%;
-                text-align: center;
-            }
-            .sonata-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-        }
-
-        /* ===== MEDIA SECTION ===== */
+        /* ===== MEDIA SECTION (UPDATED) ===== */
         .media-section {
             padding: 100px 0;
             background: linear-gradient(180deg, var(--black) 0%, var(--black-light) 100%);
@@ -1057,17 +1014,19 @@
 
         .media-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
+        /* Common Media Item Styles */
         .media-item {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(212, 175, 55, 0.02));
             border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 15px;
             overflow: hidden;
             transition: all 0.3s ease;
+            display: block; /* Ensure it takes grid space */
         }
 
         .media-item:hover {
@@ -1076,20 +1035,67 @@
             border-color: var(--gold);
         }
 
-        .media-thumbnail {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, var(--gold), var(--gold-light));
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Video Specifics */
+        .video-wrapper {
             position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
             overflow: hidden;
+            background: #000;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
-        .media-thumbnail i {
+        /* Photo Specifics */
+        .media-photo-container {
+            width: 100%;
+            height: 300px; /* Fixed height for gallery consistency */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .media-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .media-item:hover .media-photo {
+            transform: scale(1.1);
+        }
+
+        /* Audio Specifics */
+        .media-audio-container {
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+            height: 200px;
+        }
+
+        .audio-icon {
             font-size: 3rem;
-            color: var(--black);
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Custom Audio Player Styling */
+        audio {
+            width: 100%;
+            height: 40px;
+            filter: invert(1) sepia(1) saturate(0.5) hue-rotate(330deg); /* Hack to make default player gold/dark */
+            border-radius: 20px;
         }
 
         .media-info {
@@ -1420,22 +1426,6 @@
         .text-gold-light { color: var(--gold-light) !important; }
         .bg-gold-gradient { background: linear-gradient(45deg, var(--gold), var(--gold-light)) !important; }
         .border-gold { border-color: var(--gold) !important; }
-
-        /* ===== LOADING SPINNER ===== */
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(212, 175, 55, 0.3);
-            border-top: 3px solid var(--gold);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
@@ -1443,7 +1433,6 @@
     <div id="splashScreen">
         <div class="splash-content">
             <!-- Logo Area: Menggunakan tag img untuk logo -->
-            <!-- Jika file assets/logo.png tidak ada, gambar placeholder akan muncul -->
             <div class="splash-logo">
                 <img src="J&Glogo.jpg" onerror="this.src='https://placehold.co/150x150/d4af37/0a0a0a?text=JY'; this.onerror=null;" alt="Jap-Yeo Duo Logo">
             </div>
@@ -1457,7 +1446,6 @@
         <div class="container">
             <!-- Navbar Brand: Logo di kiri + Teks -->
             <a class="navbar-brand" href="#home">
-                <!-- Ganti src dengan path logo Anda yang sebenarnya -->
                 <img src="J&Glogo.jpg" onerror="this.src='https://placehold.co/60x60/d4af37/0a0a0a?text=JY'; this.onerror=null;" alt="Jap-Yeo Duo Logo" class="logo-img">
                 <span class="logo-text">Jap-Yeo Duo</span>
             </a>
@@ -1540,7 +1528,6 @@
     </section>
 
     <!-- About Section -->
-   <!-- Bagian About Section (Ganti bagian ini) -->
 <section id="about" class="about-section">
     <div class="container">
         <div class="section-title" data-lang="about_title">Tentang Kami</div>
@@ -1550,7 +1537,6 @@
             <!-- Kartu Jap Tji Kien -->
             <div class="artist-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="artist-image">
-                    <!-- GANTI IKON DI BAWAH INI MENJADI IMG -->
                     <img src="jtk-portrait.jpg" alt="Jap Tji Kien" class="artist-photo">
                 </div>
                 <h3>Jap Tji Kien</h3>
@@ -1567,7 +1553,6 @@
             <!-- Kartu Dr. Kuei Pin Yeo -->
             <div class="artist-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="artist-image">
-                    <!-- GANTI IKON DI BAWAH INI MENJADI IMG -->
                     <img src="kueipinyeopict.jpg.jpeg" alt="Dr. Kuei Pin Yeo" class="artist-photo">
                 </div>
                 <h3>Dr. Kuei Pin Yeo</h3>
@@ -1583,6 +1568,7 @@
         </div>
     </div>
 </section>
+
     <!-- Repertoire Section -->
     <section id="repertoire" class="repertoire-section">
         <div class="container">
@@ -1623,28 +1609,15 @@
                             <h4>Beethoven</h4>
                             <ul class="repertoire-details">
                                 <li>Complete Piano Concertos No. 1 - 5</li>
-                                </ul>
-                                <h4>Piano Sonatas</h4>
+                            </ul>
+                            <h4>Piano Sonatas</h4>
                             <ul class="repertoire-details">
-                                <li>Masa Awal</li>
-                                <li>Masa Pertengahan</li>
-                                <li>Masa Akhir</li>
-                            <ul>Contoh Program
-                                <li>Piano Sonata Op. 2 No. 3 in C Major</li>
-                                <li>Piano Sonata Op. 81a ‘Les Adieux’</li>
-                                <li>Piano Sonata Op. 110 in Ab Major"></li>
-                                </ul>
+                                <li>Masa Awal, Pertengahan, Akhir</li>
+                            </ul>
                             <h4>Konser Tambahan</h4>
                             <ul class="repertoire-details">
                                 <li>Chopin: Piano Concerto No. 1</li>
-                                <li>Grieg: Piano Concerto in A Minor</li>
-                                <li>Mozart: Piano Concertos</li>
                                 <li>Rachmaninoff: Piano Concerto No. 2</li>
-                                <li>Ravel: Piano Concerto for the Left Hand</li>
-                                <li>Tchaikovsky: Piano Concerto</li>
-                            </ul>
-                                
-                            </ul>
                             </ul>
                         </div>
                     </div>
@@ -1709,7 +1682,7 @@
         </div>
     </section>
 
-    <!-- Media Section -->
+    <!-- UPDATED MEDIA SECTION -->
     <section id="media" class="media-section">
         <div class="container">
             <div class="section-title" data-lang="media_title">Media</div>
@@ -1718,49 +1691,98 @@
             <div class="media-tabs">
                 <button class="media-tab active" onclick="filterMedia('videos')" data-lang="tab_videos">Video</button>
                 <button class="media-tab" onclick="filterMedia('audio')" data-lang="tab_audio">Audio</button>
-                <button class="media-tab" onclick="filterMedia('press')" data-lang="tab_press">Press</button>
+                <button class="media-tab" onclick="filterMedia('photos')" data-lang="tab_photos">Foto</button>
             </div>
             
             <div class="media-grid">
+                
+                <!-- VIDEO ITEMS -->
+                <!-- Video 1: YouTube Embed -->
                 <div class="media-item" data-tab-content="videos" data-aos="fade-up">
-                    <div class="media-thumbnail">
-                        <i class="fas fa-play"></i>
+                    <div class="video-wrapper">
+                        <!-- Ganti ID video di sini. Contoh: videoId=ogf50dAwRaw -->
+                        <iframe width="560" height="315" src="ogf50dAwRawhttps://video.search.yahoo.com/search/video?fr=mcafee&p=dr+kuei+pin+yeo+yt&type=E210US91215G0#id=1&vid=a7f5773160171c47428c5c382e6b5619&action=click" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="media-info">
-                        <h4 class="media-title">Beethoven Sonata No. 9</h4>
-                        <p class="media-description">Penampilan live di Concert Hall</p>
+                        <h4 class="media-title"><a href="https://video.search.yahoo.com/search/video?fr=mcafee&p=dr+kuei+pin+yeo+yt&type=E210US91215G0#id=1&vid=a7f5773160171c47428c5c382e6b5619&action=click" target="_blank" style="text-decoration: none; color: inherit;">I. Marzuki: Sepasang Mata Bola, Dr. Kuei Pin Yeo, piano & Ann Ellsworth, fr. horn, Daniel Paget, arr</a></h4>
+                        <p class="media-description">Live at Aula Simfonia Jakarta</p>
                     </div>
                 </div>
-                
+
+                <!-- Video 2: YouTube Embed -->
                 <div class="media-item" data-tab-content="videos" data-aos="fade-up" data-aos-delay="100">
-                    <div class="media-thumbnail">
-                        <i class="fas fa-play"></i>
+                    <div class="video-wrapper">
+                        <!-- Placeholder ID, ganti dengan ID video asli -->
+                        <iframe width="560" height="315" src="https://www.youtube.com/watch?v=Cb9-tSshr4I" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                     <div class="media-info">
-                        <h4 class="media-title">Triple Concerto</h4>
-                        <p class="media-description">Dengan Orkestra Simfoni Nasional</p>
+                        <h4 class="media-title"><a href="#" style="text-decoration: none; color: inherit;">J.S Bach - Minuet in G Major (Cover by Jap Tji Kien & SMKM Yayasan Musik Jakarta)</a></h4>
+                        <p class="media-description">Behind the scenes</p>
                     </div>
                 </div>
                 
-                <div class="media-item" data-tab-content="audio" data-aos="fade-up" data-aos-delay="200">
-                    <div class="media-thumbnail">
-                        <i class="fas fa-headphones"></i>
+                <!-- AUDIO ITEMS -->
+                <div class="media-item" data-tab-content="audio" data-aos="fade-up">
+                    <div class="media-audio-container">
+                        <i class="fas fa-compact-disc audio-icon"></i>
+                        <!-- Ganti src dengan link file audio .mp3 -->
+                        <audio controls>
+                            <source src="#" type="audio/mpeg">
+                            Browser Anda tidak mendukung elemen audio.
+                        </audio>
                     </div>
                     <div class="media-info">
-                        <h4 class="media-title">Moonlight Sonata</h4>
-                        <p class="media-description">Recording studio 2023</p>
+                        <h4 class="media-title">Moonlight Sonata (Movement 1)</h4>
+                        <p class="media-description">Studio Recording 2023</p>
                     </div>
                 </div>
                 
-                <div class="media-item" data-tab-content="press" data-aos="fade-up" data-aos-delay="300">
-                    <div class="media-thumbnail">
-                        <i class="fas fa-newspaper"></i>
+                <div class="media-item" data-tab-content="audio" data-aos="fade-up" data-aos-delay="100">
+                    <div class="media-audio-container">
+                        <i class="fas fa-compact-disc audio-icon"></i>
+                        <audio controls>
+                            <source src="#" type="audio/mpeg">
+                            Browser Anda tidak mendukung elemen audio.
+                        </audio>
                     </div>
                     <div class="media-info">
-                        <h4 class="media-title">Review Jakarta Post</h4>
-                        <p class="media-description">Penampilan yang memukau</p>
+                        <h4 class="media-title">Violin Sonata No. 5 "Spring"</h4>
+                        <p class="media-description">Live Performance Audio</p>
                     </div>
                 </div>
+
+                <!-- PHOTO ITEMS (Gallery) -->
+                <div class="media-item" data-tab-content="photos" data-aos="fade-up">
+                    <div class="media-photo-container">
+                        <!-- Menggunakan picsum untuk placeholder. Ganti src dengan path foto asli -->
+                        <img src="Beyonthenotes.jpg" alt="Concert Photo 1" class="media-photo">
+                    </div>
+                    <div class="media-info">
+                        <h4 class="media-title">Beyond The Notes</h4>
+                        <p class="media-description">Jakarta, 2024</p>
+                    </div>
+                </div>
+
+                <div class="media-item" data-tab-content="photos" data-aos="fade-up" data-aos-delay="100">
+                    <div class="media-photo-container">
+                        <img src="image1.jpg.jpeg" alt="Concert Photo 2" class="media-photo">
+                    </div>
+                    <div class="media-info">
+                        <h4 class="media-title">Beyond The Notes</h4>
+                        <p class="media-description">Jakarta, 2024</p>
+                    </div>
+                </div>
+
+                <div class="media-item" data-tab-content="photos" data-aos="fade-up" data-aos-delay="200">
+                    <div class="media-photo-container">
+                        <img src="image6.jpg.jpeg" alt="Concert Photo 3" class="media-photo">
+                    </div>
+                    <div class="media-info">
+                        <h4 class="media-title">HKIMF (Hong Kong International Music Festival)</h4>
+                        <p class="media-description">Kompetisi Musik Internasional</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1808,7 +1830,7 @@
                     </div>
                     <div class="contact-info-item">
                         <i class="fas fa-phone"></i>
-                        <span>+62 21 1234 5678</span>
+                        <span>+62 811-9892-413</span>
                     </div>
                 </div>
             </div>
@@ -1820,10 +1842,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="https://web.facebook.com/yayasanmusikjakarta" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/yayasanmusikjakarta" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@YayasanMusikJakarta" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@yayasanmusikjakarta" class="social-link"><i class="fab fa-tiktok"></i></a>
                 </div>
                 <p class="footer-text">
                     © 2024 Jap-Yeo Duo. All rights reserved. | 
@@ -1891,7 +1913,7 @@
                 media_subtitle: 'Dokumentasi Penampilan Kami',
                 tab_videos: 'Video',
                 tab_audio: 'Audio',
-                tab_press: 'Press',
+                tab_photos: 'Foto', // New Translation
                 contact_title: 'Kontak',
                 contact_subtitle: 'Hubungi Kami untuk Penampilan',
                 form_name: 'Nama Lengkap',
@@ -1931,7 +1953,7 @@
                 media_subtitle: 'Documentation of Our Performances',
                 tab_videos: 'Videos',
                 tab_audio: 'Audio',
-                tab_press: 'Press',
+                tab_photos: 'Photos', // New Translation
                 contact_title: 'Contact',
                 contact_subtitle: 'Contact Us for Performances',
                 form_name: 'Full Name',
@@ -1971,7 +1993,7 @@
                 media_subtitle: '我们的演出记录',
                 tab_videos: '视频',
                 tab_audio: '音频',
-                tab_press: '新闻',
+                tab_photos: '照片', // New Translation
                 contact_title: '联系',
                 contact_subtitle: '联系我们预约演出',
                 form_name: '全名',
@@ -2253,6 +2275,36 @@
             event.target.classList.add('active');
         }
 
+        // Media Filter Function (UPDATED)
+        function filterMedia(type) {
+            // Update Tab Active State
+            document.querySelectorAll('.media-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Show/Hide Content
+            const items = document.querySelectorAll('.media-item');
+            
+            items.forEach(item => {
+                const contentType = item.getAttribute('data-tab-content');
+                
+                if (contentType === type) {
+                    item.style.display = 'block';
+                    // Re-trigger animation
+                    item.classList.remove('aos-animate');
+                    setTimeout(() => item.classList.add('aos-animate'), 50);
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Refresh AOS for new layout
+            setTimeout(() => {
+                AOS.refresh();
+            }, 100);
+        }
+
         // Close modals when clicking outside
         window.addEventListener('click', function(event) {
             const modal = document.getElementById('bioModal');
@@ -2263,6 +2315,3 @@
     </script>
 </body>
 </html>
-
-
-
