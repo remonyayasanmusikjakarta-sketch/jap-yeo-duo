@@ -3,907 +3,1109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jap-Yeo Duo - Violin & Piano</title>
+    <title>Jap-Yeo Duo - Biola & Piano</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@400;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #000000;
-            --secondary-color: #ffffff;
-            --accent-color: #d4af37; /* Gold */
-            --accent-color-silver: #c0c0c0; /* Silver */
-            --text-color: #333333;
-            --light-gray: #f8f9fa;
-            --dark-gray: #222222;
-            --gradient-overlay: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
+            --primary-color: #d4af37;
+            --secondary-color: #8b4513;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --gradient: linear-gradient(135deg, #d4af37 0%, #8b4513 100%);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Libre Baskerville', serif;
             color: var(--text-color);
-            background-color: var(--secondary-color);
+            background-color: var(--light-color);
             overflow-x: hidden;
         }
-        
+
+        /* Splash Screen */
+        #splashScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+
+        #splashScreen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-content {
+            text-align: center;
+            color: var(--primary-color);
+            animation: pulse 2s infinite;
+        }
+
+       .splash-logo {
+            width: 200px;
+            height: 200px;
+            background: url(J&Glogo.jpg) center/cover;
+            border-radius: 50%;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: logoPulse 2s ease-in-out infinite;
+
+        .splash-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .splash-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Typography */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            margin-bottom: 1.5rem;
         }
-        
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        a:hover {
-            color: var(--accent-color-silver);
-            text-decoration: none;
-        }
-        
+
         /* Navigation */
         .navbar {
-            background-color: rgba(0, 0, 0, 0.9);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            padding: 1rem 0;
         }
-        
+
         .navbar-brand {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: var(--secondary-color) !important;
-            font-weight: 700;
-        }
-        
-        .navbar-nav .nav-link {
-            color: var(--secondary-color) !important;
-            margin: 0 0.8rem;
-            font-weight: 400;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .navbar-nav .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background-color: var(--accent-color);
-            transition: all 0.3s ease;
-        }
-        
-        .navbar-nav .nav-link:hover:after {
-            width: 100%;
-            left: 0;
-        }
-        
-        .navbar-nav .nav-link.active {
-            color: var(--accent-color) !important;
-        }
-        
-        /* Language Selector */
-        .language-selector {
-            position: relative;
-        }
-        
-        .language-dropdown {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--secondary-color);
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .language-dropdown:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .language-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.9);
-            border-radius: 4px;
-            padding: 5px 0;
-            min-width: 120px;
-            display: none;
-            z-index: 1001;
-        }
-        
-        .language-menu.show {
-            display: block;
-        }
-        
-        .language-option {
-            padding: 8px 15px;
-            color: var(--secondary-color);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .language-option:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .language-option.active {
-            background-color: rgba(212, 175, 55, 0.2);
-            color: var(--accent-color);
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: var(--gradient-overlay);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--secondary-color);
-            position: relative;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            padding: 0 20px;
-        }
-        
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            color: var(--secondary-color);
-        }
-        
-        .hero h2 {
-            font-size: 1.8rem;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            color: var(--secondary-color);
-        }
-        
-        .btn-custom {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            padding: 12px 30px;
-            font-weight: 600;
-            border: none;
-            border-radius: 2px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0.5rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .btn-custom:hover {
-            background-color: var(--accent-color-silver);
-            color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-        
-        .btn-outline-custom {
-            background-color: transparent;
-            color: var(--secondary-color);
-            border: 2px solid var(--accent-color);
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 2px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0.5rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .btn-outline-custom:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-        
-        /* Section Styling */
-        section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 3px;
-            background-color: var(--accent-color);
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        /* About Section */
-        .about {
-            background-color: var(--light-gray);
-        }
-        
-        /* Project Section */
-        .project-card {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            padding: 3rem;
-            border-radius: 5px;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
-            z-index: 1;
-        }
-        
-        .project-card > * {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .project-card h3 {
-            color: var(--accent-color);
-        }
-        
-        /* Biography Section */
-        .artist-card {
-            background-color: var(--secondary-color);
-            border: 1px solid #e0e0e0;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .artist-card:hover {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transform: translateY(-5px);
-        }
-        
-        .artist-image-placeholder {
-            width: 100%;
-            height: 300px;
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            border: 2px dashed #ccc;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .artist-image-placeholder i {
-            font-size: 3rem;
-            color: #999;
-        }
-        
-        .image-upload-btn {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2;
-        }
-        
-        .image-upload-btn:hover {
-            background-color: var(--accent-color-silver);
-        }
-        
-        /* Tabs */
-        .nav-tabs {
-            border-bottom: 1px solid var(--accent-color);
-            margin-bottom: 2rem;
-        }
-        
-        .nav-tabs .nav-link {
-            color: var(--primary-color);
-            border: none;
-            border-bottom: 2px solid transparent;
-            padding: 0.8rem 1.5rem;
-            margin-right: 0.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-tabs .nav-link:hover {
-            border-bottom: 2px solid var(--accent-color);
-            color: var(--accent-color);
-        }
-        
-        .nav-tabs .nav-link.active {
-            color: var(--accent-color);
-            background-color: transparent;
-            border-bottom: 2px solid var(--accent-color);
-        }
-        
-        /* Media Section */
-        .media-container {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            padding: 3rem;
-            border-radius: 5px;
-            margin-bottom: 2rem;
-        }
-        
-        .media-container h3 {
-            color: var(--accent-color);
-        }
-        
-        /* Gallery Section */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 2rem;
-        }
-        
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            height: 250px;
-            background-color: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #ccc;
-        }
-        
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .gallery-item i {
-            font-size: 3rem;
-            color: #999;
-        }
-        
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--gradient-overlay);
-            color: white;
-            padding: 15px;
-            transform: translateY(100%);
-            transition: all 0.3s ease;
-        }
-        
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-        
-        /* Beethoven Poster Section */
-        .beethoven-posters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-        
-        .poster-item {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            height: 400px;
-            background-color: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #ccc;
-        }
-        
-        .poster-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .poster-item i {
-            font-size: 3rem;
-            color: #999;
-        }
-        
-        /* Performance History Section */
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 2px;
-            height: 100%;
-            background: var(--accent-color);
-            transform: translateX(-50%);
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin-bottom: 30px;
-            width: 100%;
-        }
-        
-        .timeline-content {
-            position: relative;
-            width: 45%;
-            padding: 20px;
-            background: var(--secondary-color);
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-left: auto;
-        }
-        
-        .timeline-date {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            text-align: center;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-date {
-            left: 0;
-        }
-        
-        .timeline-item:nth-child(even) .timeline-date {
-            right: 0;
-        }
-        
-        .timeline-dot {
-            position: absolute;
-            top: 0;
-            width: 20px;
-            height: 20px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        /* Contact Section */
-        .contact {
-            background-color: var(--light-gray);
-        }
-        
-        .contact-info {
-            background-color: var(--secondary-color);
-            padding: 2rem;
-            border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .contact-info i {
-            color: var(--accent-color);
-            margin-right: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            padding: 2rem 0;
-            text-align: center;
-        }
-        
-        /* Admin Panel */
-        .admin-panel {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .admin-toggle {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .admin-toggle:hover {
-            background-color: var(--accent-color-silver);
-            transform: scale(1.1);
-        }
-        
-        .admin-menu {
-            position: absolute;
-            bottom: 70px;
-            right: 0;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            min-width: 200px;
-            display: none;
-        }
-        
-        .admin-menu.show {
-            display: block;
-        }
-        
-        .admin-menu-item {
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 900;
+            color: var(--primary-color) !important;
+            letter-spacing: 2px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
-        .admin-menu-item:hover {
-            background-color: #f0f0f0;
+
+        .navbar-brand i {
+            font-size: 1.5rem;
         }
-        
-        .admin-menu-item i {
-            color: var(--accent-color);
+
+        .nav-link {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--light-color) !important;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        
-        /* Login Modal */
-        .login-modal {
-            display: none;
-            position: fixed;
-            top: 0;
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
             left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
         }
-        
-        .login-modal.show {
-            display: flex;
+
+        /* Language Selector */
+        .language-selector {
+            position: relative;
         }
-        
-        .login-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 400px;
-            width: 90%;
-        }
-        
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .login-header h3 {
+
+        .language-dropdown {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--primary-color);
             color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        .login-header p {
-            color: #666;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-        
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            border: none;
-            border-radius: 4px;
-            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
         }
-        
-        .login-btn:hover {
-            background-color: var(--accent-color-silver);
+
+        .language-dropdown:hover {
+            background: var(--primary-color);
+            color: var(--dark-color);
         }
-        
-        .login-footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-            font-size: 14px;
+
+        .language-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--dark-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
         }
-        
-        /* Admin Status */
-        .admin-status {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background-color: var(--accent-color);
+
+        .language-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-option {
+            padding: 10px 20px;
+            color: var(--light-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .language-option:hover,
+        .language-option.active {
+            background: var(--primary-color);
+            color: var(--dark-color);
+        }
+
+        /* Admin Menu */
+        .admin-menu {
+            position: relative;
+        }
+
+        .admin-toggle {
+            background: transparent;
+            border: none;
+            color: var(--light-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-toggle:hover {
             color: var(--primary-color);
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            display: none;
-            z-index: 999;
         }
-        
+
+        .admin-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--dark-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            margin-top: 10px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .admin-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .admin-item {
+            padding: 10px 20px;
+            color: var(--light-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-item:hover {
+            background: var(--primary-color);
+            color: var(--dark-color);
+        }
+
+        .admin-status {
+            padding: 10px 20px;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-color);
+            font-family: 'Cormorant Garamond', serif;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            display: none;
+        }
+
         .admin-status.show {
             display: block;
         }
-        
-        /* Image Upload Modal */
-        .image-upload-modal {
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/seed/classical-music/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-color);
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
+        .btn-hero {
+            background: var(--gradient);
+            color: var(--light-color);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+            display: inline-block;
+            text-decoration: none;
+            animation: fadeInUp 1s ease 0.6s;
+            animation-fill-mode: both;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+            color: var(--light-color);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--dark-color);
+            position: relative;
+            font-weight: 900;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        /* About Section */
+        .about-card {
+            background: var(--light-color);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .about-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .about-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            color: var(--light-color);
+        }
+
+        .about-content {
+            padding: 30px;
+        }
+
+        .about-content h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .about-content p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .btn-bio {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-bio:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        /* Beethoven Section */
+        .beethoven {
+            background: linear-gradient(135deg, rgba(26,26,26,0.95), rgba(45,45,45,0.95)), url('https://picsum.photos/seed/beethoven/1920/1080');
+            background-size: cover;
+            background-position: center;
+            color: var(--light-color);
+        }
+
+        .beethoven-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .beethoven-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .beethoven-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .beethoven-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .beethoven-feature {
+            text-align: center;
+            padding: 30px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .beethoven-feature:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .beethoven-feature i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .beethoven-feature h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        /* Repertoire Section */
+        .repertoire-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .repertoire-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .repertoire-tab {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .repertoire-tab:hover,
+        .repertoire-tab.active {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .repertoire-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .repertoire-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .repertoire-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: var(--light-color);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .repertoire-section h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .repertoire-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .repertoire-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .repertoire-list li:hover {
+            padding-left: 20px;
+            color: var(--primary-color);
+        }
+
+        .repertoire-list li:last-child {
+            border-bottom: none;
+        }
+
+        .repertoire-list li i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            margin-top: 3px;
+            font-size: 0.9rem;
+        }
+
+        .repertoire-subsection {
+            margin-top: 30px;
+            padding-left: 20px;
+        }
+
+        .repertoire-subsection h4 {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .program-example {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .program-example h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .sonata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .sonata-item {
+            background: var(--light-color);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .sonata-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .sonata-number {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .sonata-title {
+            color: var(--text-color);
+            margin-top: 5px;
+        }
+
+        /* Media Section */
+        .media-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+
+        .media-tab {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .media-tab:hover,
+        .media-tab.active {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .media-item {
+            background: var(--light-color);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .media-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .media-thumbnail {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .media-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(212, 175, 55, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .media-play:hover {
+            background: var(--primary-color);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .media-info {
+            padding: 20px;
+        }
+
+        .media-info h4 {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .media-info p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(26,26,26,0.95), rgba(45,45,45,0.95));
+            color: var(--light-color);
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-control {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--light-color);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255,255,255,0.15);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+            color: var(--light-color);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .form-label {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+        }
+
+        .btn-submit {
+            background: var(--gradient);
+            color: var(--light-color);
+            padding: 12px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .contact-info {
+            padding: 40px;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 20px;
+            width: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+            transform: translateY(-5px);
+        }
+
+        /* Modal */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
+            background: rgba(0,0,0,0.8);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
             align-items: center;
             justify-content: center;
+            opacity: 1;
+            visibility: visible;
         }
-        
-        .image-upload-modal.show {
-            display: flex;
-        }
-        
-        .image-upload-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 500px;
+
+        .modal-content {
+            background: var(--light-color);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 800px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
         }
-        
-        .image-upload-area {
-            border: 2px dashed #ccc;
-            border-radius: 8px;
-            padding: 40px;
-            text-align: center;
-            margin: 20px 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
-        
-        .image-upload-area:hover {
-            border-color: var(--accent-color);
-            background-color: rgba(212, 175, 55, 0.1);
-        }
-        
-        .image-upload-area i {
-            font-size: 3rem;
-            color: #999;
-            margin-bottom: 15px;
-        }
-        
-        .image-list {
-            margin-top: 20px;
-        }
-        
-        .image-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border: 1px solid #eee;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-        
-        .image-item img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-right: 15px;
-        }
-        
-        .image-item-info {
-            flex: 1;
-        }
-        
-        .image-item-name {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .image-item-size {
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .image-item-delete {
-            background-color: #dc3545;
-            color: white;
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
             border: none;
-            border-radius: 4px;
-            padding: 5px 10px;
+            font-size: 1.5rem;
+            color: var(--text-color);
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
-        .image-item-delete:hover {
-            background-color: #c82333;
+
+        .modal-close:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
         }
-        
-        /* Notification */
-        .notification {
-            min-width: 300px;
-            z-index: 9999;
+
+        .modal-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
         }
-        
+
+        .modal-body {
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        .modal-body h4 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
+            .hero-content h1 {
                 font-size: 2.5rem;
             }
-            
-            .hero h2 {
-                font-size: 1.2rem;
+
+            .hero-content h2 {
+                font-size: 1.4rem;
             }
-            
-            .navbar-nav .nav-link {
-                margin: 0.5rem 0;
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-link {
+                margin: 0 10px;
+                font-size: 1rem;
+            }
+
+            .repertoire-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .repertoire-tab {
+                width: 200px;
                 text-align: center;
             }
-            
-            .timeline::before {
-                left: 30px;
+
+            .sonata-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .timeline-content {
-                width: calc(100% - 60px);
-                margin-left: 60px !important;
+
+            .media-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .timeline-date {
-                position: relative;
-                margin-bottom: 10px;
+
+            .splash-title {
+                font-size: 2rem;
             }
-            
-            .timeline-dot {
-                left: 30px;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+            .splash-subtitle {
+                font-size: 1rem;
             }
         }
-        
-        /* Animations */
+
+        /* Notification */
+        .notification {
+            z-index: 10001 !important;
+            min-width: 300px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Fade In Animation */
         .fade-in {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
             transition: all 0.8s ease;
         }
-        
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Color variations for sections */
-        .accent-section {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
-        }
-        
-        .dark-section {
-            background-color: var(--dark-gray);
-            color: var(--secondary-color);
-        }
     </style>
 </head>
 <body>
+    <!-- Splash Screen -->
+    <div id="splashScreen">
+        <div class="splash-content">
+            <div class="splash-logo">
+                <i class="fas fa-music"></i>
+            </div>
+            <h1 class="splash-title">JAP-YEO DUO</h1>
+            <p class="splash-subtitle">Violin & Piano Excellence</p>
+        </div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#home">Jap-Yeo Duo</a>
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-music"></i>
+                <span data-lang="nav_brand">Jap-Yeo Duo</span>
+            </a>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home" data-lang="nav_home">Beranda</a>
+                        <a class="nav-link" href="#home" data-lang="nav_home">Beranda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about" data-lang="nav_about">Tentang</a>
@@ -921,178 +1123,172 @@
                         <a class="nav-link" href="#media" data-lang="nav_media">Media</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#history" data-lang="nav_history">Sejarah Pertunjukan</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#contact" data-lang="nav_contact">Kontak</a>
                     </li>
-                    <li class="nav-item language-selector">
+                </ul>
+                
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Language Selector -->
+                    <div class="language-selector">
                         <div class="language-dropdown">
                             <i class="fas fa-globe"></i>
                             <span id="current-lang">ID</span>
-                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down ms-2"></i>
                         </div>
                         <div class="language-menu">
                             <div class="language-option active" data-lang="id">
-                                <span>🇮🇩</span> Indonesia
+                                <i class="fas fa-flag"></i> Bahasa Indonesia
                             </div>
                             <div class="language-option" data-lang="en">
-                                <span>🇬🇧</span> English
+                                <i class="fas fa-flag"></i> English
                             </div>
                             <div class="language-option" data-lang="zh">
-                                <span>🇨🇳</span> 中文
+                                <i class="fas fa-flag"></i> 中文
                             </div>
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                    
+                    <!-- Admin Menu -->
+                    <div class="admin-menu">
+                        <button class="admin-toggle" id="adminToggle">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <div class="admin-dropdown" id="adminMenu">
+                            <div class="admin-status" id="adminStatus">
+                                <i class="fas fa-user"></i>
+                                <span id="adminUsername">Admin</span>
+                            </div>
+                            <div class="admin-item" onclick="showLoginModal()">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Login</span>
+                            </div>
+                            <div class="admin-item" id="logoutItem" style="display: none;" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Admin Status -->
-    <div class="admin-status" id="adminStatus">
-        <i class="fas fa-user-shield me-2"></i>
-        <span id="adminName">Admin</span>
-        <button class="btn btn-sm btn-outline-light ms-2" onclick="logout()">
-            <i class="fas fa-sign-out-alt"></i>
-        </button>
-    </div>
-
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section class="hero" id="home">
         <div class="hero-content">
-            <h1 class="fade-in" data-lang="hero_title">Jap-Yeo Duo</h1>
-            <h2 class="fade-in" data-lang="hero_subtitle">Jap Tji Kien, Violin & Dr. Kuei Pin Yeo, Piano</h2>
-            <div class="fade-in">
-                <a href="#beethoven" class="btn-custom" data-lang="hero_btn_explore">Jelajahi Proyek Beethoven</a>
-                <a href="#gallery" class="btn-outline-custom" data-lang="hero_btn_gallery">Lihat Galeri</a>
-            </div>
+            <h1 data-lang="hero_title">Jap-Yeo Duo</h1>
+            <h2 data-lang="hero_subtitle">Jap Tji Kien, Biola & Dr. Kuei Pin Yeo, Piano</h2>
+            <p data-lang="hero_description">Jap-Yeo Duo mempertemukan dua musisi Indonesia berkelas internasional: violinis Jap Tji Kien dan pianis Dr. Kuei Pin Yeo. Dengan pengalaman panjang sebagai solis, musisi kamar, dan kolaborator lintas budaya, duo ini dikenal karena kematangan musikal, kejelasan struktur, dan penghormatan mendalam terhadap karya yang mereka bawakan.</p>
+            <a href="#beethoven" class="btn-hero" data-lang="hero_btn_beethoven">Proyek Beethoven 2027</a>
+            <a href="#gallery" class="btn-hero" data-lang="hero_btn_gallery">Lihat Galeri</a>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section class="section" id="about">
         <div class="container">
-            <h2 class="section-title fade-in" data-lang="about_title">Dialog Musikal yang Mendalam</h2>
+            <h2 class="section-title" data-lang="about_title">Tentang Kami</h2>
             <div class="row">
-                <div class="col-lg-12">
-                    <p class="lead fade-in" data-lang="about_description">Jap–Yeo Duo menghadirkan kemitraan artistik antara violinis Jap Tji Kien dan pianis Dr. Kuei Pin Yeo. Dengan dedikasi pada musik kamar yang mendalam, duo ini menampilkan kejernihan interpretasi dan keterlibatan intelektual dalam setiap penampilan. Repertoar mereka berfokus pada karya inti violin-piano, dengan penekanan khusus pada Beethoven dan tradisi Klasik-Romantis.</p>
-                </div>
-            </div>
-            
-            <div class="row mt-5">
-                <div class="col-md-6">
-                    <div class="artist-card fade-in">
-                        <div class="artist-image-placeholder" data-image-type="jap-profile">
-                            <i class="fas fa-user"></i>
+                <div class="col-md-6 mb-4">
+                    <div class="about-card fade-in">
+                        <div class="about-image" style="background-image: url('https://picsum.photos/seed/violinist/600/400');">
+                            <div class="about-overlay">
+                                <h3 data-lang="jap_name">Jap Tji Kien</h3>
+                                <p data-lang="jap_role">Violinis & Dirigen</p>
+                            </div>
                         </div>
-                        <h3 data-lang="jap_name">Jap Tji Kien (Violin)</h3>
-                        <p data-lang="jap_bio">Violinis & Dirigen terkemuka di Indonesia, penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara. Memulai karirnya sebagai solis dan musisi kamar, kemudian menjadi concertmaster Orkestra Simfoni Jakarta.</p>
-                        <a href="#" class="btn-custom" data-bs-toggle="modal" data-bs-target="#japModal" data-lang="jap_read_more">Baca Biografi Lengkap</a>
+                        <div class="about-content">
+                            <p data-lang="jap_bio">Jap Tji Kien adalah violinis dan dirigen terkemuka Indonesia, lahir di Bandung, dan dikenal sebagai penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara.</p>
+                            <button class="btn-bio" onclick="showBioModal('jap')" data-lang="jap_read_more">Baca Selengkapnya</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="artist-card fade-in">
-                        <div class="artist-image-placeholder" data-image-type="yeo-profile">
-                            <i class="fas fa-user"></i>
+                <div class="col-md-6 mb-4">
+                    <div class="about-card fade-in">
+                        <div class="about-image" style="background-image: url('https://picsum.photos/seed/pianist/600/400');">
+                            <div class="about-overlay">
+                                <h3 data-lang="yeo_name">Dr. Kuei Pin Yeo</h3>
+                                <p data-lang="yeo_role">Pianis</p>
+                            </div>
                         </div>
-                        <h3 data-lang="yeo_name">Dr. Kuei Pin Yeo (Piano)</h3>
-                        <p data-lang="yeo_bio">Pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Dikenal sebagai musisi dengan karier internasional yang panjang, tampil sebagai resitalis, solis dengan orkestra, serta musisi kamar di Amerika Serikat dan Asia.</p>
-                        <a href="#" class="btn-custom" data-bs-toggle="modal" data-bs-target="#yeoModal" data-lang="yeo_read_more">Baca Biografi Lengkap</a>
+                        <div class="about-content">
+                            <p data-lang="yeo_bio">Dr. Kuei Pin Yeo adalah pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Ia dikenal sebagai musisi dengan karier internasional yang panjang.</p>
+                            <button class="btn-bio" onclick="showBioModal('yeo')" data-lang="yeo_read_more">Baca Selengkapnya</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Beethoven Project Section -->
-    <section id="beethoven" class="accent-section">
+    <!-- Beethoven Section -->
+    <section class="section beethoven" id="beethoven">
         <div class="container">
-            <h2 class="section-title fade-in" data-lang="beethoven_title">Beethoven Bicentennial Memorial Concert Series 2027–2028</h2>
-            <p class="lead text-center fade-in" data-lang="beethoven_subtitle">Memperingati 200 Tahun Wafatnya Ludwig van Beethoven</p>
-            
-            <div class="row mt-5">
-                <div class="col-md-6">
-                    <div class="project-card fade-in">
-                        <h3 data-lang="beethoven_subtitle_english">Beethoven Bicentennial Memorial Concert Series</h3>
-                        <h4 data-lang="beethoven_commemorating">Commemorating 200 Years of Beethoven's Legacy (1827–2027)</h4>
-                        <h5 data-lang="beethoven_masterworks">Ten Masterworks for Violin and Piano</h5>
-                        <p data-lang="beethoven_description_english">A landmark concert series honouring Ludwig van Beethoven through an intimate journey for violin and piano, presented by two master musicians.</p>
-                        <a href="#" class="btn-custom mt-3" data-bs-toggle="modal" data-bs-target="#beethovenModal" data-lang="beethoven_learn_more">Pelajari Lebih Lanjut</a>
+            <div class="beethoven-content">
+                <h2 data-lang="beethoven_title">Beethoven Bicentennial Project 2027</h2>
+                <h3 data-lang="beethoven_subtitle">Memperingati 200 Tahun Karya Agung Beethoven</h3>
+                <p data-lang="beethoven_description">Dalam rangka Beethoven Bicentennial Project 2027, Jap-Yeo Duo merancang sebuah proyek artistik berskala internasional yang berfokus pada penyajian lengkap Sonate untuk Biola dan Piano karya Beethoven.</p>
+                
+                <div class="beethoven-features">
+                    <div class="beethoven-feature">
+                        <i class="fas fa-music"></i>
+                        <h4>10 Sonata Lengkap</h4>
+                        <p>Penyajian lengkap 10 sonata untuk biola dan piano</p>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="project-card fade-in">
-                        <h3 data-lang="beethoven_piano_sonatas">Piano Solo Sonatas</h3>
-                        <ul>
-                            <li data-lang="beethoven_early_period"><strong>Early Period:</strong> Op. 2 No. 3 in C major</li>
-                            <li data-lang="beethoven_middle_period"><strong>Middle Period:</strong> Op. 81a</li>
-                            <li data-lang="beethoven_late_period"><strong>Late Period:</strong> Op. 110</li>
-                        </ul>
-                        <p data-lang="beethoven_sonatas_description">These sonatas represent the evolution of Beethoven's compositional style, from his early classical influences to his groundbreaking late works.</p>
+                    <div class="beethoven-feature">
+                        <i class="fas fa-globe"></i>
+                        <h4>Tur Internasional</h4>
+                        <p>Persembahan di berbagai kota besar dunia</p>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Beethoven Posters -->
-            <div class="beethoven-posters fade-in">
-                <div class="poster-item" data-image-type="beethoven-poster-1">
-                    <i class="fas fa-image"></i>
-                </div>
-                <div class="poster-item" data-image-type="beethoven-poster-2">
-                    <i class="fas fa-image"></i>
+                    <div class="beethoven-feature">
+                        <i class="fas fa-microphone"></i>
+                        <h4>Masterclass</h4>
+                        <p>Edukasi dan pembinaan musisi muda</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="gallery">
+    <section class="section" id="gallery">
         <div class="container">
-            <h2 class="section-title fade-in" data-lang="gallery_title">Galeri</h2>
-            <p class="lead text-center fade-in" data-lang="gallery_subtitle">Momem bersama Jap-Yeo Duo di panggung</p>
-            
+            <h2 class="section-title" data-lang="gallery_title">Galeri</h2>
             <div class="gallery-grid">
-                <div class="gallery-item fade-in" data-image-type="gallery-1">
-                    <i class="fas fa-image"></i>
+                <div class="gallery-item fade-in">
+                    <img src="image1.jpg.jpeg" alt="Konser 1">
                     <div class="gallery-overlay">
-                        <h4>Concert Hall Performance</h4>
-                        <p>Jakarta, 2023</p>
+                        <h4>Konser Jakarta 2023</h4>
                     </div>
                 </div>
-                <div class="gallery-item fade-in" data-image-type="gallery-2">
-                    <i class="fas fa-image"></i>
+                <div class="gallery-item fade-in">
+                    <img src="image2.jpg.jpeg" alt="Konser 2">
                     <div class="gallery-overlay">
-                        <h4>Rehearsal Session</h4>
-                        <p>Beethoven Project, 2023</p>
+                        <h4>Beethoven Festival</h4>
                     </div>
                 </div>
-                <div class="gallery-item fade-in" data-image-type="gallery-3">
-                    <i class="fas fa-image"></i>
+                <div class="gallery-item fade-in">
+                    <img src="image3.jpg.jpeg" alt="Konser 3">
                     <div class="gallery-overlay">
-                        <h4>Masterclass</h4>
-                        <p>Conservatory of Music, 2022</p>
+                        <h4>Masterclass Vienna</h4>
                     </div>
                 </div>
-                <div class="gallery-item fade-in" data-image-type="gallery-4">
-                    <i class="fas fa-image"></i>
+                <div class="gallery-item fade-in">
+                    <img src="mage4.jpg.jpeg" alt="Konser 4">
                     <div class="gallery-overlay">
-                        <h4>Charity Gala</h4>
-                        <p>Jakarta, 2022</p>
+                        <h4>Recital Carnegie Hall</h4>
                     </div>
                 </div>
-                <div class="gallery-item fade-in" data-image-type="gallery-5">
-                    <i class="fas fa-image"></i>
+                <div class="gallery-item fade-in">
+                    <img src="image5.jpg.jpeg" alt="Konser 5">
                     <div class="gallery-overlay">
-                        <h4>International Tour</h4>
-                        <p>Singapore, 2023</p>
+                        <h4>Kolaborasi Orkestra</h4>
                     </div>
                 </div>
-                <div class="gallery-item fade-in" data-image-type="gallery-6">
-                    <i class="fas fa-image"></i>
+                <div class="gallery-item fade-in">
+                    <img src="image6.jpg.jpeg" alt="Konser 6">
                     <div class="gallery-overlay">
-                        <h4>TV Appearance</h4>
-                        <p>National TV Station, 2023</p>
+                        <h4>Workshop Musik</h4>
                     </div>
                 </div>
             </div>
@@ -1100,44 +1296,205 @@
     </section>
 
     <!-- Repertoire Section -->
-    <section id="repertoire" class="repertoire">
+    <section class="section" id="repertoire">
         <div class="container">
-            <h2 class="section-title fade-in" data-lang="repertoire_title">Repertoar Kami</h2>
+            <h2 class="section-title" data-lang="repertoire_title">Repertoar</h2>
             
-            <div class="row">
-                <div class="col-md-4 fade-in">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h3 class="card-title" data-lang="repertoire_classical">Era Klasik</h3>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-music me-2"></i>W. A. Mozart</li>
-                                <li><i class="fas fa-music me-2"></i>J. Haydn</li>
-                                <li><i class="fas fa-music me-2"></i>L. van Beethoven</li>
+            <div class="repertoire-container">
+                <div class="repertoire-tabs">
+                    <button class="repertoire-tab active" onclick="showRepertoire('duo')">Jap-Yeo Duo</button>
+                    <button class="repertoire-tab" onclick="showRepertoire('yeo')">Dr. Kuei Pin Yeo</button>
+                    <button class="repertoire-tab" onclick="showRepertoire('jap')">Jap Tji Kien</button>
+                </div>
+
+                <!-- Jap-Yeo Duo Repertoire -->
+                <div id="duo-repertoire" class="repertoire-content active">
+                    <div class="repertoire-section">
+                        <h3><i class="fas fa-music"></i> Repertoar Jap-Yeo Duo</h3>
+                        
+                        <div class="repertoire-subsection">
+                            <h4>Beethoven: Sonata Lengkap untuk Piano dan Biola</h4>
+                            <div class="sonata-grid">
+                                <div class="sonata-item">
+                                    <div class="sonata-number">Sonata No. 1</div>
+                                    <div class="sonata-title">Op. 12 No. 1 in D Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">Sonata No. 2</div>
+                                    <div class="sonata-title">Op. 12 No. 2 in A Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">Sonata No. 3</div>
+                                    <div class="sonata-title">Op. 12 No. 3 in E-flat Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">Sonata No. 4</div>
+                                    <div class="sonata-title">Op. 23 in A Minor</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">Sonata No. 5</div>
+                                    <div class="sonata-title">Op. 24 'Spring' in F Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">Sonata No. 6</div>
+                                    <div class="sonata-title">Op. 30 No. 1 in A Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">Sonata No. 7</div>
+                                    <div class="sonata-title">Op. 30 No. 2 in C Minor</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">Sonata No. 8</div>
+                                    <div class="sonata-title">Op. 30 No. 3 in G Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">Sonata No. 9</div>
+                                    <div class="sonata-title">Op. 47 'Kreutzer' in A Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">Sonata No. 10</div>
+                                    <div class="sonata-title">Op. 96 in G Major</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="repertoire-subsection">
+                            <h4>Repertoar Tambahan</h4>
+                            <ul class="repertoire-list">
+                                <li><i class="fas fa-chevron-right"></i> Beethoven: Triple Concerto for Violin, Cello, and Piano in C Major, Op. 56</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 fade-in">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h3 class="card-title" data-lang="repertoire_romantic">Era Romantis</h3>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-music me-2"></i>F. Schubert</li>
-                                <li><i class="fas fa-music me-2"></i>R. Schumann</li>
-                                <li><i class="fas fa-music me-2"></i>J. Brahms</li>
-                                <li><i class="fas fa-music me-2"></i>C. Franck</li>
+
+                <!-- Dr. Kuei Pin Yeo Repertoire -->
+                <div id="yeo-repertoire" class="repertoire-content">
+                    <div class="repertoire-section">
+                        <h3><i class="fas fa-piano"></i> Repertoar Dr. Kuei Pin Yeo</h3>
+                        
+                        <div class="repertoire-subsection">
+                            <h4>Beethoven: Complete Piano Concertos</h4>
+                            <ul class="repertoire-list">
+                                <li><i class="fas fa-chevron-right"></i> Piano Concerto No. 1 in C Major, Op. 15</li>
+                                <li><i class="fas fa-chevron-right"></i> Piano Concerto No. 2 in B-flat Major, Op. 19</li>
+                                <li><i class="fas fa-chevron-right"></i> Piano Concerto No. 3 in C Minor, Op. 37</li>
+                                <li><i class="fas fa-chevron-right"></i> Piano Concerto No. 4 in G Major, Op. 58</li>
+                                <li><i class="fas fa-chevron-right"></i> Piano Concerto No. 5 in E-flat Major, Op. 73 'Emperor'</li>
+                            </ul>
+                        </div>
+
+                        <div class="repertoire-subsection">
+                            <h4>Beethoven: Piano Sonatas</h4>
+                            
+                            <div class="program-example">
+                                <h4>Contoh Program</h4>
+                                <ul class="repertoire-list">
+                                    <li><i class="fas fa-music"></i> Piano Sonata Op. 2 No. 3 in C Major</li>
+                                    <li><i class="fas fa-music"></i> Piano Sonata Op. 81a 'Les Adieux' in E-flat Major</li>
+                                    <li><i class="fas fa-music"></i> Piano Sonata Op. 110 in A-flat Major</li>
+                                </ul>
+                            </div>
+
+                            <div class="mt-4">
+                                <h5>Masa Awal (Early Period)</h5>
+                                <ul class="repertoire-list">
+                                    <li><i class="fas fa-play-circle"></i> Three Sonatas, Op. 2</li>
+                                    <li><i class="fas fa-play-circle"></i> Two Sonatas, Op. 49</li>
+                                    <li><i class="fas fa-play-circle"></i> Sonata Pathétique, Op. 13</li>
+                                </ul>
+                            </div>
+
+                            <div class="mt-4">
+                                <h5>Masa Pertengahan (Middle Period)</h5>
+                                <ul class="repertoire-list">
+                                    <li><i class="fas fa-play-circle"></i> Sonata 'Moonlight', Op. 27 No. 2</li>
+                                    <li><i class="fas fa-play-circle"></i> Sonata 'Waldstein', Op. 53</li>
+                                    <li><i class="fas fa-play-circle"></i> Sonata 'Appassionata', Op. 57</li>
+                                </ul>
+                            </div>
+
+                            <div class="mt-4">
+                                <h5>Masa Akhir (Late Period)</h5>
+                                <ul class="repertoire-list">
+                                    <li><i class="fas fa-play-circle"></i> Sonata 'Hammerklavier', Op. 106</li>
+                                    <li><i class="fas fa-play-circle"></i> Three Sonatas, Op. 109, 110, 111</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="repertoire-subsection">
+                            <h4>Konser Tambahan (Additional Concertos)</h4>
+                            <ul class="repertoire-list">
+                                <li><i class="fas fa-chevron-right"></i> Chopin: Piano Concerto No. 1 in E Minor, Op. 11</li>
+                                <li><i class="fas fa-chevron-right"></i> Grieg: Piano Concerto in A Minor, Op. 16</li>
+                                <li><i class="fas fa-chevron-right"></i> Mozart: Piano Concertos (K. 466, 488, 595)</li>
+                                <li><i class="fas fa-chevron-right"></i> Rachmaninoff: Piano Concerto No. 2 in C Minor, Op. 18</li>
+                                <li><i class="fas fa-chevron-right"></i> Ravel: Piano Concerto for the Left Hand in D Major</li>
+                                <li><i class="fas fa-chevron-right"></i> Tchaikovsky: Piano Concerto No. 1 in B-flat Minor, Op. 23</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 fade-in">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h3 class="card-title" data-lang="repertoire_modern">Era Modern</h3>
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-music me-2"></i>D. Shostakovich</li>
-                                <li><i class="fas fa-music me-2"></i>S. Prokofiev</li>
-                                <li><i class="fas fa-music me-2"></i>dan lainnya</li>
+
+                <!-- Jap Tji Kien Repertoire -->
+                <div id="jap-repertoire" class="repertoire-content">
+                    <div class="repertoire-section">
+                        <h3><i class="fas fa-violin"></i> Repertoar Jap Tji Kien</h3>
+                        
+                        <div class="repertoire-subsection">
+                            <h4>Beethoven: Sonata Lengkap untuk Piano dan Biola</h4>
+                            <div class="sonata-grid">
+                                <div class="sonata-item">
+                                    <div class="sonata-number">No. 1</div>
+                                    <div class="sonata-title">Op. 12 No. 1 in D Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">No. 2</div>
+                                    <div class="sonata-title">Op. 12 No. 2 in A Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">No. 3</div>
+                                    <div class="sonata-title">Op. 12 No. 3 in E-flat Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">No. 4</div>
+                                    <div class="sonata-title">Op. 23 in A Minor</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">No. 5</div>
+                                    <div class="sonata-title">Op. 24 'Spring' in F Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">No. 6</div>
+                                    <div class="sonata-title">Op. 30 No. 1 in A Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">No. 7</div>
+                                    <div class="sonata-title">Op. 30 No. 2 in C Minor</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">No. 8</div>
+                                    <div class="sonata-title">Op. 30 No. 3 in G Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">No. 9</div>
+                                    <div class="sonata-title">Op. 47 'Kreutzer' in A Major</div>
+                                </div>
+                                <div class="sonata-item">
+                                    <div class="sonata-number">No. 10</div>
+                                    <div class="sonata-title">Op. 96 in G Major</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="repertoire-subsection">
+                            <h4>Repertoar Tambahan</h4>
+                            <ul class="repertoire-list">
+                                <li><i class="fas fa-chevron-right"></i> Bach: Sonatas and Partitas for Solo Violin</li>
+                                <li><i class="fas fa-chevron-right"></i> Mozart: Violin Concertos No. 3, 4, 5</li>
+                                <li><i class="fas fa-chevron-right"></i> Brahms: Violin Concerto in D Major, Op. 77</li>
+                                <li><i class="fas fa-chevron-right"></i> Tchaikovsky: Violin Concerto in D Major, Op. 35</li>
+                                <li><i class="fas fa-chevron-right"></i> Mendelssohn: Violin Concerto in E Minor, Op. 64</li>
                             </ul>
                         </div>
                     </div>
@@ -1147,123 +1504,62 @@
     </section>
 
     <!-- Media Section -->
-    <section id="media" class="media dark-section">
+    <section class="section" id="media">
         <div class="container">
-            <h2 class="section-title fade-in" data-lang="media_title">Dengar & Saksikan</h2>
+            <h2 class="section-title" data-lang="media_title">Media</h2>
             
-            <ul class="nav nav-tabs" id="mediaTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="video-tab" data-bs-toggle="tab" data-bs-target="#video" type="button" role="tab" data-lang="media_video">Video</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="audio-tab" data-bs-toggle="tab" data-bs-target="#audio" type="button" role="tab" data-lang="media_audio">Audio</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="photo-tab" data-bs-toggle="tab" data-bs-target="#photo" type="button" role="tab" data-lang="media_photo">Foto</button>
-                </li>
-            </ul>
-            
-            <div class="tab-content" id="mediaTabsContent">
-                <div class="tab-pane fade show active" id="video" role="tabpanel">
-                    <div class="media-container fade-in">
-                        <h3 data-lang="media_video_title">Penampilan Terbaru</h3>
-                        <div class="ratio ratio-16x9 mt-3">
-                            <div class="d-flex align-items-center justify-content-center" style="background-color: #333; height: 100%;">
-                                <div class="text-center text-white">
-                                    <i class="fas fa-video fa-3x mb-3"></i>
-                                    <p>Video akan ditampilkan di sini</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="audio" role="tabpanel">
-                    <div class="media-container fade-in">
-                        <h3 data-lang="media_audio_title">Rekaman Pilihan</h3>
-                        <div class="mt-3">
-                            <div class="d-flex align-items-center justify-content-center" style="background-color: #333; height: 200px; border-radius: 8px;">
-                                <div class="text-center text-white">
-                                    <i class="fas fa-music fa-3x mb-3"></i>
-                                    <p>Audio akan ditampilkan di sini</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="photo" role="tabpanel">
-                    <div class="row mt-4">
-                        <div class="col-md-4 mb-4 fade-in">
-                            <div class="image-placeholder" data-image-type="media-1" style="height: 250px; background-color: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc;">
-                                <i class="fas fa-image fa-2x text-muted"></i>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4 fade-in">
-                            <div class="image-placeholder" data-image-type="media-2" style="height: 250px; background-color: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc;">
-                                <i class="fas fa-image fa-2x text-muted"></i>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4 fade-in">
-                            <div class="image-placeholder" data-image-type="media-3" style="height: 250px; background-color: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc;">
-                                <i class="fas fa-image fa-2x text-muted"></i>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4 fade-in">
-                            <div class="image-placeholder" data-image-type="media-4" style="height: 250px; background-color: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc;">
-                                <i class="fas fa-image fa-2x text-muted"></i>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4 fade-in">
-                            <div class="image-placeholder" data-image-type="media-5" style="height: 250px; background-color: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc;">
-                                <i class="fas fa-image fa-2x text-muted"></i>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4 fade-in">
-                            <div class="image-placeholder" data-image-type="media-6" style="height: 250px; background-color: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc;">
-                                <i class="fas fa-image fa-2x text-muted"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="media-tabs">
+                <button class="media-tab active" onclick="filterMedia('videos')" data-lang="media_videos">Video</button>
+                <button class="media-tab" onclick="filterMedia('audio')" data-lang="media_audio">Audio</button>
+                <button class="media-tab" onclick="filterMedia('press')" data-lang="media_press">Press</button>
             </div>
-        </div>
-    </section>
 
-    <!-- Performance History Section -->
-    <section id="history" class="history">
-        <div class="container">
-            <h2 class="section-title fade-in" data-lang="history_title">Sejarah Pertunjukan</h2>
-            
-            <div class="timeline">
-                <div class="timeline-item fade-in">
-                    <div class="timeline-date">2023</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Beethoven Sonata Series</h3>
-                        <p>Complete cycle of Beethoven violin-piano sonatas performed over three concerts at Jakarta Concert Hall.</p>
+            <div class="media-grid">
+                <div class="media-item" data-tab-content="videos">
+                    <div class="media-thumbnail" style="background-image: url('https://picsum.photos/seed/video1/400/200');">
+                        <div class="media-play">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="media-info">
+                        <h4>Beethoven Sonata No. 9 'Kreutzer'</h4>
+                        <p>Live performance at Carnegie Hall, 2023</p>
                     </div>
                 </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-date">2022</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>European Tour</h3>
-                        <p>Concerts in Vienna, Prague, and Budapest featuring works by Mozart, Beethoven, and Brahms.</p>
+                
+                <div class="media-item" data-tab-content="videos">
+                    <div class="media-thumbnail" style="background-image: url('https://picsum.photos/seed/video2/400/200');">
+                        <div class="media-play">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="media-info">
+                        <h4>Beethoven Triple Concerto</h4>
+                        <p>With Jakarta Symphony Orchestra</p>
                     </div>
                 </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-date">2021</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Asian Chamber Music Festival</h3>
-                        <p>Featured performers at the annual festival in Singapore, showcasing Indonesian composers.</p>
+                
+                <div class="media-item" data-tab-content="audio">
+                    <div class="media-thumbnail" style="background-image: url('https://picsum.photos/seed/audio1/400/200');">
+                        <div class="media-play">
+                            <i class="fas fa-headphones"></i>
+                        </div>
+                    </div>
+                    <div class="media-info">
+                        <h4>Beethoven Piano Concerto No. 5</h4>
+                        <p>Recording with Vienna Philharmonic</p>
                     </div>
                 </div>
-                <div class="timeline-item fade-in">
-                    <div class="timeline-date">2020</div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Virtual Concert Series</h3>
-                        <p>During the pandemic, created a series of online concerts reaching international audiences.</p>
+                
+                <div class="media-item" data-tab-content="press">
+                    <div class="media-thumbnail" style="background-image: url('https://picsum.photos/seed/press1/400/200');">
+                        <div class="media-play">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                    </div>
+                    <div class="media-info">
+                        <h4>The New York Times Review</h4>
+                        <p>"Extraordinary performance by Jap-Yeo Duo"</p>
                     </div>
                 </div>
             </div>
@@ -1271,37 +1567,54 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section class="section contact" id="contact">
         <div class="container">
-            <h2 class="section-title fade-in" data-lang="contact_title">Hubungi Kami</h2>
-            <p class="lead text-center fade-in" data-lang="contact_subtitle">Untuk pemesanan konser dan pertanyaan lainnya, silakan menghubungi manajemen kami:</p>
-            
-            <div class="row justify-content-center mt-5">
-                <div class="col-md-8">
-                    <div class="contact-info fade-in">
-                        <h3 data-lang="contact_management">Informasi Manajemen</h3>
-                        <p class="mt-4"><i class="fas fa-building"></i> <span data-lang="contact_managed">Dikelola oleh:</span> YMJ STAGE (Performance & Artist Management Division)</p>
-                        <p><i class="fas fa-envelope"></i> <span data-lang="contact_email">Email:</span> info@ymjstage.com</p>
-                        <p><i class="fas fa-phone"></i> <span data-lang="contact_phone">Telepon:</span> +62 811-9892-413</p>
-                        <p><i class="fas fa-globe"></i> <span data-lang="contact_website">Website:</span> www.ymjstage.com</p>
-                        
-                        <div class="mt-4">
-                            <h4 data-lang="contact_form_title">Formulir Kontak</h4>
-                            <form class="mt-3">
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Nama Lengkap" data-lang-placeholder="contact_form_name">
-                                </div>
-                                <div class="mb-3">
-                                    <input type="email" class="form-control" placeholder="Email" data-lang-placeholder="contact_form_email">
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Subjek" data-lang-placeholder="contact_form_subject">
-                                </div>
-                                <div class="mb-3">
-                                    <textarea class="form-control" rows="5" placeholder="Pesan Anda" data-lang-placeholder="contact_form_message"></textarea>
-                                </div>
-                                <button type="submit" class="btn-custom" data-lang="contact_form_send">Kirim Pesan</button>
-                            </form>
+            <h2 class="section-title" data-lang="contact_title">Kontak</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="contact-form">
+                        <h3 data-lang="contact_send_message">Kirim Pesan</h3>
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <label class="form-label">Nama</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Pesan</label>
+                                <textarea class="form-control" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-paper-plane"></i> Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="contact-info">
+                        <h3 data-lang="contact_info">Informasi Kontak</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@japyeoduo.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+62 811-9892-413</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Jakarta, Indonesia</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-instagram"></i>
+                            <span>@japyeoduo</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-youtube"></i>
+                            <span>Jap-Yeo Duo Official</span>
                         </div>
                     </div>
                 </div>
@@ -1312,583 +1625,343 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p data-lang="footer_copyright">Hak Cipta © 2026 Jap-Yeo Duo. Semua hak dilindungi.</p>
-            <p data-lang="footer_managed">Dikelola oleh YMJ STAGE</p>
-            <div class="mt-3">
-                <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
+            <p>&copy; 2025 Jap-Yeo Duo. <span data-lang="footer_copyright">Hak Cipta Dilindungi</span>.</p>
+            <p><span data-lang="footer_managed">Dikelola oleh</span> YMJ STAGE</p>
         </div>
     </footer>
 
-    <!-- Admin Panel -->
-    <div class="admin-panel">
-        <div class="admin-menu" id="adminMenu">
-            <div class="admin-menu-item" onclick="requireAdminLogin(() => openImageUpload('hero-background'))">
-                <i class="fas fa-image"></i>
-                <span>Upload Hero Background</span>
-            </div>
-            <div class="admin-menu-item" onclick="requireAdminLogin(() => openImageUpload('jap-profile'))">
-                <i class="fas fa-user"></i>
-                <span>Upload Jap Tji Kien Photo</span>
-            </div>
-            <div class="admin-menu-item" onclick="requireAdminLogin(() => openImageUpload('yeo-profile'))">
-                <i class="fas fa-user"></i>
-                <span>Upload Dr. Kuei Pin Yeo Photo</span>
-            </div>
-            <div class="admin-menu-item" onclick="requireAdminLogin(() => openImageUpload('beethoven-poster'))">
-                <i class="fas fa-image"></i>
-                <span>Upload Beethoven Poster</span>
-            </div>
-            <div class="admin-menu-item" onclick="requireAdminLogin(() => openImageUpload('gallery'))">
-                <i class="fas fa-images"></i>
-                <span>Manage Gallery</span>
-            </div>
-            <div class="admin-menu-item" onclick="requireAdminLogin(() => openVideoUpload())">
-                <i class="fas fa-video"></i>
-                <span>Upload Video</span>
-            </div>
-            <div class="admin-menu-item" onclick="requireAdminLogin(() => openAudioUpload())">
-                <i class="fas fa-music"></i>
-                <span>Upload Audio</span>
-            </div>
-            <div class="admin-menu-item" id="logoutItem" style="display: none;" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Logout</span>
-            </div>
-            <div class="admin-menu-item" onclick="clearImageStorage()">
-                <i class="fas fa-trash-alt"></i>
-                <span>Clear Image Storage</span>
+    <!-- Bio Modal -->
+    <div class="modal" id="bioModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeBioModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title" id="bioModalTitle">Biografi</h3>
+            <div id="bioModalBody">
+                <!-- Content will be inserted here -->
             </div>
         </div>
-        <button class="admin-toggle" id="adminToggle" onclick="toggleAdminMenu()">
-            <i class="fas fa-cog"></i>
-        </button>
     </div>
 
     <!-- Login Modal -->
-    <div class="login-modal" id="loginModal">
-        <div class="login-content">
-            <div class="login-header">
-                <h3>Admin Login</h3>
-                <p>Silakan masuk untuk mengakses panel admin</p>
-            </div>
-            <form id="loginForm" onsubmit="login(event)">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="hideLoginModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">Login Admin</h3>
+            <form onsubmit="login(event)">
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" required>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required>
                 </div>
-                <button type="submit" class="login-btn">Login</button>
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
             </form>
-            <div class="login-footer">
-                <p>Username: japyeoduo | Password: japyeoduoymj1885</p>
-            </div>
         </div>
     </div>
 
-    <!-- Image Upload Modal -->
-    <div class="image-upload-modal" id="imageUploadModal">
-        <div class="image-upload-content">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3>Upload Image</h3>
-                <button class="btn-close" onclick="closeImageUpload()"></button>
-            </div>
-            
-            <div class="image-upload-area" onclick="document.getElementById('imageFileInput').click()">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <h4>Drag & Drop Image Here</h4>
-                <p>or click to browse (max 5MB)</p>
-                <input type="file" id="imageFileInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
-            </div>
-            
-            <div class="image-list" id="imageList">
-                <h5>Current Images</h5>
-                <div id="imageListContent">
-                    <!-- Images will be listed here -->
-                </div>
-            </div>
-            
-            <div class="mt-4">
-                <button class="btn-custom" onclick="saveImage()">Save Image</button>
-                <button class="btn-outline-custom" onclick="closeImageUpload()">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Jap Tji Kien Modal -->
-    <div class="modal fade" id="japModal" tabindex="-1" aria-labelledby="japModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="japModalLabel" data-lang="jap_modal_title">Biografi: Jap Tji Kien</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="artist-image-placeholder mb-4" data-image-type="jap-modal">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <p data-lang="jap_modal_bio_1">Jap Tji Kien adalah salah satu violinis dan dirigen paling dihormati di Indonesia, lahir di Bandung, dan dikenal sebagai penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara. Ia mulai belajar biola pada usia empat tahun dan melakukan debut panggung pada usia sepuluh tahun, menandai awal perjalanan panjangnya sebagai musisi profesional.</p>
-                    <p data-lang="jap_modal_bio_2">Sebagai violinis, Jap Tji Kien telah tampil luas sebagai solis dan musisi kamar, dengan kehadiran yang kuat di berbagai konser, siaran radio, dan televisi, serta memperoleh pengakuan luas baik di dalam maupun luar negeri. Pada tahun 1971, ia diterima sebagai anggota termuda Orkestra Simfoni Jakarta, dan antara tahun 1973 hingga 1985 menjabat sebagai concertmaster, peran penting yang membentuk identitas musikal dan kepemimpinannya.</p>
-                    <p data-lang="jap_modal_bio_3">Pada tahun 1985, ia menerima beasiswa dan fellowship penuh dari Asian Cultural Council (sebelumnya John D. Rockefeller 3rd Fund) serta Aspen School of Music, Colorado, untuk belajar di bawah bimbingan guru biola legendaris Dorothy DeLay. Pengalaman ini memberikan pengaruh mendalam terhadap pendekatan artistik dan musikalitasnya.</p>
-                    <p data-lang="jap_modal_bio_4">Sejak 1976, Jap Tji Kien juga aktif sebagai dirigen. Ia telah memimpin berbagai orkestra dan paduan suara besar, termasuk konser kenegaraan dengan partisipasi ribuan musisi. Saat ini, ia terus berkarya sebagai violinis, dirigen, dan pendidik, serta menjabat sebagai Resident Conductor Orkes Simfoni Nasional Indonesia (OSNI).</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-lang="modal_close">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Dr. Kuei Pin Yeo Modal -->
-    <div class="modal fade" id="yeoModal" tabindex="-1" aria-labelledby="yeoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="yeoModalLabel" data-lang="yeo_modal_title">Biografi: Dr. Kuei Pin Yeo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="artist-image-placeholder mb-4" data-image-type="yeo-modal">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <p data-lang="yeo_modal_bio_1">Dr. Kuei Pin Yeo adalah pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Ia dikenal sebagai musisi dengan karier internasional yang panjang, tampil sebagai resitalis, solis dengan orkestra, serta musisi kamar di Amerika Serikat dan Asia.</p>
-                    <p data-lang="yeo_modal_bio_2">Debut resitalnya di Carnegie Recital Hall, New York, menandai awal pengakuan internasionalnya. Pada kesempatan tersebut, The New York Times memuji permainannya sebagai pianis dengan teknik yang matang dan musikalitas yang peka, serta interpretasi yang elegan, jernih, dan langsung secara musikal. Kritik lain menyebutnya sebagai "seorang pianis yang luar biasa", dengan kepekaan dan kedalaman artistik yang tinggi.</p>
-                    <p data-lang="yeo_modal_bio_3">Sebagai performer, Dr. Yeo memiliki repertoar luas yang mencakup karya-karya klasik, romantik, hingga abad ke-20, dengan perhatian khusus pada tradisi Jerman–Austria, musik kamar, dan karya-karya berskala besar termasuk concerto. Pendekatan interpretatifnya menekankan kejernihan struktur, integritas gaya, dan kedalaman ekspresi musikal.</p>
-                    <p data-lang="yeo_modal_bio_4">Lahir di Jakarta, Dr. Yeo menempuh pendidikan musiknya di Manhattan School of Music, New York, dengan beasiswa penuh. Ia juga merupakan penerima John D. Rockefeller 3rd Fund / Asian Cultural Council fellowship untuk studi lanjutan di Amerika Serikat.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-lang="modal_close">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Beethoven Project Modal -->
-    <div class="modal fade" id="beethovenModal" tabindex="-1" aria-labelledby="beethovenModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="beethovenModalLabel" data-lang="beethoven_modal_title">Beethoven Bicentennial Memorial Concert Series</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="artist-image-placeholder mb-4" data-image-type="beethoven-modal">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    
-                    <ul class="nav nav-tabs" id="beethovenTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" data-lang="beethoven_tab_overview">Ikhtisar Proyek</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="vision-tab" data-bs-toggle="tab" data-bs-target="#vision" type="button" role="tab" data-lang="beethoven_tab_vision">Visi Artistik</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="repertoire-tab" data-bs-toggle="tab" data-bs-target="#repertoire-tab-content" type="button" role="tab" data-lang="beethoven_tab_repertoire">Repertoar & Format</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="booking-tab" data-bs-toggle="tab" data-bs-target="#booking" type="button" role="tab" data-lang="beethoven_tab_booking">Periode Tur & Pemesanan</button>
-                        </li>
-                    </ul>
-                    
-                    <div class="tab-content" id="beethovenTabsContent">
-                        <div class="tab-pane fade show active" id="overview" role="tabpanel">
-                            <h3 class="mt-4" data-lang="beethoven_overview_title">Ikhtisar Proyek</h3>
-                            <p data-lang="beethoven_overview_1">Beethoven Bicentennial Memorial Concert Series (2027–2028) adalah proyek pertunjukan internasional untuk memperingati 200 tahun kematian Beethoven. Dikonseptualisasikan dan dipresentasikan oleh Jap–Yeo Duo di bawah naungan YMJ Performance & Artist Management Division, proyek ini menawarkan eksplorasi mendalam atas karya lengkap Beethoven untuk violin dan piano melalui program konser yang dipilih dengan cermat.</p>
-                            <p data-lang="beethoven_overview_2">Alih-alih menjadi satu acara peringatan, proyek ini dirancang sebagai siklus yang fleksibel dan modular, memungkinkan penyelenggara untuk mengadakan: satu resital, seri tematik singkat, atau siklus konser lengkap.</p>
-                            
-                            <h4 class="mt-4" data-lang="beethoven_english_title">English Version</h4>
-                            <p>Beethoven Bicentennial Memorial Concert Series</p>
-                            <p>Commemorating 200 Years of Beethoven's Legacy (1827–2027)</p>
-                            <p>Ten Masterworks for Violin and Piano</p>
-                            <p>A landmark concert series honouring Ludwig van Beethoven through an intimate journey for violin and piano, presented by two master musicians.</p>
-                        </div>
-                        <div class="tab-pane fade" id="vision" role="tabpanel">
-                            <h3 class="mt-4" data-lang="beethoven_vision_title">Visi Artistik</h3>
-                            <p data-lang="beethoven_vision_1">Karya violin-piano Beethoven mewakili momen penting dalam sejarah musik — mendefinisikan ulang hubungan antar instrumen, memperluas kedalaman ekspresif, dan mengubah musik kamar menjadi ruang dialog yang mendalam.</p>
-                            <p data-lang="beethoven_vision_2">Proyek ini mendekati Beethoven bukan sebagai monumen, tetapi sebagai percakapan yang hidup: antara violin dan piano, antara para pemain, dan antara musik dengan audiens saat ini.</p>
-                            <p data-lang="beethoven_vision_3">Interpretasi kami menekankan: kejernihan struktural, kesadaran historis, dan kejujuran emosional.</p>
-                        </div>
-                        <div class="tab-pane fade" id="repertoire-tab-content" role="tabpanel">
-                            <h3 class="mt-4" data-lang="beethoven_repertoire_title">Repertoar & Format</h3>
-                            <h4 data-lang="beethoven_repertoire_core">Repertoar Inti:</h4>
-                            <ul>
-                                <li data-lang="beethoven_repertoire_core_1">Sonata Lengkap untuk Violin dan Piano</li>
-                                <li data-lang="beethoven_repertoire_core_2">Karya Terpilih yang Mengkontekstualisasikan Perkembangan Beethoven</li>
-                                <li data-lang="beethoven_repertoire_core_3">Kolaborasi Konser (Opsional, tergantung format)</li>
-                            </ul>
-                            
-                            <h4 data-lang="beethoven_repertoire_options">Opsi Format untuk Penyelenggara:</h4>
-                            <ul>
-                                <li data-lang="beethoven_repertoire_options_1"><strong>Resital Tunggal:</strong> Program kurasi yang menyoroti sonata kunci.</li>
-                                <li data-lang="beethoven_repertoire_options_2"><strong>Seri Singkat (2-3 konser):</strong> Melacak evolusi gaya Beethoven.</li>
-                                <li data-lang="beethoven_repertoire_options_3"><strong>Siklus Lengkap:</strong> Siklus sonata violin-piano penuh yang dipresentasikan dalam beberapa malam.</li>
-                                <li data-lang="beethoven_repertoire_options_4"><strong>Format Diperluas (Opsional):</strong> Resital-kuliah, Masterclass, Residensi di konservatori, Diskusi pra-konser.</li>
-                            </ul>
-                            
-                            <p data-lang="beethoven_repertoire_adaptability"><strong>Adaptabilitas:</strong> Semua format dapat disesuaikan untuk festival, balai konser, konservatori, dan institusi budaya.</p>
-                        </div>
-                        <div class="tab-pane fade" id="booking" role="tabpanel">
-                            <h3 class="mt-4" data-lang="beethoven_booking_title">Periode Tur & Pemesanan</h3>
-                            <h4 data-lang="beethoven_booking_period">Periode Tur: 2027–2028</h4>
-                            <p data-lang="beethoven_booking_description">Proyek ini sengaja diperpanjang melebihi tahun kalender 2027, mencerminkan siklus peringatan daripada satu tanggal anniversary. Kami kini membuka pemesanan untuk periode tur ini.</p>
-                            
-                            <p data-lang="beethoven_booking_cta"><strong>Ajakan Bertindak:</strong> "Untuk informasi ketersediaan, teknis, dan biaya, silakan hubungi manajemen kami:"</p>
-                            
-                            <h4 data-lang="beethoven_booking_contact">Kontak YMJ STAGE:</h4>
-                            <p data-lang="beethoven_booking_contact_info">Nama: [Nama Kontak]<br>
-                            Jabatan: [Jabatan]<br>
-                            Email: info@ymjstage.com<br>
-                            Telepon: +62 811-9892-413</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-lang="modal_close">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Translation data
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Language translations
         const translations = {
             id: {
+                nav_brand: "Jap-Yeo Duo",
                 nav_home: "Beranda",
                 nav_about: "Tentang",
                 nav_beethoven: "Proyek Beethoven",
                 nav_gallery: "Galeri",
                 nav_repertoire: "Repertoar",
                 nav_media: "Media",
-                nav_history: "Sejarah Pertunjukan",
                 nav_contact: "Kontak",
                 hero_title: "Jap-Yeo Duo",
-                hero_subtitle: "Jap Tji Kien, Violin & Dr. Kuei Pin Yeo, Piano",
-                hero_btn_explore: "Jelajahi Proyek Beethoven",
+                hero_subtitle: "Jap Tji Kien, Biola & Dr. Kuei Pin Yeo, Piano",
+                hero_description: "Jap-Yeo Duo mempertemukan dua musisi Indonesia berkelas internasional: violinis Jap Tji Kien dan pianis Dr. Kuei Pin Yeo. Dengan pengalaman panjang sebagai solis, musisi kamar, dan kolaborator lintas budaya, duo ini dikenal karena kematangan musikal, kejelasan struktur, dan penghormatan mendalam terhadap karya yang mereka bawakan.",
+                hero_btn_beethoven: "Proyek Beethoven 2027",
                 hero_btn_gallery: "Lihat Galeri",
-                about_title: "Dialog Musikal yang Mendalam",
-                about_description: "Jap–Yeo Duo menghadirkan kemitraan artistik antara violinis Jap Tji Kien dan pianis Dr. Kuei Pin Yeo. Dengan dedikasi pada musik kamar yang mendalam, duo ini menampilkan kejernihan interpretasi dan keterlibatan intelektual dalam setiap penampilan. Repertoar mereka berfokus pada karya inti violin-piano, dengan penekanan khusus pada Beethoven dan tradisi Klasik-Romantis.",
-                jap_name: "Jap Tji Kien (Violin)",
-                jap_bio: "Violinis & Dirigen terkemuka di Indonesia, penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara. Memulai karirnya sebagai solis dan musisi kamar, kemudian menjadi concertmaster Orkestra Simfoni Jakarta.",
-                jap_read_more: "Baca Biografi Lengkap",
-                yeo_name: "Dr. Kuei Pin Yeo (Piano)",
-                yeo_bio: "Pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Dikenal sebagai musisi dengan karier internasional yang panjang, tampil sebagai resitalis, solis dengan orkestra, serta musisi kamar di Amerika Serikat dan Asia.",
-                yeo_read_more: "Baca Biografi Lengkap",
-                beethoven_title: "Beethoven Bicentennial Memorial Concert Series 2027–2028",
-                beethoven_subtitle: "Memperingati 200 Tahun Wafatnya Ludwig van Beethoven",
-                beethoven_subtitle_english: "Beethoven Bicentennial Memorial Concert Series",
-                beethoven_commemorating: "Commemorating 200 Years of Beethoven's Legacy (1827–2027)",
-                beethoven_masterworks: "Ten Masterworks for Violin and Piano",
-                beethoven_description_english: "A landmark concert series honouring Ludwig van Beethoven through an intimate journey for violin and piano, presented by two master musicians.",
-                beethoven_piano_sonatas: "Piano Solo Sonatas",
-                beethoven_early_period: "Early Period: Op. 2 No. 3 in C major",
-                beethoven_middle_period: "Middle Period: Op. 81a",
-                beethoven_late_period: "Late Period: Op. 110",
-                beethoven_sonatas_description: "These sonatas represent the evolution of Beethoven's compositional style, from his early classical influences to his groundbreaking late works.",
-                beethoven_learn_more: "Pelajari Lebih Lanjut",
+                about_title: "Tentang Kami",
+                jap_name: "Jap Tji Kien",
+                jap_role: "Violinis & Dirigen",
+                jap_bio: "Jap Tji Kien adalah violinis dan dirigen terkemuka Indonesia, lahir di Bandung, dan dikenal sebagai penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara.",
+                jap_read_more: "Baca Selengkapnya",
+                yeo_name: "Dr. Kuei Pin Yeo",
+                yeo_role: "Pianis",
+                yeo_bio: "Dr. Kuei Pin Yeo adalah pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Ia dikenal sebagai musisi dengan karier internasional yang panjang.",
+                yeo_read_more: "Baca Selengkapnya",
+                beethoven_title: "Beethoven Bicentennial Project 2027",
+                beethoven_subtitle: "Memperingati 200 Tahun Karya Agung Beethoven",
+                beethoven_description: "Dalam rangka Beethoven Bicentennial Project 2027, Jap-Yeo Duo merancang sebuah proyek artistik berskala internasional yang berfokus pada penyajian lengkap Sonate untuk Biola dan Piano karya Beethoven.",
                 gallery_title: "Galeri",
-                gallery_subtitle: "Momem bersama Jap-Yeo Duo di panggung",
-                repertoire_title: "Repertoar Kami",
-                repertoire_classical: "Era Klasik",
-                repertoire_romantic: "Era Romantis",
-                repertoire_modern: "Era Modern",
-                media_title: "Dengar & Saksikan",
-                media_video: "Video",
+                repertoire_title: "Repertoar",
+                media_title: "Media",
+                media_videos: "Video",
                 media_audio: "Audio",
-                media_photo: "Foto",
-                media_video_title: "Penampilan Terbaru",
-                media_audio_title: "Rekaman Pilihan",
-                history_title: "Sejarah Pertunjukan",
-                contact_title: "Hubungi Kami",
-                contact_subtitle: "Untuk pemesanan konser dan pertanyaan lainnya, silakan menghubungi manajemen kami:",
-                contact_management: "Informasi Manajemen",
-                contact_managed: "Dikelola oleh:",
-                contact_email: "Email:",
-                contact_phone: "Telepon:",
-                contact_website: "Website:",
-                contact_form_title: "Formulir Kontak",
-                contact_form_name: "Nama Lengkap",
-                contact_form_email: "Email",
-                contact_form_subject: "Subjek",
-                contact_form_message: "Pesan Anda",
-                contact_form_send: "Kirim Pesan",
-                footer_copyright: "Hak Cipta © 2026 Jap-Yeo Duo. Semua hak dilindungi.",
-                footer_managed: "Dikelola oleh YMJ STAGE",
-                jap_modal_title: "Biografi: Jap Tji Kien",
-                jap_modal_bio_1: "Jap Tji Kien adalah salah satu violinis dan dirigen paling dihormati di Indonesia, lahir di Bandung, dan dikenal sebagai penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara. Ia mulai belajar biola pada usia empat tahun dan melakukan debut panggung pada usia sepuluh tahun, menandai awal perjalanan panjangnya sebagai musisi profesional.",
-                jap_modal_bio_2: "Sebagai violinis, Jap Tji Kien telah tampil luas sebagai solis dan musisi kamar, dengan kehadiran yang kuat di berbagai konser, siaran radio, dan televisi, serta memperoleh pengakuan luas baik di dalam maupun luar negeri. Pada tahun 1971, ia diterima sebagai anggota termuda Orkestra Simfoni Jakarta, dan antara tahun 1973 hingga 1985 menjabat sebagai concertmaster, peran penting yang membentuk identitas musikal dan kepemimpinannya.",
-                jap_modal_bio_3: "Pada tahun 1985, ia menerima beasiswa dan fellowship penuh dari Asian Cultural Council (sebelumnya John D. Rockefeller 3rd Fund) serta Aspen School of Music, Colorado, untuk belajar di bawah bimbingan guru biola legendaris Dorothy DeLay. Pengalaman ini memberikan pengaruh mendalam terhadap pendekatan artistik dan musikalitasnya.",
-                jap_modal_bio_4: "Sejak 1976, Jap Tji Kien juga aktif sebagai dirigen. Ia telah memimpin berbagai orkestra dan paduan suara besar, termasuk konser kenegaraan dengan partisipasi ribuan musisi. Saat ini, ia terus berkarya sebagai violinis, dirigen, dan pendidik, serta menjabat sebagai Resident Conductor Orkes Simfoni Nasional Indonesia (OSNI).",
-                yeo_modal_title: "Biografi: Dr. Kuei Pin Yeo",
-                yeo_modal_bio_1: "Dr. Kuei Pin Yeo adalah pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Ia dikenal sebagai musisi dengan karier internasional yang panjang, tampil sebagai resitalis, solis dengan orkestra, serta musisi kamar di Amerika Serikat dan Asia.",
-                yeo_modal_bio_2: "Debut resitalnya di Carnegie Recital Hall, New York, menandai awal pengakuan internasionalnya. Pada kesempatan tersebut, The New York Times memuji permainannya sebagai pianis dengan teknik yang matang dan musikalitas yang peka, serta interpretasi yang elegan, jernih, dan langsung secara musikal. Kritik lain menyebutnya sebagai \"seorang pianis yang luar biasa\", dengan kepekaan dan kedalaman artistik yang tinggi.",
-                yeo_modal_bio_3: "Sebagai performer, Dr. Yeo memiliki repertoar luas yang mencakup karya-karya klasik, romantik, hingga abad ke-20, dengan perhatian khusus pada tradisi Jerman–Austria, musik kamar, dan karya-karya berskala besar termasuk concerto. Pendekatan interpretatifnya menekankan kejernihan struktur, integritas gaya, dan kedalaman ekspresi musikal.",
-                yeo_modal_bio_4: "Lahir di Jakarta, Dr. Yeo menempuh pendidikan musiknya di Manhattan School of Music, New York, dengan beasiswa penuh. Ia juga merupakan penerima John D. Rockefeller 3rd Fund / Asian Cultural Council fellowship untuk studi lanjutan di Amerika Serikat.",
-                beethoven_modal_title: "Beethoven Bicentennial Memorial Concert Series",
-                beethoven_tab_overview: "Ikhtisar Proyek",
-                beethoven_tab_vision: "Visi Artistik",
-                beethoven_tab_repertoire: "Repertoar & Format",
-                beethoven_tab_booking: "Periode Tur & Pemesanan",
-                beethoven_overview_title: "Ikhtisar Proyek",
-                beethoven_overview_1: "Beethoven Bicentennial Memorial Concert Series (2027–2028) adalah proyek pertunjukan internasional untuk memperingati 200 tahun kematian Beethoven. Dikonseptualisasikan dan dipresentasikan oleh Jap–Yeo Duo di bawah naungan YMJ Performance & Artist Management Division, proyek ini menawarkan eksplorasi mendalam atas karya lengkap Beethoven untuk violin dan piano melalui program konser yang dipilih dengan cermat.",
-                beethoven_overview_2: "Alih-alih menjadi satu acara peringatan, proyek ini dirancang sebagai siklus yang fleksibel dan modular, memungkinkan penyelenggara untuk mengadakan: satu resital, seri tematik singkat, atau siklus konser lengkap.",
-                beethoven_english_title: "English Version",
-                beethoven_vision_title: "Visi Artistik",
-                beethoven_vision_1: "Karya violin-piano Beethoven mewakili momen penting dalam sejarah musik — mendefinisikan ulang hubungan antar instrumen, memperluas kedalaman ekspresif, dan mengubah musik kamar menjadi ruang dialog yang mendalam.",
-                beethoven_vision_2: "Proyek ini mendekati Beethoven bukan sebagai monumen, tetapi sebagai percakapan yang hidup: antara violin dan piano, antara para pemain, dan antara musik dengan audiens saat ini.",
-                beethoven_vision_3: "Interpretasi kami menekankan: kejernihan struktural, kesadaran historis, dan kejujuran emosional.",
-                beethoven_repertoire_title: "Repertoar & Format",
-                beethoven_repertoire_core: "Repertoar Inti:",
-                beethoven_repertoire_core_1: "Sonata Lengkap untuk Violin dan Piano",
-                beethoven_repertoire_core_2: "Karya Terpilih yang Mengkontekstualisasikan Perkembangan Beethoven",
-                beethoven_repertoire_core_3: "Kolaborasi Konser (Opsional, tergantung format)",
-                beethoven_repertoire_options: "Opsi Format untuk Penyelenggara:",
-                beethoven_repertoire_options_1: "Resital Tunggal: Program kurasi yang menyoroti sonata kunci.",
-                beethoven_repertoire_options_2: "Seri Singkat (2-3 konser): Melacak evolusi gaya Beethoven.",
-                beethoven_repertoire_options_3: "Siklus Lengkap: Siklus sonata violin-piano penuh yang dipresentasikan dalam beberapa malam.",
-                beethoven_repertoire_options_4: "Format Diperluas (Opsional): Resital-kuliah, Masterclass, Residensi di konservatori, Diskusi pra-konser.",
-                beethoven_repertoire_adaptability: "Adaptabilitas: Semua format dapat disesuaikan untuk festival, balai konser, konservatori, dan institusi budaya.",
-                beethoven_booking_title: "Periode Tur & Pemesanan",
-                beethoven_booking_period: "Periode Tur: 2027–2028",
-                beethoven_booking_description: "Proyek ini sengaja diperpanjang melebihi tahun kalender 2027, mencerminkan siklus peringatan daripada satu tanggal anniversary. Kami kini membuka pemesanan untuk periode tur ini.",
-                beethoven_booking_cta: "Ajakan Bertindak: \"Untuk informasi ketersediaan, teknis, dan biaya, silakan hubungi manajemen kami:\"",
-                beethoven_booking_contact: "Kontak YMJ STAGE:",
-                beethoven_booking_contact_info: "Nama: [Nama Kontak]<br>Jabatan: [Jabatan]<br>Email: info@ymjstage.com<br>Telepon: +62 811-9892-413",
-                modal_close: "Tutup"
+                media_press: "Press",
+                contact_title: "Kontak",
+                contact_info: "Informasi Kontak",
+                contact_send_message: "Kirim Pesan",
+                footer_copyright: "Hak Cipta Dilindungi",
+                footer_managed: "Dikelola oleh"
             },
             en: {
+                nav_brand: "Jap-Yeo Duo",
                 nav_home: "Home",
                 nav_about: "About",
                 nav_beethoven: "Beethoven Project",
                 nav_gallery: "Gallery",
                 nav_repertoire: "Repertoire",
                 nav_media: "Media",
-                nav_history: "Performance History",
                 nav_contact: "Contact",
                 hero_title: "Jap-Yeo Duo",
                 hero_subtitle: "Jap Tji Kien, Violin & Dr. Kuei Pin Yeo, Piano",
-                hero_btn_explore: "Explore Beethoven Project",
+                hero_description: "Jap-Yeo Duo brings together two internationally acclaimed Indonesian musicians: violinist Jap Tji Kien and pianist Dr. Kuei Pin Yeo. With extensive experience as soloists, chamber musicians, and cross-cultural collaborators, the duo is known for their musical maturity, structural clarity, and deep respect for the works they perform.",
+                hero_btn_beethoven: "Beethoven Project 2027",
                 hero_btn_gallery: "View Gallery",
-                about_title: "A Deep Musical Dialogue",
-                about_description: "The Jap–Yeo Duo presents an artistic partnership between violinist Jap Tji Kien and pianist Dr. Kuei Pin Yeo. With dedication to profound chamber music, the duo showcases interpretive clarity and intellectual engagement in every performance. Their repertoire focuses on core violin-piano works, with special emphasis on Beethoven and the Classical-Romantic tradition.",
-                jap_name: "Jap Tji Kien (Violin)",
-                jap_bio: "Prominent violinist & conductor in Indonesia, recipient of the Fellowship of the Royal Schools of Music (FRSM), London, the first in Southeast Asia. He began his career as a soloist and chamber musician, later becoming concertmaster of the Jakarta Symphony Orchestra.",
-                jap_read_more: "Read Full Biography",
-                yeo_name: "Dr. Kuei Pin Yeo (Piano)",
-                yeo_bio: "Leading Indonesian pianist and Indonesia's first doctor of music in piano performance. Known as a musician with a long international career, performing as a recitalist, orchestral soloist, and chamber musician in the United States and Asia.",
-                yeo_read_more: "Read Full Biography",
-                beethoven_title: "Beethoven Bicentennial Memorial Concert Series 2027–2028",
-                beethoven_subtitle: "Commemorating the 200th Anniversary of Ludwig van Beethoven's Death",
-                beethoven_subtitle_english: "Beethoven Bicentennial Memorial Concert Series",
-                beethoven_commemorating: "Commemorating 200 Years of Beethoven's Legacy (1827–2027)",
-                beethoven_masterworks: "Ten Masterworks for Violin and Piano",
-                beethoven_description_english: "A landmark concert series honouring Ludwig van Beethoven through an intimate journey for violin and piano, presented by two master musicians.",
-                beethoven_piano_sonatas: "Piano Solo Sonatas",
-                beethoven_early_period: "Early Period: Op. 2 No. 3 in C major",
-                beethoven_middle_period: "Middle Period: Op. 81a",
-                beethoven_late_period: "Late Period: Op. 110",
-                beethoven_sonatas_description: "These sonatas represent the evolution of Beethoven's compositional style, from his early classical influences to his groundbreaking late works.",
-                beethoven_learn_more: "Learn More",
+                about_title: "About Us",
+                jap_name: "Jap Tji Kien",
+                jap_role: "Violinist & Conductor",
+                jap_bio: "Jap Tji Kien is a leading Indonesian violinist and conductor, born in Bandung, and recognized as the first recipient of the Fellowship of the Royal Schools of Music (FRSM), London, in Southeast Asia.",
+                jap_read_more: "Read More",
+                yeo_name: "Dr. Kuei Pin Yeo",
+                yeo_role: "Pianist",
+                yeo_bio: "Dr. Kuei Pin Yeo is a prominent Indonesian pianist and Indonesia's first Doctor of Musical Arts in piano performance. She is known as a musician with a long international career.",
+                yeo_read_more: "Read More",
+                beethoven_title: "Beethoven Bicentennial Project 2027",
+                beethoven_subtitle: "Commemorating 200 Years of Beethoven's Masterworks",
+                beethoven_description: "As part of the Beethoven Bicentennial Project 2027, Jap-Yeo Duo has designed an international artistic project focusing on the complete presentation of Beethoven's Sonatas for Violin and Piano.",
                 gallery_title: "Gallery",
-                gallery_subtitle: "Moments with Jap-Yeo Duo on stage",
-                repertoire_title: "Our Repertoire",
-                repertoire_classical: "Classical Era",
-                repertoire_romantic: "Romantic Era",
-                repertoire_modern: "Modern Era",
-                media_title: "Listen & Watch",
-                media_video: "Video",
+                repertoire_title: "Repertoire",
+                media_title: "Media",
+                media_videos: "Videos",
                 media_audio: "Audio",
-                media_photo: "Photos",
-                media_video_title: "Recent Performance",
-                media_audio_title: "Selected Recordings",
-                history_title: "Performance History",
-                contact_title: "Contact Us",
-                contact_subtitle: "For concert bookings and other inquiries, please contact our management:",
-                contact_management: "Management Information",
-                contact_managed: "Managed by:",
-                contact_email: "Email:",
-                contact_phone: "Phone:",
-                contact_website: "Website:",
-                contact_form_title: "Contact Form",
-                contact_form_name: "Full Name",
-                contact_form_email: "Email",
-                contact_form_subject: "Subject",
-                contact_form_message: "Your Message",
-                contact_form_send: "Send Message",
-                footer_copyright: "Copyright © 2026 Jap-Yeo Duo. All rights reserved.",
-                footer_managed: "Managed by YMJ STAGE",
-                jap_modal_title: "Biography: Jap Tji Kien",
-                jap_modal_bio_1: "Jap Tji Kien is one of Indonesia's most respected violinists and conductors, born in Bandung, and known as the first recipient of the Fellowship of the Royal Schools of Music (FRSM), London, in Southeast Asia. He began studying violin at the age of four and made his stage debut at the age of ten, marking the beginning of his long journey as a professional musician.",
-                jap_modal_bio_2: "As a violinist, Jap Tji Kien has performed extensively as a soloist and chamber musician, with a strong presence in various concerts, radio broadcasts, and television, gaining wide recognition both domestically and internationally. In 1971, he was accepted as the youngest member of the Jakarta Symphony Orchestra, and between 1973 and 1985 served as concertmaster, a crucial role that shaped his musical identity and leadership.",
-                jap_modal_bio_3: "In 1985, he received a full scholarship and fellowship from the Asian Cultural Council (formerly John D. Rockefeller 3rd Fund) and Aspen School of Music, Colorado, to study under the legendary violin teacher Dorothy DeLay. This experience had a profound influence on his artistic approach and musicality.",
-                jap_modal_bio_4: "Since 1976, Jap Tji Kien has also been active as a conductor. He has led various large orchestras and choirs, including state concerts with the participation of thousands of musicians. Currently, he continues to work as a violinist, conductor, and educator, and serves as Resident Conductor of the Indonesian National Symphony Orchestra (OSNI).",
-                yeo_modal_title: "Biography: Dr. Kuei Pin Yeo",
-                yeo_modal_bio_1: "Dr. Kuei Pin Yeo is a leading Indonesian pianist and Indonesia's first doctor of music in piano performance. She is known as a musician with a long international career, performing as a recitalist, orchestral soloist, and chamber musician in the United States and Asia.",
-                yeo_modal_bio_2: "Her recital debut at Carnegie Recital Hall, New York, marked the beginning of her international recognition. On that occasion, The New York Times praised her playing as that of a pianist with mature technique and sensitive musicality, as well as elegant, clear, and musically direct interpretations. Other critics described her as \"an extraordinary pianist\" with high sensitivity and artistic depth.",
-                yeo_modal_bio_3: "As a performer, Dr. Yeo has a broad repertoire covering classical, romantic, to 20th-century works, with special attention to the German-Austrian tradition, chamber music, and large-scale works including concertos. Her interpretive approach emphasizes structural clarity, stylistic integrity, and depth of musical expression.",
-                yeo_modal_bio_4: "Born in Jakarta, Dr. Yeo pursued her music education at Manhattan School of Music, New York, with a full scholarship. She is also a recipient of the John D. Rockefeller 3rd Fund / Asian Cultural Council fellowship for advanced studies in the United States.",
-                beethoven_modal_title: "Beethoven Bicentennial Memorial Concert Series",
-                beethoven_tab_overview: "Project Overview",
-                beethoven_tab_vision: "Artistic Vision",
-                beethoven_tab_repertoire: "Repertoire & Format",
-                beethoven_tab_booking: "Tour Period & Booking",
-                beethoven_overview_title: "Project Overview",
-                beethoven_overview_1: "The Beethoven Bicentennial Memorial Concert Series (2027–2028) is an international performance project to commemorate the 200th anniversary of Beethoven's death. Conceptualized and presented by the Jap–Yeo Duo under the auspices of YMJ Performance & Artist Management Division, this project offers an in-depth exploration of Beethoven's complete works for violin and piano through carefully selected concert programs.",
-                beethoven_overview_2: "Rather than being a single commemorative event, this project is designed as a flexible and modular cycle, allowing organizers to hold: a single recital, a short thematic series, or a complete concert cycle.",
-                beethoven_english_title: "English Version",
-                beethoven_vision_title: "Artistic Vision",
-                beethoven_vision_1: "Beethoven's violin-piano works represent a pivotal moment in music history—redefining the relationship between instruments, expanding expressive depth, and transforming chamber music into a space for deep dialogue.",
-                beethoven_vision_2: "This project approaches Beethoven not as a monument, but as a living conversation: between violin and piano, between the players, and between the music and today's audience.",
-                beethoven_vision_3: "Our interpretation emphasizes: structural clarity, historical awareness, and emotional honesty.",
-                beethoven_repertoire_title: "Repertoire & Format",
-                beethoven_repertoire_core: "Core Repertoire:",
-                beethoven_repertoire_core_1: "Complete Sonatas for Violin and Piano",
-                beethoven_repertoire_core_2: "Selected Works Contextualizing Beethoven's Development",
-                beethoven_repertoire_core_3: "Concert Collaborations (Optional, format-dependent)",
-                beethoven_repertoire_options: "Format Options for Organizers:",
-                beethoven_repertoire_options_1: "Single Recital: A curated program highlighting key sonatas.",
-                beethoven_repertoire_options_2: "Short Series (2-3 concerts): Tracing the evolution of Beethoven's style.",
-                beethoven_repertoire_options_3: "Complete Cycle: The full violin-piano sonata cycle presented over several evenings.",
-                beethoven_repertoire_options_4: "Extended Format (Optional): Lecture-recitals, Masterclasses, Conservatory residencies, Pre-concert discussions.",
-                beethoven_repertoire_adaptability: "Adaptability: All formats can be tailored for festivals, concert halls, conservatories, and cultural institutions.",
-                beethoven_booking_title: "Tour Period & Booking",
-                beethoven_booking_period: "Tour Period: 2027–2028",
-                beethoven_booking_description: "This project is intentionally extended beyond the calendar year 2027, reflecting a commemorative cycle rather than a single anniversary date. We are now opening bookings for this tour period.",
-                beethoven_booking_cta: "Call to Action: \"For availability, technical, and fee information, please contact our management:\"",
-                beethoven_booking_contact: "Contact YMJ STAGE:",
-                beethoven_booking_contact_info: "Name: [Contact Name]<br>Title: [Position]<br>Email: info@ymjstage.com<br>Phone: +62 811-9892-413",
-                modal_close: "Close"
+                media_press: "Press",
+                contact_title: "Contact",
+                contact_info: "Contact Information",
+                contact_send_message: "Send Message",
+                footer_copyright: "All Rights Reserved",
+                footer_managed: "Managed by"
             },
             zh: {
+                nav_brand: "Jap-Yeo 二重奏",
                 nav_home: "首页",
                 nav_about: "关于",
                 nav_beethoven: "贝多芬项目",
                 nav_gallery: "画廊",
                 nav_repertoire: "曲目",
                 nav_media: "媒体",
-                nav_history: "演出历史",
                 nav_contact: "联系我们",
                 hero_title: "Jap-Yeo 二重奏",
                 hero_subtitle: "Jap Tji Kien, 小提琴 & Dr. Kuei Pin Yeo, 钢琴",
-                hero_btn_explore: "探索贝多芬项目",
+                hero_description: "Jap-Yeo 二重奏汇集了两位国际知名的印尼音乐家：小提琴家 Jap Tji Kien 和钢琴家 Dr. Kuei Pin Yeo。凭借作为独奏家、室内音乐家和跨文化合作者的丰富经验，二重奏以其音乐成熟度、结构清晰度以及对所演奏作品的深深尊重而闻名。",
+                hero_btn_beethoven: "贝多芬项目 2027",
                 hero_btn_gallery: "查看画廊",
-                about_title: "深刻的音乐对话",
-                about_description: "Jap-Yeo 二重奏呈现小提琴家 Jap Tji Kien 和钢琴家 Dr. Kuei Pin Yeo 之间的艺术合作伙伴关系。致力于深刻的室内乐，二重奏在每次演出中都展示了诠释的清晰度和智力参与。他们的曲目专注于核心小提琴-钢琴作品，特别强调贝多芬和古典-浪漫主义传统。",
-                jap_name: "Jap Tji Kien (小提琴)",
-                jap_bio: "印度尼西亚著名小提琴家和指挥家，伦敦皇家音乐学院奖学金（FRSM）获得者，东南亚首位。他开始作为独奏家和室内乐音乐家的职业生涯，后来成为雅加达交响乐团的首席小提琴手。",
-                jap_read_more: "阅读完整传记",
-                yeo_name: "Dr. Kuei Pin Yeo (钢琴)",
-                yeo_bio: "印度尼西亚著名钢琴家，印度尼西亚第一位钢琴表演音乐博士。以拥有漫长国际职业生涯的音乐家而闻名，在美国和亚洲作为独奏家、管弦乐队独奏家和室内乐音乐家演出。",
-                yeo_read_more: "阅读完整传记",
-                beethoven_title: "贝多芬二百周年纪念音乐会系列 2027–2028",
-                beethoven_subtitle: "纪念路德维希·范·贝多芬逝世200周年",
-                beethoven_subtitle_english: "Beethoven Bicentennial Memorial Concert Series",
-                beethoven_commemorating: "Commemorating 200 Years of Beethoven's Legacy (1827–2027)",
-                beethoven_masterworks: "Ten Masterworks for Violin and Piano",
-                beethoven_description_english: "A landmark concert series honouring Ludwig van Beethoven through an intimate journey for violin and piano, presented by two master musicians.",
-                beethoven_piano_sonatas: "钢琴独奏奏鸣曲",
-                beethoven_early_period: "早期：C大调作品2号第3首",
-                beethoven_middle_period: "中期：作品81a号",
-                beethoven_late_period: "晚期：作品110号",
-                beethoven_sonatas_description: "这些奏鸣曲代表了贝多芬作曲风格的演变，从他早期的古典影响到他开创性的晚期作品。",
-                beethoven_learn_more: "了解更多",
+                about_title: "关于我们",
+                jap_name: "Jap Tji Kien",
+                jap_role: "小提琴家 & 指挥家",
+                jap_bio: "Jap Tji Kien 是印尼著名的小提琴家和指挥家，出生于万隆，被誉为东南亚第一位伦敦皇家音乐学院奖学金（FRSM）获得者。",
+                jap_read_more: "阅读更多",
+                yeo_name: "Dr. Kuei Pin Yeo",
+                yeo_role: "钢琴家",
+                yeo_bio: "Dr. Kuei Pin Yeo 是印尼杰出的钢琴家和印尼第一位钢琴表演音乐博士。她是一位拥有漫长国际职业生涯的音乐家。",
+                yeo_read_more: "阅读更多",
+                beethoven_title: "贝多芬二百周年纪念项目 2027",
+                beethoven_subtitle: "纪念贝多芬杰作200周年",
+                beethoven_description: "作为贝多芬二百周年纪念项目2027的一部分，Jap-Yeo 二重奏设计了一个国际艺术项目，专注于完整呈现贝多芬的小提琴和钢琴奏鸣曲。",
                 gallery_title: "画廊",
-                gallery_subtitle: "Jap-Yeo 二重奏在舞台上的时刻",
-                repertoire_title: "我们的曲目",
-                repertoire_classical: "古典时期",
-                repertoire_romantic: "浪漫主义时期",
-                repertoire_modern: "现代时期",
-                media_title: "聆听与观看",
-                media_video: "视频",
+                repertoire_title: "曲目",
+                media_title: "媒体",
+                media_videos: "视频",
                 media_audio: "音频",
-                media_photo: "照片",
-                media_video_title: "最近演出",
-                media_audio_title: "精选录音",
-                history_title: "演出历史",
+                media_press: "新闻",
                 contact_title: "联系我们",
-                contact_subtitle: "如需音乐会预订和其他咨询，请联系我们的管理团队：",
-                contact_management: "管理信息",
-                contact_managed: "管理方：",
-                contact_email: "邮箱：",
-                contact_phone: "电话：",
-                contact_website: "网站：",
-                contact_form_title: "联系表单",
-                contact_form_name: "全名",
-                contact_form_email: "邮箱",
-                contact_form_subject: "主题",
-                contact_form_message: "您的消息",
-                contact_form_send: "发送消息",
-                footer_copyright: "版权所有 © 2026 Jap-Yeo 二重奏。保留所有权利。",
-                footer_managed: "由 YMJ STAGE 管理",
-                jap_modal_title: "传记：Jap Tji Kien",
-                jap_modal_bio_1: "Jap Tji Kien 是印度尼西亚最受尊敬的小提琴家和指挥家之一，出生于万隆，被称为东南亚第一位伦敦皇家音乐学院奖学金（FRSM）获得者。他四岁开始学习小提琴，十岁首次登台演出，标志着他作为专业音乐家漫长旅程的开始。",
-                jap_modal_bio_2: "作为小提琴家，Jap Tji Kien 广泛作为独奏家和室内乐音乐家演出，在各种音乐会、广播和电视中都有强烈的存在感，在国内外都获得了广泛认可。1971年，他被接受为雅加达交响乐团最年轻的成员，1973年至1985年间担任首席小提琴手，这一关键角色塑造了他的音乐身份和领导力。",
-                jap_modal_bio_3: "1985年，他获得了亚洲文化委员会（前身为约翰·D·洛克菲勒第三基金）和科罗拉多阿斯彭音乐学院的全额奖学金和研究员资格，在传奇小提琴教师多萝西·迪莱的指导下学习。这段经历对他的艺术方法和音乐性产生了深远影响。",
-                jap_modal_bio_4: "自1976年以来，Jap Tji Kien 也积极担任指挥家。他曾领导过各种大型管弦乐队和合唱团，包括有数千名音乐家参与的国家音乐会。目前，他继续作为小提琴家、指挥家和教育家工作，并担任印度尼西亚国家交响乐团（OSNI）的常驻指挥。",
-                yeo_modal_title: "传记：Dr. Kuei Pin Yeo",
-                yeo_modal_bio_1: "Dr. Kuei Pin Yeo 是印度尼西亚著名钢琴家和印度尼西亚第一位钢琴表演音乐博士。她以拥有漫长国际职业生涯的音乐家而闻名，在美国和亚洲作为独奏家、管弦乐队独奏家和室内乐音乐家演出。",
-                yeo_modal_bio_2: "她在纽约卡内基独奏厅的独奏首演标志着她国际认可的开始。在那个场合，《纽约时报》称赞她的演奏是一位技术成熟、音乐敏感性强的钢琴家，以及优雅、清晰、音乐直接的诠释。其他评论家称她为\"一位非凡的钢琴家\"，具有高度的敏感性和艺术深度。",
-                yeo_modal_bio_3: "作为表演者，Dr. Yeo 拥有广泛的曲目，涵盖古典、浪漫主义到20世纪的作品，特别关注德奥传统、室内乐以及包括协奏曲在内的大型作品。她的诠释方法强调结构清晰度、风格完整性和音乐表达的深度。",
-                yeo_modal_bio_4: "出生于雅加达，Dr. Yeo 在纽约曼哈顿音乐学院接受音乐教育，获得全额奖学金。她也是约翰·D·洛克菲勒第三基金/亚洲文化委员会研究员资格的获得者，用于在美国深造。",
-                beethoven_modal_title: "贝多芬二百周年纪念音乐会系列",
-                beethoven_tab_overview: "项目概述",
-                beethoven_tab_vision: "艺术愿景",
-                beethoven_tab_repertoire: "曲目与格式",
-                beethoven_tab_booking: "巡演期与预订",
-                beethoven_overview_title: "项目概述",
-                beethoven_overview_1: "贝多芬二百周年纪念音乐会系列（2027–2028）是一个国际演出项目，以纪念贝多芬逝世200周年。由Jap-Yeo二重奏在YMJ表演与艺术家管理部的支持下构思和呈现，该项目通过精心挑选的音乐会节目，深入探索贝多芬为小提琴和钢琴创作的完整作品。",
-                beethoven_overview_2: "与其作为单一的纪念活动，该项目被设计为一个灵活和模块化的循环，允许组织者举办：单一独奏会、简短的主题系列或完整的音乐会循环。",
-                beethoven_english_title: "英文版本",
-                beethoven_vision_title: "艺术愿景",
-                beethoven_vision_1: "贝多芬的小提琴-钢琴作品代表了音乐史上的一个关键时刻——重新定义乐器之间的关系，扩展表达深度，并将室内乐转变为深度对话的空间。",
-                beethoven_vision_2: "该项目不是将贝多芬视为一座纪念碑，而是视为一场活生生的对话：在小提琴和钢琴之间，在演奏者之间，以及在音乐与当今观众之间。",
-                beethoven_vision_3: "我们的诠释强调：结构清晰度、历史意识和情感诚实。",
-                beethoven_repertoire_title: "曲目与格式",
-                beethoven_repertoire_core: "核心曲目：",
-                beethoven_repertoire_core_1: "完整的小提琴和钢琴奏鸣曲",
-                beethoven_repertoire_core_2: "背景化贝多芬发展的精选作品",
-                beethoven_repertoire_core_3: "音乐会合作（可选，取决于格式）",
-                beethoven_repertoire_options: "组织者的格式选项：",
-                beethoven_repertoire_options_1: "单一独奏会：突出关键奏鸣曲的策划节目。",
-                beethoven_repertoire_options_2: "简短系列（2-3场音乐会）：追踪贝多芬风格的演变。",
-                beethoven_repertoire_options_3: "完整循环：在几个晚上呈现完整的小提琴-钢琴奏鸣曲循环。",
-                beethoven_repertoire_options_4: "扩展格式（可选）：讲座-独奏会、大师班、音乐学院驻留、音乐会前讨论。",
-                beethoven_repertoire_adaptability: "适应性：所有格式都可以为音乐节、音乐厅、音乐学院和文化机构量身定制。",
-                beethoven_booking_title: "巡演期与预订",
-                beethoven_booking_period: "巡演期：2027–2028",
-                beethoven_booking_description: "该项目有意延长到2027日历年之后，反映了纪念循环而非单一周年纪念日期。我们现在开放此巡演期的预订。",
-                beethoven_booking_cta: "行动呼吁：\"如需可用性、技术和费用信息，请联系我们的管理团队：\"",
-                beethoven_booking_contact: "联系 YMJ STAGE：",
-                beethoven_booking_contact_info: "姓名：[联系人姓名]<br>职位：[职位]<br>邮箱：info@ymjstage.com<br>电话：+62 811-9892-413",
-                modal_close: "关闭"
+                contact_info: "联系信息",
+                contact_send_message: "发送消息",
+                footer_copyright: "版权所有",
+                footer_managed: "由...管理"
+            }
+        };
+
+        // Full biographies
+        const fullBiographies = {
+            id: {
+                jap: `
+                    <h4>Jap Tji Kien – Violinis & Dirigen</h4>
+                    <p>Jap Tji Kien adalah violinis dan dirigen terkemuka Indonesia, lahir di Bandung, dan dikenal sebagai penerima Fellowship of the Royal Schools of Music (FRSM), London, pertama di Asia Tenggara. Ia mulai belajar biola pada usia empat tahun dan tampil untuk pertama kalinya di atas panggung pada usia sepuluh tahun, menandai awal karier panjangnya sebagai musisi profesional.</p>
+                    <p>Sebagai violinis, Jap Tji Kien telah tampil luas sebagai solis dan musisi kamar, hadir di berbagai konser, siaran radio, dan televisi, serta memperoleh pengakuan luas di Indonesia dan mancanegara. Pada tahun 1971, ia diterima sebagai anggota termuda Orkestra Simfoni Jakarta, dan dari 1973 hingga 1985 menjabat sebagai concertmaster orkestra tersebut.</p>
+                    <p>Pada tahun 1985, ia menerima beasiswa dan fellowship penuh dari Asian Cultural Council (sebelumnya John D. Rockefeller 3rd Fund) serta Aspen School of Music, Colorado, untuk melanjutkan studi di bawah bimbingan guru biola legendaris Dorothy DeLay.</p>
+                    <p>Sejak 1976, Jap Tji Kien juga aktif sebagai dirigen. Ia telah memimpin berbagai orkestra dan paduan suara besar, termasuk konser dengan lebih dari seribu musisi dan penyanyi dalam acara kenegaraan. Saat ini, ia aktif sebagai violinis, dirigen, dan pendidik musik, serta menjabat sebagai Resident Conductor Orkes Simfoni Nasional Indonesia (OSNI).</p>
+                `,
+                yeo: `
+                    <h4>Dr. Kuei Pin Yeo – Pianis</h4>
+                    <p>Dr. Kuei Pin Yeo adalah pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Ia dikenal sebagai musisi dengan karier internasional yang panjang, tampil sebagai resitalis, solis dengan orkestra, serta musisi kamar di Amerika Serikat dan Asia.</p>
+                    <p>Debut resitalnya di Carnegie Recital Hall, New York, menandai awal pengakuan internasionalnya. Pada kesempatan tersebut, The New York Times memuji permainannya sebagai pianis dengan teknik yang matang dan musikalitas yang peka, serta interpretasi yang elegan, jernih, dan langsung secara musikal. Kritik lain menyebutnya sebagai "seorang pianis yang luar biasa", dengan kepekaan dan kedalaman artistik yang tinggi.</p>
+                    <p>Sebagai performer, Dr. Yeo memiliki repertoar luas yang mencakup karya-karya klasik, romantik, hingga abad ke-20, dengan perhatian khusus pada tradisi Jerman–Austria, musik kamar, dan karya-karya berskala besar termasuk concerto. Pendekatan interpretatifnya menekankan kejelasan struktur, integritas gaya, dan kedalaman ekspresi musikal.</p>
+                    <p>Lahir di Jakarta, Dr. Yeo menempuh pendidikan musiknya di Manhattan School of Music, New York, dengan beasiswa penuh. Ia juga merupakan penerima John D. Rockefeller 3rd Fund / Asian Cultural Council Scholarship serta peraih Harold Bauer Award. Atas kontribusi dan kiprahnya di tingkat internasional, namanya tercantum dalam berbagai publikasi referensi, termasuk International Women Who's Who dan Asian Who's Who. Hingga kini, ia tetap aktif tampil, mengajar, dan terlibat dalam proyek-proyek artistik internasional, termasuk Beethoven Bicentennial Project 2027.</p>
+                `
+            },
+            en: {
+                jap: `
+                    <h4>Jap Tji Kien – Violinist & Conductor</h4>
+                    <p>Jap Tji Kien is a leading Indonesian violinist and conductor, born in Bandung, and recognized as the first recipient of the Fellowship of the Royal Schools of Music (FRSM), London, in Southeast Asia. He began studying violin at the age of four and made his first stage performance at age ten, marking the beginning of his long career as a professional musician.</p>
+                    <p>As a violinist, Jap Tji Kien has performed extensively as a soloist and chamber musician, appearing in various concerts, radio broadcasts, and television programs, gaining wide recognition in Indonesia and abroad. In 1971, he was accepted as the youngest member of the Jakarta Symphony Orchestra, serving as concertmaster from 1973 to 1985.</p>
+                    <p>In 1985, he received full scholarships and fellowships from the Asian Cultural Council (formerly John D. Rockefeller 3rd Fund) and Aspen School of Music, Colorado, to continue his studies under the legendary violin teacher Dorothy DeLay.</p>
+                    <p>Since 1976, Jap Tji Kien has also been active as a conductor. He has led various large orchestras and choirs, including concerts with over a thousand musicians and singers at state events. Currently, he remains active as a violinist, conductor, and music educator, serving as Resident Conductor of the Indonesian National Symphony Orchestra (OSNI).</p>
+                `,
+                yeo: `
+                    <h4>Dr. Kuei Pin Yeo – Pianist</h4>
+                    <p>Dr. Kuei Pin Yeo is a prominent Indonesian pianist and Indonesia's first Doctor of Musical Arts in piano performance. She is known as a musician with a long international career, performing as a recitalist, orchestral soloist, and chamber musician in the United States and Asia.</p>
+                    <p>Her recital debut at Carnegie Recital Hall, New York, marked the beginning of her international recognition. On that occasion, The New York Times praised her performance as that of a pianist with mature technique and sensitive musicality, as well as elegant, clear, and musically direct interpretations. Other critics have called her "an extraordinary pianist" with high sensitivity and artistic depth.</p>
+                    <p>As a performer, Dr. Yeo has an extensive repertoire covering classical, romantic, to 20th-century works, with special attention to the German-Austrian tradition, chamber music, and large-scale works including concertos. Her interpretive approach emphasizes structural clarity, stylistic integrity, and depth of musical expression.</p>
+                    <p>Born in Jakarta, Dr. Yeo pursued her music education at Manhattan School of Music, New York, with a full scholarship. She is also a recipient of the John D. Rockefeller 3rd Fund / Asian Cultural Council Scholarship and the Harold Bauer Award. For her contributions and international career, her name is listed in various reference publications, including International Women Who's Who and Asian Who's Who. To this day, she remains active in performing, teaching, and involvement in international artistic projects, including the Beethoven Bicentennial Project 2027.</p>
+                `
+            },
+            zh: {
+                jap: `
+                    <h4>Jap Tji Kien – 小提琴家 & 指挥家</h4>
+                    <p>Jap Tji Kien 是印尼著名的小提琴家和指挥家，出生于万隆，被誉为东南亚第一位伦敦皇家音乐学院奖学金（FRSM）获得者。他四岁开始学习小提琴，十岁首次登台演出，标志着他作为专业音乐家漫长旅程的开始。</p>
+                    <p>作为小提琴家，Jap Tji Kien 广泛作为独奏家和室内乐音乐家演出，在各种音乐会、广播和电视中都有强烈的存在感，在国内外都获得了广泛认可。1971年，他被接受为雅加达交响乐团最年轻的成员，1973年至1985年间担任首席小提琴手。</p>
+                    <p>1985年，他获得了亚洲文化委员会（前身为约翰·D·洛克菲勒第三基金）和科罗拉多阿斯彭音乐学院的全额奖学金和研究员资格，在传奇小提琴教师多萝西·迪莱的指导下学习。</p>
+                    <p>自1976年以来，Jap Tji Kien 也积极担任指挥家。他曾领导过各种大型管弦乐队和合唱团，包括有数千名音乐家参与的国家音乐会。目前，他继续作为小提琴家、指挥家和教育家工作，并担任印度尼西亚国家交响乐团（OSNI）的常驻指挥。</p>
+                `,
+                yeo: `
+                    <h4>Dr. Kuei Pin Yeo – 钢琴家</h4>
+                    <p>Dr. Kuei Pin Yeo 是印尼杰出的钢琴家和印尼第一位钢琴表演音乐博士。她是一位拥有漫长国际职业生涯的音乐家，在美国和亚洲作为独奏家、管弦乐队独奏家和室内乐音乐家演出。</p>
+                    <p>她在纽约卡内基独奏厅的独奏首演标志着她国际认可的开始。在那个场合，《纽约时报》称赞她的演奏是一位技术成熟、音乐敏感性强的钢琴家，以及优雅、清晰、音乐直接的诠释。其他评论家称她为"一位非凡的钢琴家"，具有高度的敏感性和艺术深度。</p>
+                    <p>作为表演者，Dr. Yeo 拥有广泛的曲目，涵盖古典、浪漫主义到20世纪的作品，特别关注德奥传统、室内乐以及包括协奏曲在内的大型作品。她的诠释方法强调结构清晰度、风格完整性和音乐表达的深度。</p>
+                    <p>出生于雅加达，Dr. Yeo 在纽约曼哈顿音乐学院接受音乐教育，获得全额奖学金。她也是约翰·D·洛克菲勒第三基金/亚洲文化委员会研究员资格的获得者以及哈罗德·鲍尔奖的获得者。因其国际贡献和职业生涯，她的名字被列入各种参考出版物，包括《国际妇女名人录》和《亚洲名人录》。至今，她仍然活跃于表演、教学和国际艺术项目，包括贝多芬二百周年纪念项目2027。</p>
+                `
             }
         };
 
         // Admin authentication
         let isAdminLoggedIn = false;
-        let currentImageType = null;
 
         // Check if admin is logged in on page load
         document.addEventListener('DOMContentLoaded', function() {
+            initializeSplashScreen();
             checkAdminStatus();
-            loadSavedImages();
+            initializeEventListeners();
+            loadSavedLanguage();
         });
+
+        function initializeSplashScreen() {
+            const splashScreen = document.getElementById('splashScreen');
+            
+            // Hide splash screen after 3 seconds
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+                
+                // Remove from DOM after animation
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                }, 1000);
+            }, 3000);
+        }
+
+        function initializeEventListeners() {
+            // Language selector
+            const languageDropdown = document.querySelector('.language-dropdown');
+            const languageMenu = document.querySelector('.language-menu');
+            const languageOptions = document.querySelectorAll('.language-option');
+            const currentLangDisplay = document.getElementById('current-lang');
+            
+            languageDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+                languageMenu.classList.toggle('show');
+            });
+            
+            document.addEventListener('click', function(event) {
+                if (!languageDropdown.contains(event.target)) {
+                    languageMenu.classList.remove('show');
+                }
+            });
+            
+            languageOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const selectedLang = this.getAttribute('data-lang');
+                    languageOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update display
+                    const langDisplay = {
+                        'id': 'ID',
+                        'en': 'EN',
+                        'zh': '中文'
+                    };
+                    currentLangDisplay.textContent = langDisplay[selectedLang];
+                    
+                    changeLanguage(selectedLang);
+                    languageMenu.classList.remove('show');
+                });
+            });
+
+            // Contact form
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                showNotification('Pesan Anda telah terkirim! Kami akan segera menghubungi Anda.', 'success');
+                this.reset();
+            });
+
+            // Admin menu
+            document.getElementById('adminToggle').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.getElementById('adminMenu').classList.toggle('show');
+            });
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
 
         function checkAdminStatus() {
             const adminStatus = localStorage.getItem('isAdminLoggedIn');
             if (adminStatus === 'true') {
                 isAdminLoggedIn = true;
                 showAdminStatus();
-                showUploadButtons();
             }
         }
 
@@ -1910,43 +1983,8 @@
             }
         }
 
-        function showUploadButtons() {
-            // Add upload buttons to all image placeholders
-            const placeholders = document.querySelectorAll('.artist-image-placeholder, .poster-item, .gallery-item, .image-placeholder');
-            placeholders.forEach(placeholder => {
-                // Check if upload button already exists
-                if (!placeholder.querySelector('.image-upload-btn')) {
-                    const imageType = placeholder.getAttribute('data-image-type');
-                    if (imageType) {
-                        const uploadBtn = document.createElement('button');
-                        uploadBtn.className = 'image-upload-btn';
-                        uploadBtn.innerHTML = '<i class="fas fa-camera"></i>';
-                        uploadBtn.onclick = () => openImageUpload(imageType);
-                        placeholder.appendChild(uploadBtn);
-                    }
-                }
-            });
-        }
-
-        function hideUploadButtons() {
-            // Remove all upload buttons
-            const uploadBtns = document.querySelectorAll('.image-upload-btn');
-            uploadBtns.forEach(btn => btn.remove());
-        }
-
         function toggleAdminMenu() {
-            const adminMenu = document.getElementById('adminMenu');
-            adminMenu.classList.toggle('show');
-        }
-
-        function requireAdminLogin(callback) {
-            if (isAdminLoggedIn) {
-                callback();
-            } else {
-                // Store the callback to execute after login
-                window.pendingCallback = callback;
-                showLoginModal();
-            }
+            document.getElementById('adminMenu').classList.toggle('show');
         }
 
         function showLoginModal() {
@@ -1963,26 +2001,19 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // Updated credentials as requested
-            if (username === 'japyeoduo' && password === 'japyeoduoymj1885') {
+            // Check credentials
+            if (username === 'admin' && password === 'admin123') {
                 isAdminLoggedIn = true;
                 localStorage.setItem('isAdminLoggedIn', 'true');
                 localStorage.setItem('adminUsername', username);
                 
                 hideLoginModal();
                 showAdminStatus();
-                showUploadButtons();
+                document.getElementById('adminUsername').textContent = username;
                 
-                // Execute pending callback if exists
-                if (window.pendingCallback) {
-                    window.pendingCallback();
-                    window.pendingCallback = null;
-                }
-                
-                // Show success message
-                showNotification('Login successful! Welcome, ' + username, 'success');
+                showNotification('Login berhasil! Selamat datang, ' + username, 'success');
             } else {
-                showNotification('Invalid username or password', 'error');
+                showNotification('Username atau password salah', 'error');
             }
         }
 
@@ -1992,16 +2023,12 @@
             localStorage.removeItem('adminUsername');
             
             hideAdminStatus();
-            hideUploadButtons();
-            
-            // Close admin menu
             document.getElementById('adminMenu').classList.remove('show');
             
-            showNotification('You have been logged out', 'info');
+            showNotification('Anda telah keluar dari sistem', 'info');
         }
 
         function showNotification(message, type) {
-            // Create notification element
             const notification = document.createElement('div');
             notification.className = `notification alert alert-${type} position-fixed top-0 start-50 translate-middle-x mt-3`;
             notification.style.zIndex = '9999';
@@ -2014,7 +2041,6 @@
             
             document.body.appendChild(notification);
             
-            // Remove after 5 seconds
             setTimeout(() => {
                 if (notification.parentElement) {
                     notification.remove();
@@ -2022,408 +2048,139 @@
             }, 5000);
         }
 
-        // Image storage (in a real application, this would be on a server)
-        let imageStorage = {};
-
-        // Image compression function
-        function compressImage(file, maxWidth = 1920, maxHeight = 1080, quality = 0.8) {
-            return new Promise((resolve, reject) => {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                const img = new Image();
-                
-                img.onload = function() {
-                    // Calculate new dimensions
-                    let width = img.width;
-                    let height = img.height;
-                    
-                    if (width > maxWidth) {
-                        height = (maxWidth / width) * height;
-                        width = maxWidth;
-                    }
-                    
-                    if (height > maxHeight) {
-                        width = (maxHeight / height) * width;
-                        height = maxHeight;
-                    }
-                    
-                    canvas.width = width;
-                    canvas.height = height;
-                    
-                    // Draw and compress
-                    ctx.drawImage(img, 0, 0, width, height);
-                    canvas.toBlob(resolve, 'image/jpeg', quality);
-                };
-                
-                img.onerror = reject;
-                img.src = URL.createObjectURL(file);
-            });
-        }
-
-        // Image upload functions
-        function openImageUpload(imageType) {
-            if (!isAdminLoggedIn) {
-                showLoginModal();
-                return;
+        function showBioModal(artist) {
+            const modal = document.getElementById('bioModal');
+            const title = document.getElementById('bioModalTitle');
+            const body = document.getElementById('bioModalBody');
+            const currentLang = localStorage.getItem('selectedLanguage') || 'id';
+            
+            if (artist === 'jap') {
+                title.textContent = 'Biografi: Jap Tji Kien';
+                body.innerHTML = fullBiographies[currentLang].jap;
+            } else if (artist === 'yeo') {
+                title.textContent = 'Biografi: Dr. Kuei Pin Yeo';
+                body.innerHTML = fullBiographies[currentLang].yeo;
             }
             
-            currentImageType = imageType;
-            document.getElementById('imageUploadModal').classList.add('show');
-            updateImageList(imageType);
+            modal.classList.add('show');
         }
 
-        function closeImageUpload() {
-            document.getElementById('imageUploadModal').classList.remove('show');
+        function closeBioModal() {
+            document.getElementById('bioModal').classList.remove('show');
         }
 
-        async function handleImageSelect(event) {
-            const file = event.target.files[0];
-            if (file && file.type.startsWith('image/')) {
-                // Tampilkan informasi file
-                const fileSizeInMB = (file.size / (1024 * 1024)).toFixed(2);
-                console.log(`File selected: ${file.name}, Size: ${fileSizeInMB} MB`);
-                
-                // Periksa ukuran file (maksimal 5MB)
-                if (file.size > 5 * 1024 * 1024) {
-                    showNotification(`Ukuran gambar terlalu besar (${fileSizeInMB} MB). Maksimal 5MB.`, 'error');
-                    return;
-                }
-                
-                try {
-                    // Kompres gambar terlebih dahulu
-                    const compressedBlob = await compressImage(file);
-                    
-                    // Periksa ukuran file setelah kompresi
-                    if (compressedBlob.size > 5 * 1024 * 1024) {
-                        showNotification('Gambar terlalu besar bahkan setelah kompresi. Silakan pilih gambar yang lebih kecil.', 'error');
-                        return;
-                    }
-                    
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        try {
-                            // In a real application, you would upload this to a server
-                            // For now, we'll store it in localStorage
-                            const imageData = {
-                                url: e.target.result,
-                                name: file.name,
-                                size: (compressedBlob.size / 1024).toFixed(2) + ' KB',
-                                type: currentImageType
-                            };
-                            
-                            if (!imageStorage[currentImageType]) {
-                                imageStorage[currentImageType] = [];
-                            }
-                            
-                            // Hapus gambar lama jika ada (hanya simpan satu gambar per tipe)
-                            imageStorage[currentImageType] = [imageData];
-                            
-                            // Save to localStorage dengan penanganan error
-                            try {
-                                localStorage.setItem('imageStorage', JSON.stringify(imageStorage));
-                                
-                                // Update the UI
-                                updateImageDisplay(currentImageType, imageData.url);
-                                updateImageList(currentImageType);
-                                
-                                showNotification('Gambar berhasil diunggah!', 'success');
-                            } catch (storageError) {
-                                console.error('Storage error:', storageError);
-                                showNotification('Gagal menyimpan gambar. Penyimpanan lokal mungkin penuh.', 'error');
-                            }
-                        } catch (error) {
-                            console.error('Error processing image:', error);
-                            showNotification('Terjadi kesalahan saat memproses gambar.', 'error');
-                        }
-                    };
-                    
-                    reader.onerror = function() {
-                        showNotification('Gagal membaca file gambar.', 'error');
-                    };
-                    
-                    reader.readAsDataURL(compressedBlob);
-                } catch (error) {
-                    console.error('Error compressing image:', error);
-                    showNotification('Terjadi kesalahan saat memproses gambar.', 'error');
-                }
-            } else {
-                showNotification('Harap pilih file gambar yang valid.', 'error');
-            }
-        }
-
-        function saveImage() {
-            // In a real application, this would save to a server
-            showNotification('Gambar berhasil disimpan!', 'success');
-            closeImageUpload();
-        }
-
-        function updateImageDisplay(imageType, imageUrl) {
-            const placeholders = document.querySelectorAll(`[data-image-type="${imageType}"]`);
-            placeholders.forEach(placeholder => {
-                // Remove existing image if any
-                const existingImg = placeholder.querySelector('img');
-                if (existingImg) {
-                    existingImg.remove();
-                }
-                
-                // Create and add new image
-                const img = document.createElement('img');
-                img.src = imageUrl;
-                img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1;';
-                placeholder.style.position = 'relative';
-                placeholder.appendChild(img);
-                
-                // Move the upload button to the front
-                const uploadBtn = placeholder.querySelector('.image-upload-btn');
-                if (uploadBtn) {
-                    placeholder.appendChild(uploadBtn);
-                }
-            });
-        }
-
-        function updateImageList(imageType) {
-            const imageListContent = document.getElementById('imageListContent');
-            const images = imageStorage[imageType] || [];
+        function changeLanguage(lang) {
+            // Save language preference
+            localStorage.setItem('selectedLanguage', lang);
             
-            // Clear existing list
-            imageListContent.innerHTML = '';
+            // Update document language
+            document.documentElement.lang = lang;
             
-            // Add images to list
-            images.forEach(image => {
-                const item = document.createElement('div');
-                item.className = 'image-item';
-                item.innerHTML = `
-                    <img src="${image.url}" alt="${image.name}">
-                    <div class="image-item-info">
-                        <div class="image-item-name">${image.name}</div>
-                        <div class="image-item-size">${image.size}</div>
-                    </div>
-                    <button class="image-item-delete" onclick="deleteImage('${imageType}', '${image.name}')">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                `;
-                imageListContent.appendChild(item);
-            });
-        }
-
-        function deleteImage(imageType, imageName) {
-            if (confirm('Apakah Anda yakin ingin menghapus gambar ini?')) {
-                if (imageStorage[imageType]) {
-                    imageStorage[imageType] = imageStorage[imageType].filter(img => img.name !== imageName);
-                    localStorage.setItem('imageStorage', JSON.stringify(imageStorage));
-                    updateImageList(imageType);
-                    
-                    // Remove image from display
-                    const placeholders = document.querySelectorAll(`[data-image-type="${imageType}"]`);
-                    placeholders.forEach(placeholder => {
-                        const img = placeholder.querySelector('img');
-                        if (img) {
-                            img.remove();
-                        }
-                    });
-                }
-            }
-        }
-
-        function loadSavedImages() {
-            const saved = localStorage.getItem('imageStorage');
-            if (saved) {
-                imageStorage = JSON.parse(saved);
-                
-                // Display all saved images
-                Object.keys(imageStorage).forEach(imageType => {
-                    const images = imageStorage[imageType];
-                    if (images && images.length > 0) {
-                        // Display the last image for each type
-                        const lastImage = images[images.length - 1];
-                        updateImageDisplay(imageType, lastImage.url);
-                    }
-                });
-            }
-        }
-
-        function clearImageStorage() {
-            if (confirm('Apakah Anda yakin ingin menghapus semua gambar yang tersimpan?')) {
-                localStorage.removeItem('imageStorage');
-                imageStorage = {};
-                showNotification('Semua gambar telah dihapus.', 'info');
-                
-                // Refresh halaman untuk memperbarui tampilan
-                location.reload();
-            }
-        }
-
-        function openVideoUpload() {
-            if (!isAdminLoggedIn) {
-                showLoginModal();
-                return;
-            }
-            showNotification('Fitur upload video akan segera tersedia', 'info');
-        }
-
-        function openAudioUpload() {
-            if (!isAdminLoggedIn) {
-                showLoginModal();
-                return;
-            }
-            showNotification('Fitur upload audio akan segera tersedia', 'info');
-        }
-
-        // Language selector functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const languageDropdown = document.querySelector('.language-dropdown');
-            const languageMenu = document.querySelector('.language-menu');
-            const languageOptions = document.querySelectorAll('.language-option');
-            const currentLangDisplay = document.getElementById('current-lang');
-            
-            // Toggle language menu
-            languageDropdown.addEventListener('click', function() {
-                languageMenu.classList.toggle('show');
-            });
-            
-            // Close language menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!languageDropdown.contains(event.target)) {
-                    languageMenu.classList.remove('show');
-                }
-            });
-            
-            // Handle language selection
-            languageOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const selectedLang = this.getAttribute('data-lang');
-                    
-                    // Update active state
-                    languageOptions.forEach(opt => opt.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Update current language display
-                    currentLangDisplay.textContent = selectedLang.toUpperCase();
-                    
-                    // Change language
-                    changeLanguage(selectedLang);
-                    
-                    // Close menu
-                    languageMenu.classList.remove('show');
-                });
-            });
-            
-            // Function to change language
-            function changeLanguage(lang) {
-                // Update HTML lang attribute
-                document.documentElement.lang = lang;
-                
-                // Update all elements with data-lang attribute
-                document.querySelectorAll('[data-lang]').forEach(element => {
-                    const key = element.getAttribute('data-lang');
-                    if (translations[lang] && translations[lang][key]) {
+            // Update all elements with data-lang attribute
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
                         element.textContent = translations[lang][key];
                     }
-                });
-                
-                // Update placeholders
-                document.querySelectorAll('[data-lang-placeholder]').forEach(element => {
-                    const key = element.getAttribute('data-lang-placeholder');
-                    if (translations[lang] && translations[lang][key]) {
-                        element.placeholder = translations[lang][key];
-                    }
-                });
-                
-                // Update page title
-                if (lang === 'en') {
-                    document.title = 'Jap-Yeo Duo - Violin & Piano';
-                } else if (lang === 'zh') {
-                    document.title = 'Jap-Yeo 二重奏 - 小提琴与钢琴';
-                } else {
-                    document.title = 'Jap-Yeo Duo - Violin & Piano';
                 }
-                
-                // Save language preference to localStorage
-                localStorage.setItem('selectedLanguage', lang);
-            }
+            });
             
-            // Load saved language preference
-            const savedLanguage = localStorage.getItem('selectedLanguage') || 'id';
-            if (savedLanguage !== 'id') {
-                const option = document.querySelector(`.language-option[data-lang="${savedLanguage}"]`);
-                if (option) {
-                    option.click();
-                }
-            }
-        });
+            // Update page title
+            const titles = {
+                id: 'Jap-Yeo Duo - Biola & Piano',
+                en: 'Jap-Yeo Duo - Violin & Piano',
+                zh: 'Jap-Yeo 二重奏 - 小提琴与钢琴'
+            };
+            document.title = titles[lang] || titles.id;
+            
+            // Show notification
+            const langNames = {
+                'id': 'Bahasa Indonesia',
+                'en': 'English',
+                'zh': '中文'
+            };
+            showNotification(`Bahasa diubah ke ${langNames[lang]}`, 'success');
+        }
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                
-                // Update active nav link
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-        
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-        
-        const observer = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Update active nav link on scroll
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('section');
+        function loadSavedLanguage() {
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'id';
             
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
+            // Set active language option
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-lang') === savedLanguage) {
+                    option.classList.add('active');
                 }
             });
             
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.classList.add('active');
+            // Update display
+            const langDisplay = {
+                'id': 'ID',
+                'en': 'EN',
+                'zh': '中文'
+            };
+            document.getElementById('current-lang').textContent = langDisplay[savedLanguage];
+            
+            // Apply language
+            changeLanguage(savedLanguage);
+        }
+
+        function showRepertoire(artist) {
+            // Hide all repertoire contents
+            document.querySelectorAll('.repertoire-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.repertoire-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected repertoire content
+            const selectedContent = document.getElementById(artist + '-repertoire');
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function filterMedia(tab) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.media-tab').forEach(t => {
+                t.classList.remove('active');
+            });
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Filter media items
+            const items = document.querySelectorAll('.media-item');
+            items.forEach(item => {
+                if (item.getAttribute('data-tab-content') === tab) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
                 }
             });
-        });
+        }
 
         // Close modals when clicking outside
         window.addEventListener('click', function(event) {
-            const loginModal = document.getElementById('loginModal');
-            const imageUploadModal = document.getElementById('imageUploadModal');
+            const modals = ['loginModal', 'bioModal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (event.target === modal) {
+                    modal.classList.remove('show');
+                }
+            });
+            
             const adminMenu = document.getElementById('adminMenu');
             const adminToggle = document.getElementById('adminToggle');
-            
-            if (event.target === loginModal) {
-                hideLoginModal();
-            }
-            
-            if (event.target === imageUploadModal) {
-                closeImageUpload();
-            }
-            
             if (!adminToggle.contains(event.target) && !adminMenu.contains(event.target)) {
                 adminMenu.classList.remove('show');
             }
