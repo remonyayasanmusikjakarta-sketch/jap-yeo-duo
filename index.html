@@ -173,7 +173,7 @@
             background: linear-gradient(45deg, var(--gold), transparent, var(--gold));
             border-radius: 50%;
             opacity: 0.5;
-            animation: rotate 3s linear infinite;
+            animation: rotate 5s linear infinite;
             z-index: -1;
         }
 
@@ -357,12 +357,14 @@
 
 /* 2. Atur Gambar agar mengisi lebar H1 */
 .hero-title img {
-    width: 100%;        /* Membuat gambar melebar memenuhi lebar H1 */
-    height: auto;       /* Tinggi menyesuaikan otomatis agar gambar tidak gepeng */
-    display: block;     /* Menghilangkan ruang kecil di bawah gambar */
-    object-fit: cover;  /* (Opsional) Potong gambar rapi jika rasio tidak pas */
+max-width: none;
+width: 100vw
+height: auto;
+display: block;
+margin-left: 50%;
+transform: translateX(-50%);
+margin-top: -150px; /* Geser gambar 50px ke atas */
 }
-        }
 
         .hero-subtitle {
             display: flex;
@@ -2328,6 +2330,7 @@
     </script>
 </body>
 </html>
+
 
 
 
