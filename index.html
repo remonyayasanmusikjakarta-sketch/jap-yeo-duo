@@ -347,17 +347,21 @@
              padding: 3rem 0;
         }
 
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            font-weight: 900;
-            margin-bottom: 2rem;
-            background: linear-gradient(45deg, var(--gold), var(--gold-light), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 3s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        /* 1. Atur Tag H1 agar tidak ada jarak (margin) dan lebarnya penuh */
+.hero-title {
+    margin: 0;          /* Menghilangkan jarak putih otomatis browser */
+    padding: 0;         /* Menghilangkan padding jika ada */
+    width: 100%;        /* Memastikan H1 memakan lebar penuh kontainer */
+    display: block;     /* Agar elemen diperlakukan sebagai blok */
+}
+
+/* 2. Atur Gambar agar mengisi lebar H1 */
+.hero-title img {
+    width: 100%;        /* Membuat gambar melebar memenuhi lebar H1 */
+    height: auto;       /* Tinggi menyesuaikan otomatis agar gambar tidak gepeng */
+    display: block;     /* Menghilangkan ruang kecil di bawah gambar */
+    object-fit: cover;  /* (Opsional) Potong gambar rapi jika rasio tidak pas */
+}
         }
 
         .hero-subtitle {
@@ -2324,6 +2328,7 @@
     </script>
 </body>
 </html>
+
 
 
 
