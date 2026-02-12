@@ -357,13 +357,24 @@
 
 /* 2. Atur Gambar agar mengisi lebar H1 */
 .hero-title img {
-max-width: none;
-width: 100vw
-height: auto;
-display: block;
-margin-left: 50%;
-transform: translateX(-50%);
-margin-top: -100px; /* Geser gambar 50px ke atas */
+    max-width: none;
+    width: 100vw;          /* Lebar sesuai lebar layar (viewport) */
+    height: auto;
+    display: block;
+    margin-left: 50%;      /* Hack untuk memusatkan elemen lebarnya diluar container */
+    transform: translateX(-50%);
+    margin-top: -100px;    /* Geser gambar ke atas */
+
+    /* --- TAMBAHAN BINGKAI EMAS GLOW --- */
+    
+    /* 1. Penting: Agar tebal border masuk hitungan dalam 100vw (tidak membesar ke luar) */
+    box-sizing: border-box; 
+
+    /* 2. Bingkai Emas Solid */
+    border: 15px solid #FFD700; 
+
+    /* 3. Efek Glow (Cahaya) */
+    box-shadow: 0 0 40px #FFD700, 0 0 80px rgba(255, 215, 0, 0.6);
 }
 
         .hero-subtitle {
@@ -2356,6 +2367,7 @@ margin-top: -100px; /* Geser gambar 50px ke atas */
     </script>
 </body>
 </html>
+
 
 
 
