@@ -485,6 +485,32 @@
             margin-right: auto;
             line-height: 1.8;
         }
+.hero-pict {
+margin: 0;          /* Menghilangkan jarak putih otomatis browser */
+padding: 0;         /* Menghilangkan padding jika ada */
+width: 100%;        /* Memastikan H1 memakan lebar penuh kontainer */
+display: block;     /* Agar elemen diperlakukan sebagai blok */
+Margin-bottom: 50px;
+}
+
+/* 2. Atur Gambar agar mengisi lebar H1 */
+.hero-pict img {
+max-width: none;
+width: 100%;          /* Lebar sesuai lebar layar (viewport) */
+height: auto;
+display: block;
+margin-left: 50%;      /* Hack untuk memusatkan elemen lebarnya diluar container */
+transform: translateX(-50%);
+margin-top: 50px;    /* Geser gambar ke atas */
+/* --- TAMBAHAN BINGKAI EMAS GLOW --- */
+/* 1. Penting: Agar tebal border masuk hitungan dalam 100vw (tidak membesar ke luar) */
+box-sizing: border-box; 
+/* 2. Bingkai Emas Solid */
+border: 5px solid #FFD700; 
+/* 3. Efek Glow (Cahaya) */
+box-shadow: 0 0 40px #FFD700, 0 0 80px rgba(255, 215, 0, 0.6);
+}
+
 
         .hero-buttons {
             display: flex;
@@ -1534,6 +1560,10 @@
                 <p class="hero-description" data-lang="hero_description">
                     Jap-Yeo Duo mempertemukan dua musisi Indonesia berkelas internasional: violinis Jap Tji Kien dan pianis Dr. Kuei Pin Yeo. Dengan pengalaman panjang sebagai solis, musisi kamar, dan kolaborator lintas budaya, duo ini dikenal karena kematangan musikal, kejelasan struktur, dan penghormatan mendalam terhadap karya yang mereka bawakan.
                 </p>
+
+                <h1 class="hero-pict">
+                    <img src="managebypict.jpeg" alt="Jap-Yeo Duo" class="hero-pict-img">
+                </h1>
                 
                 <div class="hero-buttons">
                     <a href="#about" class="btn-hero btn-hero-primary" data-lang="btn_learn_more">
@@ -2368,6 +2398,7 @@
     </script>
 </body>
 </html>
+
 
 
 
