@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -82,7 +82,7 @@
         }
 
         .logo-text {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat' sans-serif !important;
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--gold); 
@@ -178,7 +178,7 @@
         }
 
         .splash-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat' sans-serif;
             font-size: 3rem;
             font-weight: 900;
             background: linear-gradient(45deg, var(--gold), var(--gold-light));
@@ -1503,8 +1503,8 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
                 
                 <div class="hero-subtitle">
                     <div class="artist-block">
-                        <div class="artist-name">Jap Tji Kien</div>
-                        <div class="artist-instrument">Violin</div>
+                        <div class="artist-name" data-lang="artist_jap">Jap Tji Kien</div>
+                        <div class="artist-instrument" data-lang="artist_jap_instrument">Violin</div>
                     </div>
                     
                     <div class="artist-divider">
@@ -1514,8 +1514,8 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
                     </div>
                     
                     <div class="artist-block">
-                        <div class="artist-name">Dr. Kuei Pin Yeo</div>
-                        <div class="artist-instrument">Piano</div>
+                        <div class="artist-name" data-lang="artist_yeo">Dr. Kuei Pin Yeo</div>
+                        <div class="artist-instrument" data-lang="artist_yeo_instrument">Piano</div>
                     </div>
                 </div>
                 
@@ -1547,8 +1547,8 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
                 <div class="artist-image">
                     <img src="jtk-portrait.jpg" alt="Jap Tji Kien" class="artist-photo">
                 </div>
-                <h3>Jap Tji Kien</h3>
-                <p class="artist-role">Violinis & Konduktor</p>
+                <h3 data-lang= "about_jap">Jap Tji Kien</h3>
+                <p class="artist-role" data-lang="jap_role">Violinis & Konduktor</p>
                 <p class="artist-bio" data-lang="jap_bio">
                     Violinis dan konduktor terkemuka Indonesia dengan karir internasional yang gemilang. 
                     Penerima Fellowship of the Royal Schools of Music (FRSM) pertama di Asia Tenggara.
@@ -1563,8 +1563,8 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
                 <div class="artist-image">
                     <img src="kueipinyeopict.jpg.jpeg" alt="Dr. Kuei Pin Yeo" class="artist-photo">
                 </div>
-                <h3>Dr. Kuei Pin Yeo</h3>
-                <p class="artist-role">Pianis</p>
+                <h3 data-lang= "about_yeo">Dr. Kuei Pin Yeo</h3>
+                <p class="artist-role" data_lang="yeo_role">Pianis</p>
                 <p class="artist-bio" data-lang="yeo_bio">
                     Pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. 
                     Karir internasional yang cemerlang dengan penampilan di berbagai panggung dunia.
@@ -1783,8 +1783,8 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
                         <img src="image1.jpg.jpeg" alt="Concert Photo 2" class="media-photo">
                     </div>
                     <div class="media-info">
-                        <h4 class="media-title">Beyond The Notes</h4>
-                        <p class="media-description">Jakarta, 2024</p>
+                        <h4 class="media-title">Konser</h4>
+                        <p class="media-description">Surabaya</p>
                     </div>
                 </div>
 
@@ -1904,11 +1904,13 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
                 nav_repertoire: 'Repertoar',
                 nav_media: 'Media',
                 nav_contact: 'Kontak',
+
                 hero_description: 'Jap-Yeo Duo mempertemukan dua musisi Indonesia berkelas internasional: violinis Jap Tji Kien dan pianis Dr. Kuei Pin Yeo. Dengan pengalaman panjang sebagai solis, musisi kamar, dan kolaborator lintas budaya, duo ini dikenal karena kematangan musikal, kejelasan struktur, dan penghormatan mendalam terhadap karya yang mereka bawakan.',
                 btn_learn_more: 'Pelajari Lebih Lanjut',
                 btn_contact: 'Hubungi Kami',
                 about_title: 'Tentang Kami',
                 about_subtitle: 'Musisi Berbakat dengan Dedikasi Tinggi',
+                jap_music: 'Violinis & Konduktor',
                 jap_bio: 'Violin dan konduktor terkemuka Indonesia dengan karir internasional yang gemilang. Penerima Fellowship of the Royal Schools of Music (FRSM) pertama di Asia Tenggara.',
                 yeo_bio: 'Pianis Indonesia terkemuka dan doktor musik pertama Indonesia dalam bidang piano performance. Karir internasional yang cemerlang dengan penampilan di berbagai panggung dunia.',
                 btn_full_bio: 'Biografi Lengkap',
@@ -1949,6 +1951,7 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
                 btn_contact: 'Contact Us',
                 about_title: 'About Us',
                 about_subtitle: 'Talented Musicians with High Dedication',
+                jap_music: 'Violinis & Conductor',
                 jap_bio: 'Leading Indonesian violinist and conductor with brilliant international career. First recipient of Fellowship of the Royal Schools of Music (FRSM) in Southeast Asia.',
                 yeo_bio: 'Prominent Indonesian pianist and Indonesia\'s first Doctor of Musical Arts in piano performance. Brilliant international career with performances on various world stages.',
                 btn_full_bio: 'Full Biography',
@@ -1984,11 +1987,19 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
                 nav_repertoire: '曲目',
                 nav_media: '媒体',
                 nav_contact: '联系',
+                artist_jap: '叶至坚',
+                artist_yeo: '杨圭斌博士',
+                artist_jap_instrument: '小提琴',
+                artist_yeo_instrument: '钢琴家',
                 hero_description: 'Jap-Yeo Duo 由两位享誉国际的印尼音乐家组成：小提琴家 叶志坚 和钢琴家 杨圭斌博士 。凭借作为独奏家、室内乐演奏家及跨文化合作者的丰富经验，这对二重奏以其音乐表现成熟、结构清晰以及对演奏曲目的崇高敬意而著称。',
                 btn_learn_more: '了解更多',
                 btn_contact: '联系我们',
                 about_title: '关于我们',
                 about_subtitle: '才华横溢、专注投入的音乐家',
+                about_jap: '叶至坚',
+                about_yeo: '杨圭斌博士',
+                jap_role: '小提琴家兼指挥家',
+                yeo_role: '钢琴家',
                 jap_bio: '印尼著名小提琴家和指挥家，拥有辉煌的国际职业生涯。东南亚第一位伦敦皇家音乐学院奖学金（FRSM）获得者。',
                 yeo_bio: '印尼杰出钢琴家，印尼第一位钢琴表演音乐博士。辉煌的国际职业生涯，在世界各地舞台演出。',
                 btn_full_bio: '完整传记',
@@ -2040,14 +2051,14 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
             },
             en: {
                 jap: `
-                    <h4>Jap Tji Kien – Violin & Konduktor</h4>
+                    <h4>Jap Tji Kien – Violinis & Conductor</h4>
                     <p>Jap Tji Kien is a leading Indonesian violinist and conductor, born in Bandung, and recognized as the first recipient of the Fellowship of the Royal Schools of Music (FRSM), London, in Southeast Asia. He began studying violin at the age of four and made his first stage performance at age ten, marking the beginning of his long career as a professional musician.</p>
                     <p>As a violinist, Jap Tji Kien has performed extensively as a soloist and chamber musician, appearing in various concerts, radio broadcasts, and television programs, gaining wide recognition in Indonesia and abroad. In 1971, he was accepted as the youngest member of the Jakarta Symphony Orchestra, serving as concertmaster from 1973 to 1985.</p>
                     <p>In 1985, he received full scholarships and fellowships from the Asian Cultural Council (formerly John D. Rockefeller 3rd Fund) and Aspen School of Music, Colorado, to continue his studies under the legendary violin teacher Dorothy DeLay.</p>
                     <p>Since 1976, Jap Tji Kien has also been active as a conductor. He has led various large orchestras and choirs, including concerts with over a thousand musicians and singers at state events. Currently, he remains active as a violinist, conductor, and music educator, serving as Resident Conductor of the Indonesian National Symphony Orchestra (OSNI).</p>
                 `,
                 yeo: `
-                    <h4>Dr. Kuei Pin Yeo – Pianist</h4>
+                    <h4>Dr. Kuei Pin Yeo – Pianis</h4>
                     <p>Dr. Kuei Pin Yeo is a prominent Indonesian pianist and Indonesia's first Doctor of Musical Arts in piano performance. She is known as a musician with a long international career, performing as a recitalist, orchestral soloist, and chamber musician in the United States and Asia.</p>
                     <p>Her recital debut at Carnegie Recital Hall, New York, marked the beginning of her international recognition. On that occasion, The New York Times praised her performance as that of a pianist with mature technique and sensitive musicality, as well as elegant, clear, and musically direct interpretations. Other critics have called her "an extraordinary pianist" with high sensitivity and artistic depth.</p>
                     <p>As a performer, Dr. Yeo has an extensive repertoire covering classical, romantic, to 20th-century works, with special attention to the German-Austrian tradition, chamber music, and large-scale works including concertos. Her interpretive approach emphasizes structural clarity, stylistic integrity, and depth of musical expression.</p>
@@ -2056,15 +2067,15 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
             },
             zh: {
                 jap: `
-                    <h4>Jap Tji Kien – 小提琴家 & 指挥家</h4>
+                    <h4>叶至坚 – 小提琴家 & 指挥家</h4>
                     <p>Jap Tji Kien 是印尼著名的小提琴家和指挥家，出生于万隆，被誉为东南亚第一位伦敦皇家音乐学院奖学金（FRSM）获得者。他四岁开始学习小提琴，十岁首次登台演出，标志着他作为专业音乐家漫长旅程的开始。</p>
-                    <p>作为小提琴家，Jap Tji Kien 广泛作为独奏家和室内乐音乐家演出，在各种音乐会、广播和电视中都有强烈的存在感，在国内外都获得了广泛认可。1971年，他被接受为雅加达交响乐团最年轻的成员，1973年至1985年间担任首席小提琴手。</p>
+                    <p>作为小提琴家，叶至坚 广泛作为独奏家和室内乐音乐家演出，在各种音乐会、广播和电视中都有强烈的存在感，在国内外都获得了广泛认可。1971年，他被接受为雅加达交响乐团最年轻的成员，1973年至1985年间担任首席小提琴手。</p>
                     <p>1985年，他获得了亚洲文化委员会（前身为约翰·D·洛克菲勒第三基金）和科罗拉多阿斯彭音乐学院的全额奖学金和研究员资格，在传奇小提琴教师多萝西·迪莱的指导下学习。</p>
                     <p>自1976年以来，Jap Tji Kien 也积极担任指挥家。他曾领导过各种大型管弦乐队和合唱团，包括有数千名音乐家参与的国家音乐会。目前，他继续作为小提琴家、指挥家和教育家工作，并担任印度尼西亚国家交响乐团（OSNI）的常驻指挥。</p>
                 `,
                 yeo: `
-                    <h4>Dr. Kuei Pin Yeo – 钢琴家</h4>
-                    <p>Dr. Kuei Pin Yeo 是印尼杰出的钢琴家和印尼第一位钢琴表演音乐博士。她是一位拥有漫长国际职业生涯的音乐家，在美国和亚洲作为独奏家、管弦乐队独奏家和室内乐音乐家演出。</p>
+                    <h4>杨圭斌博士 – 钢琴家</h4>
+                    <p>杨圭斌博士 是印尼杰出的钢琴家和印尼第一位钢琴表演音乐博士。她是一位拥有漫长国际职业生涯的音乐家，在美国和亚洲作为独奏家、管弦乐队独奏家和室内乐音乐家演出。</p>
                     <p>她在纽约卡内基独奏厅的独奏首演标志着她国际认可的开始。在那个场合，《纽约时报》称赞她的演奏是一位技术成熟、音乐敏感性强的钢琴家，以及优雅、清晰、音乐直接的诠释。其他评论家称她为"一位非凡的钢琴家"，具有高度的敏感性和艺术深度。</p>
                     <p>作为表演者，Dr. Yeo 拥有广泛的曲目，涵盖古典、浪漫主义到20世纪的作品，特别关注德奥传统、室内乐以及包括协奏曲在内的大型作品。她的诠释方法强调结构清晰度、风格完整性和音乐表达的深度。</p>
                     <p>出生于雅加达，Dr. Yeo 在纽约曼哈顿音乐学院接受音乐教育，获得全额奖学金。她也是约翰·D·洛克菲勒第三基金/亚洲文化委员会研究员资格的获得者以及哈罗德·鲍尔奖的获得者。因其国际贡献和职业生涯，她的名字被列入各种参考出版物。</p>
@@ -2330,6 +2341,7 @@ margin-top: -150px; /* Geser gambar 50px ke atas */
     </script>
 </body>
 </html>
+
 
 
 
